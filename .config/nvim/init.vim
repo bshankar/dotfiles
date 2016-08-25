@@ -33,6 +33,10 @@ if has('persistent_undo')      "check if your vim version supports it
   set undodir=$HOME/.local/share/nvim/undo  "directory where the undo files will be stored
   endif
  
+" Backup files
+set backupdir=$HOME/.local/share/nvim/backup,.
+set directory=$HOME/.local/share/nvim/backup,.
+
 " Note that not everyone likes working this way (with the hidden option).
 " Alternatives include using tabs or split windows instead of re-using the same
 " window as mentioned above, and/or either of the following options:
