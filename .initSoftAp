@@ -7,7 +7,7 @@ sleep 2
 ###########Start dnsmasq, modify if required##########
 if [ -z "$(ps -e | grep dnsmasq)" ]
 then
- dnsmasq -p 2366
+ dnsmasq -C .dnsmasq.conf -p 2366
 fi
 ###########
  
@@ -26,5 +26,5 @@ iptables --append FORWARD --in-interface $1 -j ACCEPT
 sysctl -w net.ipv4.ip_forward=1
  
 #start hostapd
-hostapd /etc/hostapd/hostapd.conf 1> /dev/null
+hostapd .hostapd.conf 1> /dev/null
 killall dnsmasq
