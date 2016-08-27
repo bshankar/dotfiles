@@ -218,7 +218,7 @@ bar {
 		focused_workspace  #010101 #000000 #dcdcdc
 	    active_workspace   #010101 #000000 #888888
 	    inactive_workspace #010101 #000000 #555555		    
-        urgent_workspace   #010101 #000000 #aa0000
+        urgent_workspace   #010101 #000000 #FA4D64
     }
 }
 
