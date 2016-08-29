@@ -151,6 +151,7 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 " Manage plugins with vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
+Plug 'scrooloose/nerdtree'
 Plug 'benekastah/neomake'
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/deoplete.nvim'
@@ -180,6 +181,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'critiqjo/lldb.nvim'
 Plug 'kana/vim-operator-user'
 Plug 'fatih/vim-go'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " Run neomake on every save
@@ -212,11 +214,11 @@ let g:gruvbox_italic=1
 colorscheme gruvbox
 let g:gruvbox_contrast_dark='hard'
 let g:airline_theme='gruvbox'
-let g:airline#extensions#tabline#enabled = 1
 
 " air-line enable powerline fonts
 let g:airline_powerline_fonts = 1
-
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
 " make tables ReSt compatible
 let g:table_mode_corner_corner="+"
 let g:table_mode_header_fillchar="="
@@ -251,3 +253,15 @@ let g:grepper = {
     \ 'next_tool': '<leader>g',
     \ }
 
+" load and configure the devicons plugin 
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_ctrlp = 1
+let g:webdevicons_enable_flagship_statusline = 1
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1

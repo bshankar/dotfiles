@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Inconsolata-g for Powerline 13
+font = Inconsolata Nerd Font 14
 
 scrollback_lines = 100000
 search_wrap = true
@@ -75,7 +75,7 @@ color7 = #a89984
 color15 = #ebdbb2
 
 [hints]
-font = Inconsolata-g for Powerline 12
+font = Inconsolata Nerd Font 12
 foreground = #dcdccc
 background = #3f3f3f
 active_foreground = #e68080
