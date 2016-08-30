@@ -1,0 +1,98 @@
+{
+    "entries": [
+        {
+            "package": "cpu_util",
+            "name": "cpu_util",
+            "options": {
+                "interval": "5s",
+                "warn_threshold": 75,
+                "crit_threshold": 90
+            }
+        },
+        {
+            "package": "memory",
+            "name": "memory",
+            "options": {
+                "interval": "5s",
+                "warn_threshold": 75,
+                "crit_threshold": 85
+            }
+        },
+        {
+            "package": "disk_usage",
+            "name": "disk_usage",
+            "options": {
+                "interval": "5s",
+                "options": {
+                    "warn_threshold": 30,
+                    "crit_threshold": 10,
+                    "items": [
+                        {
+                            "name": "",
+                            "path": "/"
+                        },
+                        {
+                            "name": "",
+                            "path": "/home"
+                        }
+                    ]
+                }
+            }
+        },
+       {
+            "package": "network",
+            "name": "network",
+            "options": {
+                "interval": "5s",
+                "config": {
+                    "devices": {
+                        "eth": {
+                            "name": "eth",
+                            "identifier": "enp5s0"
+                        },
+                        "wifi": {
+                            "name": "wifi",
+                            "identifier": "wlp9s0",
+                            "wireless": {
+                                "warn_threshold": 40,
+                                "crit_threshold": 20
+                            }
+                        }
+                    },
+                    "preference": [
+                        "eth",
+                        "wifi"
+                    ]
+                }
+            }
+        },
+        {
+            "package": "battery",
+            "name": "intBat",
+            "options": {
+                "interval": "5s",
+                "name": "",
+                "identifier": "BAT0",
+                "warn_threshold": 25,
+                "crit_threshold": 15
+            }
+        },
+        {
+            "package": "clock",
+            "name": "localTime",
+            "options": {
+                "interval": "60s",
+                "format": "%a %d-%b-%y %I:%M%p",
+                "color": "#FFFFFF",
+                "location": ""
+            }
+        }
+    ],
+    "interval": "1s",
+    "colors": {
+        "color_crit": "#FF0000",
+        "color_warn": "#FFA500",
+        "color_ok": "#00FF00",
+        "color_general": "#FFFFFF"
+    }
+}
