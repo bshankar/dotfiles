@@ -22,7 +22,7 @@
             "package": "disk_usage",
             "name": "disk_usage",
             "options": {
-                "interval": "5s",
+                "interval": "30s",
                 "options": {
                     "warn_threshold": 30,
                     "crit_threshold": 10,
@@ -90,9 +90,9 @@
     ],
     "interval": "1s",
     "colors": {
-        "color_crit": "#FF0000",
-        "color_warn": "#FFA500",
-        "color_ok": "#00FF00",
+        "color_crit": "#FF2222",
+        "color_warn": "#FFA511",
+        "color_ok": "#33FF33",
         "color_general": "#FFFFFF"
     }
 }
