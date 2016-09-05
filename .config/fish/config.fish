@@ -11,3 +11,4 @@ set -x BROWSER firefox
 set -x NVIM_TUI_ENABLE_TRUE_COLOR 1
 alias vim=/usr/bin/nvim
 alias clang++="/usr/bin/clang++ -std=c++11"
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
