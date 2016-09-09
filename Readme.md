@@ -9,8 +9,7 @@ with nerd fonts patcher. Here are some highlights:
 i3 wm
 -----
 Replaced the default status bar with goi3bar and and use font awesome icons.
-
-![goi3bar](https://github.com/bshankar/dotfiles/tree/master/Pictures/goi3bar.png)
+![goi3bar](https://raw.githubusercontent.com/bshankar/dotfiles/master/Pictures/goi3bar.png)
 
 tmux
 ----
