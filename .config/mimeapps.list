@@ -27,6 +27,7 @@ text/x-python=geany.desktop;
 text/x-csrc=geany.desktop;
 application/zip=firefox.desktop;org.gnome.FileRoller.desktop;
 application/epub+zip=firefox.desktop;org.gnome.FileRoller.desktop;
+text/markdown=firefox.desktop;
 
 [Default Applications]
 x-scheme-handler/http=userapp-Firefox-611WDY.desktop
