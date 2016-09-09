@@ -155,6 +155,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'simnalamburt/vim-mundo'
 Plug 'benekastah/neomake'
 Plug 'Shougo/neoinclude.vim'
+Plug 'Konfekt/FastFold' 
 Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-go',{'do': 'make'}
@@ -183,6 +184,7 @@ Plug 'critiqjo/lldb.nvim'
 Plug 'kana/vim-operator-user'
 Plug 'fatih/vim-go'
 Plug 'ryanoasis/vim-devicons'
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 " Run neomake on every save
