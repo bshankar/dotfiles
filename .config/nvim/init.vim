@@ -152,6 +152,7 @@ nnoremap <C-L> :nohl<CR><C-L>
 " Manage plugins with vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'scrooloose/nerdtree'
+Plug 'simnalamburt/vim-mundo'
 Plug 'benekastah/neomake'
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/deoplete.nvim'
@@ -207,6 +208,7 @@ let g:deoplete#sources#go#json_directory = '$HOME/.local/share/nvim/go/json'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsSnippetDirectories=["UltiSnips", "mycoolsnippets"]
 
 " set colorscheme
 set background=dark
