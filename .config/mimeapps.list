@@ -25,7 +25,7 @@ video/x-matroska=mpv.desktop;
 application/x-chess-pgn=scidb-beta.desktop;scid.desktop;
 text/x-python=geany.desktop;
 text/x-csrc=geany.desktop;
-application/zip=org.gnome.FileRoller.desktop;firefox.desktop;
+application/zip=firefox.desktop;org.gnome.FileRoller.desktop;
 application/epub+zip=firefox.desktop;org.gnome.FileRoller.desktop;
 
 [Default Applications]
