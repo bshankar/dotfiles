@@ -1,6 +1,7 @@
 acpid
 alsa-utils
 anki
+aria2
 aspell
 aspell-en
 astyle
@@ -177,8 +178,6 @@ thunar-archive-plugin
 thunar-volman
 time
 tmux
-transmission-cli
-transmission-gtk
 ttf-indic-otf
 tumbler
 udisks2
