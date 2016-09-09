@@ -1,240 +1,220 @@
-acpid 2.0.27-1
-alsa-utils 1.1.2-1
-android-sdk-platform-tools r24-3
-anki 2.0.36-2
-aspell 0.60.6.1-5
-aspell-en 2016.06.26-1
-astyle 2.05.1-2
-audacity 2.1.2-3
-autoconf 2.69-3
-automake 1.15-1
-b43-fwcutter 019-1
-bash 4.3.046-1
-bbswitch 0.8-53
-bind-tools 9.10.4.P2-1
-binutils 2.27-1
-bison 3.0.4-2
-bitlbee 3.4.2-1
-blueman 2.0.4-2
-bluez-utils 5.41-2
-btrfs-progs 4.7-1
-bumblebee 3.2.1-12
-bzip2 1.0.6-5
-bzr 2.7.0-1
-cabextract 1.6-1
-cairo 1.14.6-2
-cantarell-fonts 1:0.0.25-2
-ccache 3.3-1
-chromium-pepper-flash 1:22.0.0.209-1
-clang 3.8.1-1
-clang-tools-extra 3.8.1-1
-cmake 3.6.1-1
-compton 0.1_beta2.5-3
-coreutils 8.25-2
-cowfortune 0.1.2-4
-crda 3.18-1
-cryptsetup 1.7.2-1
-ctags 5.8-5
-device-mapper 2.02.164-1
-dhcpcd 6.11.3-1
-dialog 1:1.3_20160424-1
-diffutils 3.5-1
-dmenu 4.6-1
-dmraid 1.0.0.rc16.3-10
-dnsmasq 2.76-2
-dosfstools 4.0-3
-downgrade 5.3.0-1
-dunst 1.1.0-1
-e2fsprogs 1.43.1-2
-exfat-utils 1.2.4-1
-f2fs-tools 1.6.1-1
-faenza-icon-theme 1.3.1-4
-fakeroot 1.21-2
-feh 2.17-1
-file 5.28-1
-file-roller 3.20.3-1
-filesystem 2015.09-1
-findutils 4.6.0-2
-firefox 48.0.2-1
-firejail 0.9.40-1
-fish-git 2:2.3.1.r492.g3702616-1
-flex 2.6.1-1
-fontconfig 2.12.1-3
-fontforge 20160404-1
-freetype2 2.6.5-2
-freshplayerplugin 0.3.5-2
-gawk 4.1.3-2
-gcc 6.1.1-5
-gcc-libs 6.1.1-5
-gdb 7.11.1-2
-geany 1.28-1
-gettext 0.19.8.1-2
-gimp 2.8.18-1
-git 2.9.3-1
-glibc 2.24-2
-go 2:1.7-1
-go-tools 2:1.7-1
-gocode-bin 20150420-1
-goi3bar-git 0e2229-1
-gparted 0.26.1-1
-gprof2dot 2015.12.1-1
-grep 2.25-2
-groff 1.22.3-7
-grub 1:2.02.beta3-3
-grub2-theme-archlinux 1.0-4
-gtk-engines 2.21.0-3
-gvfs 1.28.3-1
-gvfs-mtp 1.28.3-1
-gzip 1.8-2
-haveged 1.9.1-2
-hostapd 2.5-2
-htop 2.0.2-1
-hugo 0.16-1
-i3-wm 4.12-1
-i3lock 2.8-1
-i3status 2.10-1
-imgur-screenshot-git 1.7.4.r6.g6a4433a-1
-inetutils 1.9.4-4
-inotify-tools 3.14-4
-iproute2 4.7.0-1
-iputils 20160308.0db72a4-1
-ipw2100-fw 1.3-7
-ipw2200-fw 3.1-5
-ipython 5.0.0-2
-j4-dmenu-desktop 2.14-1
-jfsutils 1.1.15-4
-less 481-2
-libnotify 0.7.6-2
-libtool 2.4.6-5
-libtxc_dxtn 1.0.1-6
-libva-intel-driver 1.7.1-1
-licenses 20140629-1
-linux 4.7.2-1
-lldb 3.8.1-1
-lm_sensors 3.4.0-1
-logrotate 3.9.2-1
-lvm2 2.02.164-1
-lxappearance 0.6.2-1
-m4 1.4.17-2
-make 4.2.1-1
-man-db 2.7.5-4
-man-pages 4.07-1
-mdadm 3.4-1
-mediainfo 0.7.88-1
-modemmanager 1.6.0-1
-mpv 1:0.20.0-1
-nano 2.6.3-1
-neovim 0.1.5-1
-net-tools 1.60.20160710git-1
-netctl 1.12-2
-nfs-utils 1.3.4-1
-nilfs-utils 2.2.4-1
-noto-fonts-emoji 20160714-1
-ntfs-3g 2016.2.22-1
-ntp 4.2.8.p8-1
-nvidia 370.23-4
-openssh 7.3p1-1
-opus-tools 0.1.9-1
-os-prober 1.71-1
-otf-inconsolata-g-powerline-git r100.a44abd0-2
-p7zip 16.02-2
-pacman 5.0.1-4
-patch 2.7.5-1
-pavucontrol 3.0-4
-pciutils 3.5.1-1
-pcmciautils 018-7
-perl 5.24.0-1
-perl-net-dbus 1.1.0-3
-perl-time-duration 1:1.20-1
-pidgin 2.11.0-1
-pkg-config 0.29.1-2
-pkgfile 15-1
-pkgstats 2.3-6
-postgresql 9.5.4-1
-primus 20151110-6
-procps-ng 3.3.12-1
-psmisc 22.21-3
-pulseaudio-bluetooth 9.0-1
-python-docutils 0.12-3
-python-neovim 0.1.9-1
-python-nose 1.3.7-2
-python-requests 2.11.1-1
-python-virtualenvwrapper 4.7.2-1
-python2-gobject 3.20.1-1
-python2-neovim 0.1.9-1
-python2-notify 0.1.1-13
-qalculate-gtk 0.9.9-1
-qcachegrind 0.7.4-6
-qt5ct 0.25-1
-reiserfsprogs 3.6.25-1
-rfkill 0.5-1
-rsync 3.1.2-1
-s-nail 14.8.10-1
-sbt 1:0.13.12-1
-scala 2.11.8-1
-scala-docs 2.11.8-1
-scidb-svn 2:1.0.beta.r1095-1
-screen 4.4.0-1
-scrot 0.8.13-1
-sed 4.2.2-4
-shadow 4.2.1-3
-sharutils 4.15.2-2
-stockfish-git r3826.g76971d8-1
-subversion 1.9.4-1
-sudo 1.8.17.p1-1
-swig 3.0.10-1
-sysfsutils 2.1.0-9
-systemd-sysvcompat 231-1
-tar 1.29-1
-termite 11-3
-texinfo 6.1-4
-the_platinum_searcher 2.1.3-1
-thunar 1.6.10-3
-thunar-archive-plugin 0.3.1-6
-thunar-volman 0.8.1-2
-time 1.7-8
-tmate 2.2.1-2
-tmux 2.2-1
-transmission-cli 2.92-5
-transmission-gtk 2.92-5
-ttf-indic-otf 0.2-8
-tumbler 0.1.31-1
-udisks2 2.1.7-1
-unace 2.5-9
-unrar 1:5.4.5-1
-unzip 6.0-12
-usb_modeswitch 2.4.0-2
-usbutils 008-1
-util-linux 2.28.1-1
-uudeview 0.5.20-12
-valgrind 3.11.0-4
-vcsh 1.20151229.1-1
-vi 1:070224-2
-w3m 0.5.3.git20160413-1
-webfs 1.21-12
-weechat 1.5-2
-wget 1.18-1
-which 2.21-2
-whois 5.2.12-1
-wireless_tools 30.pre9-1
-wpa_actiond 1.4-2
-xclip 0.12.git.20160201-1
-xdot 0.7-2
-xdotool 3.20160805.1-1
-xf86-input-synaptics 1.8.99.1-1
-xf86-video-intel 1:2.99.917+697+g12c14de-1
-xf86-video-nouveau 1.0.12-2
-xfsprogs 4.7.0-1
-xorg-xinit 1.3.4-4
-xorg-xmodmap 1.0.9-1
-xorg-xprop 1.2.2-1
-xorg-xrdb 1.1.0-2
-xsel 1.2.0-6
-xz 5.2.2-1
-yaourt 1.8.1-1
-yapf 0.11.1-1
-zathura 0.3.6-2
-zathura-djvu 0.2.5-2
-zathura-pdf-poppler 0.2.6-2
-zd1211-firmware 1.5-1
-zip 3.0-7
+acpid
+alsa-utils
+anki
+aspell
+aspell-en
+astyle
+audacity
+autoconf
+automake
+b43-fwcutter
+bash
+bbswitch
+bind-tools
+binutils
+bison
+bitlbee
+blueman
+bluez-utils
+btrfs-progs
+bumblebee
+bzip2
+bzr
+cabextract
+cairo
+cantarell-fonts
+ccache
+clang
+clang-tools-extra
+cmake
+compton
+coreutils
+crda
+cryptsetup
+ctags
+device-mapper
+dhcpcd
+dialog
+diffutils
+dmenu
+dmraid
+dnsmasq
+dosfstools
+dunst
+e2fsprogs
+exfat-utils
+f2fs-tools
+faenza-icon-theme
+fakeroot
+feh
+file
+file-roller
+filesystem
+findutils
+firefox
+firejail
+flex
+fontconfig
+fontforge
+freetype2
+gawk
+gcc
+gcc-libs
+gdb
+geany
+gettext
+gimp
+git
+glibc
+go
+go-tools
+gparted
+grep
+groff
+grub
+gtk-engines
+gvfs
+gvfs-mtp
+gzip
+haveged
+hostapd
+htop
+i3-wm
+i3lock
+i3status
+inetutils
+inotify-tools
+iproute2
+iputils
+ipw2100-fw
+ipw2200-fw
+ipython
+jfsutils
+less
+libnotify
+libtool
+libtxc_dxtn
+libva-intel-driver
+licenses
+linux
+lldb
+lm_sensors
+logrotate
+lvm2
+lxappearance
+m4
+make
+man-db
+man-pages
+mdadm
+mediainfo
+modemmanager
+mpv
+nano
+neovim
+net-tools
+netctl
+nfs-utils
+nilfs-utils
+noto-fonts-emoji
+ntfs-3g
+ntp
+nvidia
+openssh
+opus-tools
+os-prober
+p7zip
+pacman
+patch
+pavucontrol
+pciutils
+pcmciautils
+perl
+perl-net-dbus
+perl-time-duration
+pidgin
+pkg-config
+pkgfile
+pkgstats
+postgresql
+primus
+procps-ng
+psmisc
+pulseaudio-bluetooth
+python-docutils
+python-neovim
+python-nose
+python-requests
+python-virtualenvwrapper
+python2-gobject
+python2-neovim
+python2-notify
+qalculate-gtk
+qcachegrind
+qt5ct
+reiserfsprogs
+rfkill
+rsync
+s-nail
+sbt
+scala
+scala-docs
+screen
+scrot
+sed
+shadow
+sharutils
+subversion
+sudo
+swig
+sysfsutils
+systemd-sysvcompat
+tar
+termite
+texinfo
+thunar
+thunar-archive-plugin
+thunar-volman
+time
+tmux
+transmission-cli
+transmission-gtk
+ttf-indic-otf
+tumbler
+udisks2
+unace
+unrar
+unzip
+usb_modeswitch
+usbutils
+util-linux
+uudeview
+valgrind
+vi
+w3m
+webfs
+weechat
+wget
+which
+whois
+wireless_tools
+wpa_actiond
+xclip
+xdot
+xdotool
+xf86-input-synaptics
+xf86-video-intel
+xf86-video-nouveau
+xfsprogs
+xorg-xinit
+xorg-xmodmap
+xorg-xprop
+xorg-xrdb
+xsel
+xz
+yapf
+zathura
+zathura-djvu
+zathura-pdf-poppler
+zd1211-firmware
+zip
