@@ -193,6 +193,7 @@ let g:neomake_c_enabled_makers=['gcc']
 let g:neomake_c_gcc_args = ["-std=c++11", "-Wextra", "-Wall", "-fsanitize=undefined","-g", "-fopenmp"]
 let g:neomake_cpp_enabled_makers=['gcc']
 let g:neomake_cpp_gcc_args = ["-std=c++1z", "-Wextra", "-Wall", "-fsanitize=undefined","-g", "-fopenmp"]
+let g:neomake_python_enabled_makers = ['flake8']
 
 " neocomplete like
 set completeopt+=noinsert

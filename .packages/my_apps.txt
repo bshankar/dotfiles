@@ -54,6 +54,7 @@ filesystem
 findutils
 firefox
 firejail
+flake8
 flex
 fontconfig
 fontforge
