@@ -156,7 +156,7 @@ Plug 'simnalamburt/vim-mundo'
 Plug 'benekastah/neomake'
 Plug 'Shougo/neoinclude.vim'
 Plug 'Konfekt/FastFold' 
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-go',{'do': 'make'}
 Plug 'zchee/deoplete-jedi'
@@ -189,8 +189,10 @@ call plug#end()
 
 " Run neomake on every save
 autocmd! BufWritePost * Neomake
-let g:neomake_cpp_enable_markers=['clang']
-let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined","-g"]
+let g:neomake_c_enabled_makers=['gcc']
+let g:neomake_c_gcc_args = ["-std=c++11", "-Wextra", "-Wall", "-fsanitize=undefined","-g", "-fopenmp"]
+let g:neomake_cpp_enabled_makers=['gcc']
+let g:neomake_cpp_gcc_args = ["-std=c++1z", "-Wextra", "-Wall", "-fsanitize=undefined","-g", "-fopenmp"]
 
 " neocomplete like
 set completeopt+=noinsert
@@ -210,7 +212,6 @@ let g:deoplete#sources#go#json_directory = '$HOME/.local/share/nvim/go/json'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" let g:UltiSnipsSnippetDirectories=["UltiSnips", "mycoolsnippets"]
 
 " set colorscheme
 set background=dark
@@ -236,6 +237,7 @@ let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 let g:formatdef_cpp_google = '"astyle -A2 -xL -xC65"'
+let g:formatters_c = ['cpp_google']
 let g:formatters_cpp = ['cpp_google']
 let g:formatter_yapf_style = 'pep8'
 
