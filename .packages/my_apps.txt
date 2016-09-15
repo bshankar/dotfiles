@@ -16,6 +16,7 @@ binutils
 bison
 bitlbee
 blueman
+bluez-hid2hci
 bluez-utils
 btrfs-progs
 bumblebee
@@ -91,7 +92,9 @@ iputils
 ipw2100-fw
 ipw2200-fw
 ipython
+jdk8-openjdk
 jfsutils
+jre8-openjdk
 less
 libnotify
 libtool
