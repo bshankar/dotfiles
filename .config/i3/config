@@ -76,10 +76,6 @@ bindsym $mod+Shift+f exec firefox
 # Take a screenshot
 bindsym Print exec imgur-screenshot
 
-# Caps lock to Escape
-exec_always xmodmap -e "clear lock" #disable caps lock switch
-exec_always xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
-
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
