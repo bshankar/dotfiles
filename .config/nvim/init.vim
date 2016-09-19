@@ -28,6 +28,9 @@ syntax on
 " crashes.
 set hidden
 
+" set runtime path
+set runtimepath+=$HOME/.local/share/nvim
+
 if has('persistent_undo')      "check if your vim version supports it
   set undofile                 "turn on the feature  
   set undodir=$HOME/.local/share/nvim/undo  "directory where the undo files will be stored
@@ -170,8 +173,10 @@ Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/taglist.vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'morhetz/gruvbox'
+Plug 'MaxSt/FlatColor'
 Plug 'ervandew/supertab'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'dag/vim-fish' 
@@ -213,13 +218,16 @@ let g:deoplete#sources#go#json_directory = '$HOME/.local/share/nvim/go/json'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetsDir="~/.local/share/nvim/custom_snippets"
+let g:UltiSnipsSnippetDirectories=["custom_snippets"]
 
 " set colorscheme
-set background=dark
-let g:gruvbox_italic=1
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='hard'
-let g:airline_theme='gruvbox'
+" set background=dark
+" let g:gruvbox_italic=1
+colorscheme flatcolor
+" let g:gruvbox_contrast_dark='hard'
+" let g:airline_theme='gruvbox'
+let g:airline_theme='base16'
 
 " air-line enable powerline fonts
 let g:airline_powerline_fonts = 1
