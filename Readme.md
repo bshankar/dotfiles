@@ -18,7 +18,7 @@ and tmux-sensible along with a few tweaks.
 
 neovim
 ------
-Using Gruvbox theme. 30+ plugins and some neat tweaks with markdown, C, C++, Python, Scala 
+Using FlatColor theme. 30+ plugins and some neat tweaks with markdown, C, C++, Python, Scala 
 and Go in mind. 
 
 ![neovim](https://raw.githubusercontent.com/bshankar/dotfiles/master/Pictures/nvim.png)
@@ -39,7 +39,7 @@ Uses Font awesome icons
 
 termite
 -------
-Uses Gruvbox theme and Inconsolata-g font.
+Uses FlatColor theme and Inconsolata-g font.
 
 .packages/my_apps.txt
 ---------------------
