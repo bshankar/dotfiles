@@ -29,6 +29,7 @@ application/zip=org.gnome.FileRoller.desktop;firefox.desktop;
 application/epub+zip=firefox.desktop;org.gnome.FileRoller.desktop;
 text/markdown=firefox.desktop;
 audio/x-vorbis+ogg=mpv.desktop;
+application/vnd.chess-pgn=scidb-beta.desktop;
 
 [Default Applications]
 x-scheme-handler/http=userapp-Firefox-611WDY.desktop
