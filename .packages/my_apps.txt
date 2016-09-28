@@ -92,9 +92,10 @@ iputils
 ipw2100-fw
 ipw2200-fw
 ipython
-jdk8-openjdk
+jdk7-openjdk
 jfsutils
-jre8-openjdk
+jre7-openjdk
+jre7-openjdk-headless
 less
 libnotify
 libtool
