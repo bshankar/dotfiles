@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Knack Nerd Font 13
+font = Hack 13
 
 scrollback_lines = 100000
 search_wrap = true
@@ -36,8 +36,8 @@ filter_unmatched_urls = true
 # gruvbox dark color scheme
 [colors]
 # hard contrast: 
-background = #1d2021
-#background = #282828
+#background = #1d2021
+background = #282828
 # soft contrast: background = #32302f
 foreground = #ebdbb2
 foreground_bold = #ebdbb2
@@ -75,7 +75,7 @@ color7 = #a89984
 color15 = #ebdbb2
 
 [hints]
-font = Knack Nerd Font 12
+font = Hack 12
 foreground = #dcdccc
 background = #3f3f3f
 active_foreground = #e68080
