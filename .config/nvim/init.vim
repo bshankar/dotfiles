@@ -109,8 +109,8 @@ set mouse=a
 " "press <Enter> to continue"
 set cmdheight=2
  
-" Display line numbers on the left
-set number
+" Display relative line numbers on the left
+set relativenumber
  
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
@@ -152,6 +152,8 @@ nnoremap <C-L> :nohl<CR><C-L>
 " Manage plugins with vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'simnalamburt/vim-mundo'
 Plug 'benekastah/neomake'
 Plug 'Shougo/neoinclude.vim'
@@ -218,7 +220,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 set background=dark
 let g:gruvbox_italic=1
 colorscheme gruvbox
-let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_dark='medium'
 let g:airline_theme='gruvbox'
 
 " air-line enable powerline fonts
