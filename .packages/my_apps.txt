@@ -1,6 +1,8 @@
 acpid
 alsa-utils
+android-sdk-platform-tools
 anki
+aov-html2epub-git
 aria2
 aspell
 aspell-en
@@ -10,6 +12,8 @@ autoconf
 automake
 b43-fwcutter
 bash
+bash-git-prompt
+bauerbill
 bbswitch
 bind-tools
 binutils
@@ -31,6 +35,7 @@ clang-tools-extra
 cmake
 compton
 coreutils
+cowfortune
 crda
 cryptsetup
 ctags
@@ -42,6 +47,7 @@ dmenu
 dmraid
 dnsmasq
 dosfstools
+downgrade
 dunst
 e2fsprogs
 exfat-utils
@@ -55,11 +61,13 @@ filesystem
 findutils
 firefox
 firejail
+fish-git
 flake8
 flex
 fontconfig
 fontforge
 freetype2
+freshplayerplugin
 gawk
 gcc
 gcc-libs
@@ -71,10 +79,14 @@ git
 glibc
 go
 go-tools
+gocode-bin
+goi3bar-git
 gparted
+gprof2dot
 grep
 groff
 grub
+grub2-theme-archlinux
 gtk-engines
 gvfs
 gvfs-mtp
@@ -82,9 +94,11 @@ gzip
 haveged
 hostapd
 htop
+hugo
 i3-wm
 i3lock
 i3status
+imgur-screenshot-git
 inetutils
 inotify-tools
 iproute2
@@ -92,6 +106,8 @@ iputils
 ipw2100-fw
 ipw2200-fw
 ipython
+j4-dmenu-desktop
+jbxkb
 jdk7-openjdk
 jfsutils
 jre7-openjdk
@@ -135,6 +151,7 @@ patch
 pavucontrol
 pciutils
 pcmciautils
+pepper-flash
 perl
 perl-net-dbus
 perl-time-duration
@@ -158,6 +175,7 @@ python2-notify
 qalculate-gtk
 qcachegrind
 qt5ct
+qxkb
 reiserfsprogs
 rfkill
 rsync
@@ -165,11 +183,13 @@ s-nail
 sbt
 scala
 scala-docs
+scidb-svn
 screen
 scrot
 sed
 shadow
 sharutils
+stockfish-git
 subversion
 sudo
 swig
@@ -178,10 +198,12 @@ systemd-sysvcompat
 tar
 termite
 texinfo
+the_platinum_searcher
 thunar
 thunar-archive-plugin
 thunar-volman
 time
+tmate
 tmux
 ttf-indic-otf
 tumbler
@@ -194,6 +216,7 @@ usbutils
 util-linux
 uudeview
 valgrind
+vcsh
 vi
 w3m
 webfs
