@@ -8,12 +8,12 @@ aspell
 aspell-en
 astyle
 audacity
+aurvote
 autoconf
 automake
 b43-fwcutter
 bash
 bash-git-prompt
-bauerbill
 bbswitch
 bind-tools
 binutils
@@ -160,6 +160,7 @@ pkg-config
 pkgfile
 pkgstats
 postgresql
+powerpill
 primus
 procps-ng
 psmisc
@@ -176,6 +177,7 @@ qalculate-gtk
 qcachegrind
 qt5ct
 qxkb
+reflector-timer-weekly
 reiserfsprogs
 rfkill
 rsync
@@ -239,6 +241,7 @@ xorg-xprop
 xorg-xrdb
 xsel
 xz
+yaourt
 yapf
 zathura
 zathura-djvu
