@@ -151,42 +151,65 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 " Manage plugins with vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
+
+" Clipboard
 Plug 'simnalamburt/vim-mundo'
+Plug 'vim-scripts/YankRing.vim'
+
+" :make 
 Plug 'benekastah/neomake'
-Plug 'Shougo/neoinclude.vim'
+
+" Autocomplete engine
+Plug 'ervandew/supertab'
 Plug 'Konfekt/FastFold' 
+Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-go',{'do': 'make'}
 Plug 'zchee/deoplete-jedi'
-Plug 'vim-scripts/YankRing.vim'
+
+" code navigation
+Plug 'vim-scripts/taglist.vim'
+Plug 'easymotion/vim-easymotion'
+
+" Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" Github integration
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'vim-scripts/mru.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'vim-scripts/taglist.vim'
+
+" Language support
 Plug 'derekwyatt/vim-scala'
-Plug 'morhetz/gruvbox'
-Plug 'ervandew/supertab'
-Plug 'vim-airline/vim-airline'
-Plug 'easymotion/vim-easymotion'
-Plug 'godlygeek/tabular'
 Plug 'dag/vim-fish' 
-Plug 'Rykka/riv.vim'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'Chiel92/vim-autoformat'
+Plug 'fatih/vim-go'
 Plug 'vim-utils/vim-man'
-Plug 'mhinz/vim-grepper'
 Plug 'critiqjo/lldb.nvim'
 Plug 'kana/vim-operator-user'
-Plug 'fatih/vim-go'
-Plug 'ryanoasis/vim-devicons'
 Plug 'plasticboy/vim-markdown'
+Plug 'h1mesuke/unite-outline'
+Plug 'kana/vim-operator-user'
+Plug 'baabelfish/nvim-nim'
+
+" Theme
+Plug 'vim-airline/vim-airline'
+Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
+
+" Fuzzy finder
+Plug 'vim-scripts/mru.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'mhinz/vim-grepper'
+
+" Macros
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
+" Misc Tools 
+Plug 'godlygeek/tabular'
+Plug 'Chiel92/vim-autoformat'
+Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 
 " Run neomake on every save
