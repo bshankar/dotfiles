@@ -138,6 +138,8 @@ net-tools
 netctl
 nfs-utils
 nilfs-utils
+nim
+nimsuggest
 noto-fonts-emoji
 ntfs-3g
 ntp

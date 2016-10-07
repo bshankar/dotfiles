@@ -11,9 +11,6 @@ set -x BROWSER firefox
 set -x WEECHAT_HOME $HOME/.config/weechat
 set -x NVIM_TUI_ENABLE_TRUE_COLOR 1
 
-# makepkg configuration file
-set -x MAKEPKG_CONF $HOME/.config/makepkg/makepkg.conf
-
 # Hack to make python2 detect lldb
 set -x PYTHONPATH /usr/lib/python2.7/site-packages/lldb
 
