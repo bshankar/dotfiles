@@ -21,6 +21,7 @@ alias java='java -Xms512M -Xmx2G -Dawt.useSystemAAFontSettings=on -Dswing.aatext
 
 # Some yaourt shortcuts
 alias y='yaourt'
-alias yupg='yaourt -Syua'
+alias yupg='yaourt -Syu'
+alias yaupg='yaourt -Syua'
 alias yin='yaourt -S'
 alias yrem='sudo pacman -Rs'

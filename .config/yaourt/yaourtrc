@@ -1,5 +1,5 @@
 AURVOTE=1
 EXPORT=1
 NOCONFIRM=1
-PACMAN="powerpill --config $HOME/.config/pacman/pacman.conf"
+PACMAN="powerpill --powerpill-config $HOME/.config/powerpill/powerpill.json"
 MAKEPKG="makepkg --config $HOME/.config/makepkg/makepkg.conf"

@@ -212,6 +212,7 @@ tmux
 ttf-indic-otf
 tumbler
 udisks2
+uget
 unace
 unrar
 unzip
