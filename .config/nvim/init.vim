@@ -28,6 +28,9 @@ syntax on
 " crashes.
 set hidden
 
+" set runtime path
+set runtimepath+=$HOME/.local/share/nvim
+
 if has('persistent_undo')      "check if your vim version supports it
   set undofile                 "turn on the feature  
   set undodir=$HOME/.local/share/nvim/undo  "directory where the undo files will be stored
@@ -70,7 +73,10 @@ set hlsearch
 " Use case insensitive search, except when using capital letters
 set ignorecase
 set smartcase
- 
+
+" syntax based code folding
+set foldmethod=syntax
+
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
  
@@ -238,6 +244,8 @@ let g:deoplete#sources#go#json_directory = '$HOME/.local/share/nvim/go/json'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetsDir="~/.local/share/nvim/custom_snippets"
+let g:UltiSnipsSnippetDirectories=["custom_snippets"]
 
 " set colorscheme
 set background=dark
