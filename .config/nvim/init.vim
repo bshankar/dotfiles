@@ -75,7 +75,9 @@ set ignorecase
 set smartcase
 
 " syntax based code folding
-set foldmethod=syntax
+autocmd Syntax c,cpp,vim,xml,html,xhtml,python,markdown,scala setlocal foldmethod=syntax
+" unfold everything when a file is opened
+autocmd Syntax c,cpp,vim,xml,html,xhtml,perl,python,markdown,scala normal zR
 
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
@@ -196,6 +198,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'h1mesuke/unite-outline'
 Plug 'kana/vim-operator-user'
 Plug 'baabelfish/nvim-nim'
+Plug 'reedes/vim-pencil'
 
 " Theme
 Plug 'vim-airline/vim-airline'
@@ -306,3 +309,17 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+
+" Some basic pencil configuration
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init({'wrap': 'hard'})
+augroup END
+
+let g:airline_section_x = '%{PencilMode()}'
+
+" Spell-check Markdown files
+autocmd FileType markdown setlocal spell
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
