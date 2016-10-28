@@ -11,6 +11,7 @@ audacity
 aurvote
 autoconf
 automake
+azdrawing
 b43-fwcutter
 bash
 bash-git-prompt
@@ -39,6 +40,7 @@ cowfortune
 crda
 cryptsetup
 ctags
+cyberfox
 device-mapper
 dhcpcd
 dialog
@@ -57,6 +59,7 @@ fakeroot
 feh
 file
 file-roller
+filegive
 filesystem
 findutils
 firefox
@@ -75,6 +78,7 @@ gdb
 geany
 gettext
 gimp
+gimp-webp
 git
 glibc
 go
@@ -82,6 +86,7 @@ go-tools
 gocode-bin
 goi3bar-git
 gparted
+gperf
 gprof2dot
 grep
 groff
@@ -100,6 +105,7 @@ i3lock
 i3status
 imgur-screenshot-git
 inetutils
+inkscape
 inotify-tools
 iproute2
 iputils
@@ -108,11 +114,12 @@ ipw2200-fw
 ipython
 j4-dmenu-desktop
 jbxkb
-jdk7-openjdk
+jdk8-openjdk
 jfsutils
-jre7-openjdk
-jre7-openjdk-headless
+jre8-openjdk-headless
 less
+lib32-gcc-libs
+lib32-zlib
 libnotify
 libtool
 libtxc_dxtn
@@ -121,6 +128,7 @@ licenses
 linux
 lldb
 lm_sensors
+lmms
 logrotate
 lvm2
 lxappearance
@@ -130,6 +138,7 @@ man-db
 man-pages
 mdadm
 mediainfo
+minify
 modemmanager
 mpv
 nano
@@ -140,6 +149,8 @@ nfs-utils
 nilfs-utils
 nim
 nimsuggest
+ninja
+nmap
 noto-fonts-emoji
 ntfs-3g
 ntp
@@ -193,6 +204,7 @@ scrot
 sed
 shadow
 sharutils
+soundfont-fluid
 stockfish-git
 subversion
 sudo
@@ -223,6 +235,7 @@ uudeview
 valgrind
 vcsh
 vi
+vmpk
 w3m
 webfs
 weechat
@@ -246,6 +259,7 @@ xsel
 xz
 yaourt
 yapf
+yasm
 zathura
 zathura-djvu
 zathura-pdf-poppler
