@@ -261,9 +261,9 @@ let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
-" make tables ReSt compatible
-let g:table_mode_corner_corner="+"
-let g:table_mode_header_fillchar="="
+
+" make tables markdown compatible
+let g:table_mode_corner="|"
 
 " yank to clipboard
 set clipboard=unnamedplus
