@@ -74,7 +74,7 @@ bindsym $mod+d exec --no-startup-id j4-dmenu-desktop [--dmenu="dmenu -i"] [--ter
 bindsym $mod+Shift+f exec firefox
 
 # Take a screenshot
-bindsym Print exec imgur-screenshot
+bindsym Print exec pscrotum -s
 
 # change focus
 bindsym $mod+j focus left
