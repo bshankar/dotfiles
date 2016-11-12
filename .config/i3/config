@@ -70,8 +70,8 @@ bindsym $mod+Shift+q kill
 # installed.
 bindsym $mod+d exec --no-startup-id j4-dmenu-desktop [--dmenu="dmenu -i"] [--term="i3-sensible-terminal"
 
-# Run firefox
-bindsym $mod+Shift+f exec firefox
+# Run chromium 
+bindsym $mod+Shift+f exec chromium
 
 # Take a screenshot
 bindsym Print exec pscrotum -s
@@ -184,7 +184,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Program Workspaces
-assign [class="Firefox"] $workspace1
+assign [class="Chromium"] $workspace1
 
 # Floating
 for_window [class="Lxappearance"] floating enable
