@@ -18,7 +18,7 @@
     "path": "/usr/bin/aria2c"
   },
   "pacman": {
-    "config": "/home/ebs/.config/pacman/pacman.conf",
+    "config": "/etc/pacman.conf",
     "path": "/usr/bin/pacman"
   },
   "pacserve": {

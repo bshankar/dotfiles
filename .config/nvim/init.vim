@@ -161,7 +161,6 @@ nnoremap <C-L> :nohl<CR><C-L>
 call plug#begin('~/.local/share/nvim/site/plugged')
 
 " Clipboard
-Plug 'simnalamburt/vim-mundo'
 Plug 'vim-scripts/YankRing.vim'
 
 " :make 
@@ -173,7 +172,6 @@ Plug 'Konfekt/FastFold'
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-clang'
-Plug 'zchee/deoplete-go',{'do': 'make'}
 Plug 'zchee/deoplete-jedi'
 
 " code navigation
@@ -190,19 +188,18 @@ Plug 'tpope/vim-fugitive'
 " Language support
 Plug 'derekwyatt/vim-scala'
 Plug 'dag/vim-fish' 
-Plug 'fatih/vim-go'
 Plug 'vim-utils/vim-man'
 Plug 'critiqjo/lldb.nvim'
 Plug 'kana/vim-operator-user'
 Plug 'plasticboy/vim-markdown'
 Plug 'h1mesuke/unite-outline'
 Plug 'kana/vim-operator-user'
-Plug 'baabelfish/nvim-nim'
 Plug 'reedes/vim-pencil'
+Plug 'ajford/vimkivy'
 
 " Theme
-Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
 
 " Fuzzy finder
@@ -223,10 +220,8 @@ call plug#end()
 
 " Run neomake on every save
 autocmd! BufWritePost * Neomake
-let g:neomake_c_enabled_makers=['gcc']
-let g:neomake_c_gcc_args = ["-std=c++11", "-Wextra", "-Wall", "-fsanitize=undefined","-g", "-fopenmp"]
-let g:neomake_cpp_enabled_makers=['gcc']
-let g:neomake_cpp_gcc_args = ["-std=c++1z", "-Wextra", "-Wall", "-fsanitize=undefined","-g", "-fopenmp"]
+let g:neomake_c_clang_args = ["-std=c++11", "-Wextra", "-Wall", "-fsanitize=undefined","-g", "-fopenmp"]
+let g:neomake_cpp_clang_args = ["-std=c++1z", "-Wextra", "-Wall", "-fsanitize=undefined","-g", "-fopenmp"]
 let g:neomake_python_enabled_makers = ['flake8']
 
 " neocomplete like
@@ -242,6 +237,7 @@ let g:deoplete#sources#clang#std = {'c': 'c11', 'cpp': 'c++1z', 'objc': 'c11', '
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#use_cache = 1
 let g:deoplete#sources#go#json_directory = '$HOME/.local/share/nvim/go/json'
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -251,11 +247,10 @@ let g:UltiSnipsSnippetsDir="~/.local/share/nvim/custom_snippets"
 let g:UltiSnipsSnippetDirectories=["custom_snippets"]
 
 " set colorscheme
+set termguicolors
 set background=dark
 let g:gruvbox_italic=1
 colorscheme gruvbox
-let g:gruvbox_contrast_dark='medium'
-let g:airline_theme='gruvbox'
 
 " air-line enable powerline fonts
 let g:airline_powerline_fonts = 1
@@ -276,7 +271,6 @@ let g:autoformat_remove_trailing_spaces = 0
 let g:formatdef_cpp_google = '"astyle -A2 -xL -xC65"'
 let g:formatters_c = ['cpp_google']
 let g:formatters_cpp = ['cpp_google']
-let g:formatter_yapf_style = 'pep8'
 
 " grepper options
 " for browsing the input history
@@ -319,7 +313,14 @@ augroup END
 
 let g:airline_section_x = '%{PencilMode()}'
 
+" Toggle pencil mode
+nnoremap <leader>pm :PencilToggle<cr>
+
 " Spell-check Markdown files
 autocmd FileType markdown setlocal spell
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
+
+" run kivy application
+nnoremap <leader>kv :!python main.py<cr>
+nnoremap <leader>tp :!tup<cr>
