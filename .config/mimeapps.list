@@ -47,6 +47,7 @@ text/x-java=nvim-qt.desktop;geany.desktop;
 application/xml=geany.desktop;
 text/x-tex=nvim-qt.desktop;
 video/x-msvideo=mpv.desktop;
+text/x-emacs-lisp=geany.desktop;
 
 [Default Applications]
 x-scheme-handler/http=userapp-Firefox-611WDY.desktop

@@ -1,5 +1,5 @@
 AURVOTE=1
 EXPORT=1
 NOCONFIRM=1
-PACMAN="powerpill"
-MAKEPKG="makepkg"
+#PACMAN="powerpill"
+#MAKEPKG="makepkg"
