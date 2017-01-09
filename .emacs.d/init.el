@@ -13,7 +13,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org relative-line-numbers ## company-irony elpy flycheck-irony company irony powerline-evil ivy yasnippet flycheck gruvbox-theme org-evil evil-numbers evil-leader evil-surround evil)))
+    (org-bullets org relative-line-numbers ## company-irony elpy flycheck-irony company irony powerline-evil ivy yasnippet flycheck gruvbox-theme org-evil evil-leader evil-surround evil)))
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
 (custom-set-faces
@@ -35,13 +35,25 @@
 
 ;; highlight matching parenthesis
 (show-paren-mode t)
+(defvar show-paren-style)
 (setq show-paren-style 'expression)
 
 ;; show relative line numbers
 (require 'relative-line-numbers)
 (global-relative-line-numbers-mode)
 
-;; evil mode (vim emulator)
+;; leader key emulation
+(require 'evil-leader)
+;; set leader key
+(evil-leader/set-leader ",")
+(global-evil-leader-mode)
+;; evil surround
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+;; org-evil
+(require 'org-evil)
+
+;; finally enable evil mode (vim emulator)
 (require 'evil)
   (evil-mode 1)
 
@@ -81,8 +93,14 @@
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 ;; use comany backend for auto completion
+(defvar company-backends)
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
 
 ;; Enable elpy for python
+(require 'elpy)
 (elpy-enable)
+
+;; pretty bullets for org-mode
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
