@@ -1,3 +1,4 @@
+;;; package --- package manager for emacs
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
@@ -5,6 +6,14 @@
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) ;; You might already have this line
+
+;;; commentary:
+;;; code:
+
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)                ;; if you use :diminish
+(require 'bind-key)                ;; if you use any :bind variant
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -21,14 +30,15 @@
     ("10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
  '(package-selected-packages
    (quote
-    (rainbow-delimiters htmlize icicles ivy evil org-evil evil-leader evil-surround relative-line-numbers powerline-evil gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets ox-rst ox-impress-js))))
+    (evil-commentary esup swiper rainbow-delimiters htmlize ivy evil evil-leader evil-surround relative-line-numbers powerline-evil gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets ox-rst ox-impress-js))))
+ 
+ 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Knack Nerd Font" :foundry "simp" :slant normal :weight normal :height 128 :width normal)))))
-
 
 ;; get rid of some ueless things
 (tool-bar-mode -1)
@@ -39,31 +49,21 @@
 ;;(menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-;; open html files with firefox
- '(org-file-apps
-    (quote
-      ((auto-mode . emacs)
-      ("\\.mm\\'" . default)
-      ("\\.x?html?\\'" . "/usr/bin/firefox %s")
-      ("\\.pdf\\'" . default))))
-
 ;; indent with spaces
 (setq-default indent-tabs-mode nil)
 ;; set tab width to 4
 (setq-default tab-width 4)
 
-;; abbreviation table
-(define-abbrev-table 'global-abbrev-table
-  '((";name" "Bhavani Shankar")
-    (";email" "ebs@openmailbox.org")
-    ))
-
+;; silently save new abbrevations
+(setq save-abbrevs 'silently)
 ;; always enable abbrev mode
 (setq-default abbrev-mode t)
 
-;; icicles minibuffer completion
-(require 'icicles)
-(icy-mode 1)
+;; ivy mode
+(require 'ivy)
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
 
 ;; use pretty symbols
 (global-prettify-symbols-mode t)
@@ -82,25 +82,31 @@
 
 ;; show relative line numbers
 (require 'relative-line-numbers)
-(global-relative-line-numbers-mode)
+(add-hook 'prog-mode-hook #'relative-line-numbers-mode)
+
+;; finally enable evil mode (vim emulator)
+(require 'evil)
+  (evil-mode 1)
+
+;; evil commentery
+(evil-commentary-mode)
 
 ;; leader key emulation
 (require 'evil-leader)
 ;; set leader key
 (evil-leader/set-leader ",")
 (global-evil-leader-mode)
-;; evil surround
-(require 'evil-surround)
-(global-evil-surround-mode 1)
-;; org-evil
-(require 'org-evil)
 
-;; finally enable evil mode (vim emulator)
-(require 'evil)
-  (evil-mode 1)
+;; evil leader settings
+(evil-leader/set-key
+  "e" 'find-file
+  "b" 'ivy-switch-buffer
+  "k" 'kill-buffer)
+
+;; evil surround
+(global-evil-surround-mode 1)
 
 ;; powerline
-(require 'powerline)
 (powerline-default-theme)
 (require 'powerline-evil)
 
@@ -111,8 +117,10 @@
 ;; htmlize for syntax highlighting in exported html
 (require 'htmlize)
 (require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; fontify natively for org
+(defvar org-src-fontify-natively)
 (setq org-src-fontify-natively t)
 
 ;; syntax highlight from a css file instead of copying
@@ -122,16 +130,18 @@
 (defvar org-html-htmlize-font-prefix)
 (setq org-html-htmlize-font-prefix "org-")
 ;; preserve indentation
+(defvar org-src-preserve-indentation)
 (setq org-src-preserve-indentation t)
 
-;; allow babel to run elisp, python and gnuplot codes
+;; allow babel to run elisp, python and sh codes
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (python . t)
-   (gnuplot . t)))
+   (sh . t)))
 
 ;; evaluate code without confirm
+(defvar org-confirm-babel-evaluate)
 (setq org-confirm-babel-evaluate nil)
 
 ;; enable spell checking for org-mode
@@ -162,6 +172,7 @@
 (add-hook 'org-mode-hook #'flycheck-mode)
 
 ;; don't include author info at the bottom of every html
+(defvar org-html-postamble)
 (setq org-html-postamble nil)
 
 (require 'ox-rst)
@@ -171,16 +182,10 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-(eval-when-compile
-  (require 'use-package))
-
 ;; enable flycheck for all files
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
-
-;; load the dark theme by default
-;; (load-theme 'gruvbox t)
 
 ;; Irony mode for c++
 (add-hook 'c++-mode-hook 'irony-mode)
@@ -190,6 +195,8 @@
 ;; replace the `completion-at-point' and `complete-symbol' bindings in
 ;; irony-mode's buffers by irony-mode's function
 (defun my-irony-mode-hook ()
+  "Recommended settings for irony-mode hook."
+  (defvar irony-mode-map)
   (define-key irony-mode-map [remap completion-at-point]
     'irony-completion-at-point-async)
   (define-key irony-mode-map [remap complete-symbol]
@@ -204,7 +211,10 @@
   '(add-to-list 'company-backends 'company-irony))
 
 ;; Enable elpy for python
+(defvar python-indent)
 (setq python-indent 4)
 (require 'elpy)
 (elpy-enable)
 
+(provide 'init)
+;;; init.el ends here
