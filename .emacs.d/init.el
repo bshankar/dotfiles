@@ -26,18 +26,13 @@
  '(custom-enabled-themes (quote (gruvbox)))
  '(custom-safe-themes
    (quote
-    ("10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
+    ("938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "ed317c0a3387be628a48c4bbdb316b4fa645a414838149069210b66dd521733f" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
  '(package-selected-packages
    (quote
     (evil-org evil-commentary esup swiper rainbow-delimiters htmlize ivy evil evil-leader evil-surround relative-line-numbers gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets ox-rst ox-impress-js))))
  
- 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Knack Nerd Font" :foundry "simp" :slant normal :weight normal :height 128 :width normal)))))
+;; set default font
+(set-frame-font "Knack Nerd Font-13" nil t)
 
 ;; get rid of some ueless things
 (tool-bar-mode -1)
@@ -61,6 +56,8 @@
 ;; ivy mode
 (use-package ivy
 :diminish ivy-mode
+:defer t
+:ensure t
 :config
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
@@ -95,6 +92,7 @@
 
 ;; enable evil mode (vim emulator)
 (use-package evil
+:defer t
 :config
 (evil-mode 1)
 (evil-commentary-mode)
@@ -102,15 +100,16 @@
 (global-evil-surround-mode 1))
 
 ;; evil leader
-(use-package evil-leader)
-(evil-leader/set-leader ",")
+(use-package evil-leader 
+:config             
 (global-evil-leader-mode)
-
+(evil-leader/set-leader ",")
 ;; evil leader settings
 (evil-leader/set-key
   "e" 'find-file
   "b" 'ivy-switch-buffer
   "k" 'kill-buffer)
+)
 
 ;; evil bindings for org-mode
 (use-package evil-org-mode
@@ -122,6 +121,8 @@
 ;; snippet manager
 (use-package yasnippet
 :diminish yas-minor-mode
+:defer t
+:ensure t
 :config
 (yas-global-mode 1))
 
@@ -147,12 +148,15 @@
 (setq org-src-preserve-indentation t)
 
 ;; ;; allow babel to run elisp, python and sh codes
-;; (org-babel-do-load-languages
-;;  'org-babel-load-languages
-;;  '((emacs-lisp . t)
-;;    (python . t)
-;;    (sh . t)))
+(use-package org
+  :mode "\\.org\\'"
 
+:config
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (sh . t)))
+  )
 ;; evaluate code without confirm
 (defvar org-confirm-babel-evaluate)
 (setq org-confirm-babel-evaluate nil)
