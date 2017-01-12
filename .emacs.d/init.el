@@ -6,7 +6,6 @@
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) ;; You might already have this line
-
 ;;; commentary:
 ;;; code:
 
@@ -30,7 +29,7 @@
     ("10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
  '(package-selected-packages
    (quote
-    (evil-commentary esup swiper rainbow-delimiters htmlize ivy evil evil-leader evil-surround relative-line-numbers powerline-evil gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets ox-rst ox-impress-js))))
+    (evil-org evil-commentary esup swiper rainbow-delimiters htmlize ivy evil evil-leader evil-surround relative-line-numbers gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets ox-rst ox-impress-js))))
  
  
 (custom-set-faces
@@ -60,10 +59,13 @@
 (setq-default abbrev-mode t)
 
 ;; ivy mode
-(require 'ivy)
+(use-package ivy
+:diminish ivy-mode
+:config
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
+)
 
 ;; use pretty symbols
 (global-prettify-symbols-mode t)
@@ -80,20 +82,27 @@
 (defvar compilation-scroll-output)
 (setq compilation-scroll-output t)
 
+(use-package abbrev
+  :diminish abbrev-mode
+  :config
+  (if (file-exists-p abbrev-file-name)
+      (quietly-read-abbrev-file)))
+
 ;; show relative line numbers
-(require 'relative-line-numbers)
-(add-hook 'prog-mode-hook #'relative-line-numbers-mode)
+(use-package relative-line-numbers
+:config
+(add-hook 'prog-mode-hook #'relative-line-numbers-mode))
 
-;; finally enable evil mode (vim emulator)
-(require 'evil)
-  (evil-mode 1)
-
-;; evil commentery
+;; enable evil mode (vim emulator)
+(use-package evil
+:config
+(evil-mode 1)
 (evil-commentary-mode)
+;; evil surround
+(global-evil-surround-mode 1))
 
-;; leader key emulation
-(require 'evil-leader)
-;; set leader key
+;; evil leader
+(use-package evil-leader)
 (evil-leader/set-leader ",")
 (global-evil-leader-mode)
 
@@ -103,21 +112,25 @@
   "b" 'ivy-switch-buffer
   "k" 'kill-buffer)
 
-;; evil surround
-(global-evil-surround-mode 1)
+;; evil bindings for org-mode
+(use-package evil-org-mode
+  :mode "\\.org\\'")
 
 ;; powerline
 (powerline-default-theme)
-(require 'powerline-evil)
 
 ;; snippet manager
-(require 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+:diminish yas-minor-mode
+:config
+(yas-global-mode 1))
 
 ;; htmlize for syntax highlighting in exported html
-(require 'htmlize)
-(require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(use-package htmlize :mode "\\.org\\'")
+(use-package rainbow-delimiters
+  :defer t
+  :config
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;; fontify natively for org
 (defvar org-src-fontify-natively)
@@ -133,12 +146,12 @@
 (defvar org-src-preserve-indentation)
 (setq org-src-preserve-indentation t)
 
-;; allow babel to run elisp, python and sh codes
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (python . t)
-   (sh . t)))
+;; ;; allow babel to run elisp, python and sh codes
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((emacs-lisp . t)
+;;    (python . t)
+;;    (sh . t)))
 
 ;; evaluate code without confirm
 (defvar org-confirm-babel-evaluate)
@@ -153,8 +166,11 @@
 ;; disable text warping with hotkey
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 
-;; check written text using proselint
-(require 'flycheck)
+;; enable flycheck globally
+(use-package flycheck
+  :diminish flycheck-mode
+  :init
+ (global-flycheck-mode))
 
 (flycheck-define-checker proselint
   "A linter for prose."
@@ -171,21 +187,18 @@
 (add-hook 'text-mode-hook #'flycheck-mode)
 (add-hook 'org-mode-hook #'flycheck-mode)
 
+
 ;; don't include author info at the bottom of every html
 (defvar org-html-postamble)
 (setq org-html-postamble nil)
 
-(require 'ox-rst)
-(require 'ox-impress-js)
+(use-package ox-rst :mode "\\.org\\'")
+(use-package ox-impress-js :mode "\\.org\\'")
 
 ;; pretty bullets for org-mode
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-
-;; enable flycheck for all files
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
+(use-package org-bullets
+:config
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;; Irony mode for c++
 (add-hook 'c++-mode-hook 'irony-mode)
@@ -213,8 +226,7 @@
 ;; Enable elpy for python
 (defvar python-indent)
 (setq python-indent 4)
-(require 'elpy)
-(elpy-enable)
+(use-package elpy :mode "\\.py\\'" :config (elpy-enable))
 
 (provide 'init)
 ;;; init.el ends here
