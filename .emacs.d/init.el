@@ -92,11 +92,9 @@
 
 ;; highlight matching parenthesis
 (show-paren-mode t)
-(defvar show-paren-style)
 (setq show-paren-style 'expression)
 
 ;; automatically scroll compilation output
-(defvar compilation-scroll-output)
 (setq compilation-scroll-output t)
 
 (use-package abbrev
@@ -172,7 +170,6 @@
 ;; irony-mode's buffers by irony-mode's function
 (defun my-irony-mode-hook ()
   "Recommended settings for irony-mode hook."
-  (defvar irony-mode-map)
   (define-key irony-mode-map [remap completion-at-point]
     'irony-completion-at-point-async)
   (define-key irony-mode-map [remap complete-symbol]
@@ -182,7 +179,6 @@
 
 ;; use comany backend for auto completion everywhere
 (add-hook 'after-init-hook 'global-company-mode)
-(defvar company-backends)
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
 
@@ -203,8 +199,9 @@
    '((python . t)
      (sh . t)))
 
-  ;; downward pointing arrow instead of ...
-  (setq org-ellipsis "⤵")
+  ;; custom ellipsis for org-mode (...)
+  (set-display-table-slot standard-display-table
+    'selective-display (string-to-vector " ⤵"))
 
   ;; fontify natively for org
   (setq org-src-fontify-natively t)
@@ -221,16 +218,13 @@
   ;; disable text warping with hotkey
   (global-set-key (kbd "C-c q") 'auto-fill-mode)
   ;; don't include author info at the bottom of every html
-  (defvar org-html-postamble)
   (setq org-html-postamble nil)
   )
 
 ;; htmlize for syntax highlighting in exported html
 (use-package htmlize :defer 4 :config
   ;; syntax highlight from a css file instead of copying
-  (defvar org-html-htmlize-output-type)
   (setq org-html-htmlize-output-type 'css)
-  (defvar org-html-htmlize-font-prefix)
   (setq org-html-htmlize-font-prefix "org-")
   )
 
@@ -243,7 +237,11 @@
 (use-package evil-org-mode :defer 3)
 
 ;; Load magit last
-(use-package magit :defer 4)
+(use-package magit :defer 4
+  :config
+  (evil-leader/set-key "g" 'magit-status))
+
+;; evil bindings for magit
 (use-package evil-magit :defer 4)
 
 (provide 'init)
