@@ -1,18 +1,22 @@
-;;; package --- package manager for emacs
-(require 'package) ;; You might already have this line
+;;; init.el --- user init file      -*- no-byte-compile: t -*-
+(setq load-prefer-newer t)
+(package-initialize)
+
+(eval-when-compile
+  (require 'use-package))
+
+(use-package auto-compile
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
+
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-(package-initialize) ;; You might already have this line
 ;;; commentary:
 ;;; code:
-
-(eval-when-compile
-  (require 'use-package))
-(require 'diminish)                ;; if you use :diminish
-(require 'bind-key)                ;; if you use any :bind variant
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -31,7 +35,7 @@
  '(hl-sexp-background-color "#1c1f26")
  '(package-selected-packages
    (quote
-    (evil-magit magit tup-mode kivy-mode evil-org evil-commentary esup swiper rainbow-delimiters htmlize ivy evil evil-leader evil-surround relative-line-numbers gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets)))
+    (auto-compile evil-magit magit kivy-mode evil-org evil-commentary esup swiper htmlize ivy evil evil-leader evil-surround relative-line-numbers gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -63,16 +67,8 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; set default font
-(set-frame-font "Knack Nerd Font-13" nil t)
-
-;; get rid of some ueless things
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(menu-bar-mode -1)
+;; get rid of the annoying bell
 (setq ring-bell-function 'ignore)
-;;(menu-bar-mode -1)
-(scroll-bar-mode -1)
 
 ;; indent with spaces
 (setq-default indent-tabs-mode nil)
@@ -167,10 +163,6 @@
   (add-hook 'text-mode-hook #'flycheck-mode)
   (add-hook 'org-mode-hook #'flycheck-mode))
 
-(use-package rainbow-delimiters
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-
 ;; Irony mode for c++
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -195,15 +187,11 @@
   '(add-to-list 'company-backends 'company-irony))
 
 ;; Enable elpy for python
-(defvar python-indent)
-(setq python-indent 4)
-(use-package elpy :defer 2 :config (elpy-enable))
-
-;; tup mode
-(use-package tup)
+(use-package elpy :defer 2 :config (elpy-enable)
+(setq python-indent-offset 4))
 
 ;; kivy mode
-(use-package kivy)
+(use-package kivy :defer 2)
 
 ;; ;; allow babel to run elisp, python and sh codes
 (use-package org
@@ -215,11 +203,12 @@
    '((python . t)
      (sh . t)))
 
+  ;; downward pointing arrow instead of ...
+  (setq org-ellipsis "⤵")
+
   ;; fontify natively for org
   (setq org-src-fontify-natively t)
 
-  ;; syntax highlight from a css file instead of copying
-  ;; emacs theme
   ;; preserve indentation
   (setq org-src-preserve-indentation t)
   ;; evaluate code without confirm
@@ -238,6 +227,7 @@
 
 ;; htmlize for syntax highlighting in exported html
 (use-package htmlize :defer 4 :config
+  ;; syntax highlight from a css file instead of copying
   (defvar org-html-htmlize-output-type)
   (setq org-html-htmlize-output-type 'css)
   (defvar org-html-htmlize-font-prefix)

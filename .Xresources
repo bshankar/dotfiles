@@ -23,4 +23,7 @@ URxvt*color15: #FFFFFF // white
 
 URxvt.scrollBar: false
 
-emacs.font: Knack Nerd Font-16
+Emacs.font: Knack Nerd Font-14
+Emacs.menuBar: off
+Emacs.verticalScrollBars: off
+Emacs.toolBar: off
