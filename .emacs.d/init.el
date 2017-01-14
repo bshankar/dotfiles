@@ -114,14 +114,6 @@
   :config
   (add-hook 'prog-mode-hook #'relative-line-numbers-mode))
 
-;; enable evil mode (vim emulator)
-(use-package evil
-  :defer t
-  :config
-  (evil-mode 1)
-  (evil-commentary-mode)
-  (global-evil-surround-mode 1))
-
 ;; evil leader
 (use-package evil-leader
   :defer 1
@@ -132,7 +124,11 @@
     "f" 'find-file
     "b" 'ivy-switch-buffer
     "k" 'kill-buffer)
-  (global-evil-leader-mode))
+  (evil-commentary-mode)
+  (global-evil-surround-mode 1)
+  (global-evil-leader-mode)
+  ;; finally load evil mode
+  (evil-mode 1))
 
 ;; powerline
 (powerline-default-theme)
