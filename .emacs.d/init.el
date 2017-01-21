@@ -1,15 +1,6 @@
 ;;; init.el --- user init file      -*- no-byte-compile: t -*-
-(setq load-prefer-newer t)
-(package-initialize)
 
-(eval-when-compile
-  (require 'use-package))
-
-(use-package auto-compile
-  :config
-  (auto-compile-on-load-mode)
-  (auto-compile-on-save-mode))
-
+(require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
@@ -17,6 +8,18 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 ;;; commentary:
 ;;; code:
+
+(package-initialize)
+
+(eval-when-compile
+  (require 'use-package))
+
+(setq load-prefer-newer t)
+
+(use-package auto-compile
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -27,15 +30,15 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(custom-enabled-themes (quote (gruvbox)))
+ '(custom-enabled-themes (quote (material)))
  '(custom-safe-themes
    (quote
-    ("10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
+    ("98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "43c1a8090ed19ab3c0b1490ce412f78f157d69a29828aa977dae941b994b4147" "4156d0da4d9b715c6f7244be34f2622716fb563d185b6facedca2c0985751334" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
  '(fci-rule-color "#37474f")
  '(hl-sexp-background-color "#1c1f26")
  '(package-selected-packages
    (quote
-    (auto-compile evil-magit magit kivy-mode evil-org evil-commentary swiper htmlize ivy evil evil-leader evil-surround relative-line-numbers gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets)))
+    (ensime material-theme ox-pandoc auto-compile evil-magit magit evil-org evil-commentary swiper htmlize ivy evil evil-leader evil-surround relative-line-numbers gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -67,6 +70,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; some user details for packages
+(setq user-full-name "Bhavani Shankar")
+(setq user-email-address "ebs@openmailbox.org")
+
 ;; get rid of the annoying bell
 (setq ring-bell-function 'ignore)
 
@@ -80,7 +87,6 @@
 
 ;; ivy mode
 (use-package ivy
-  :defer 1
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
@@ -116,7 +122,6 @@
 
 ;; evil leader
 (use-package evil-leader
-  :defer 1
   :config
   (evil-leader/set-leader ",")
   ;; evil leader settings
@@ -135,13 +140,11 @@
 
 ;; snippet manager
 (use-package yasnippet
-  :defer 2
   :config
   (yas-global-mode 1))
 
 ;; enable flycheck globally
 (use-package flycheck
-  :defer 1
   :config
   (global-flycheck-mode)
 
@@ -182,15 +185,15 @@
   '(add-to-list 'company-backends 'company-irony))
 
 ;; Enable elpy for python
-(use-package elpy :defer 2 :config (elpy-enable)
+(use-package elpy :config (elpy-enable)
 (setq python-indent-offset 4))
 
-;; kivy mode
-(use-package kivy :defer 2)
+;; Scala tools
+(use-package ensime)
+(setq ensime-startup-notification nil)
 
 ;; ;; allow babel to run elisp, python and sh codes
 (use-package org
-  :defer 3
   :config
   ;; let babel execute python and sh in org documents
   (org-babel-do-load-languages
@@ -215,33 +218,36 @@
   (add-hook 'text-mode-hook 'turn-on-auto-fill)
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
   ;; disable text warping with hotkey
-  (global-set-key (kbd "C-c q") 'auto-fill-mode)
-  ;; don't include author info at the bottom of every html
-  (setq org-html-postamble nil)
-  )
+  (global-set-key (kbd "C-c q") 'auto-fill-mode))
 
 ;; htmlize for syntax highlighting in exported html
-(use-package htmlize :defer 4 :config
+(use-package htmlize :config
   ;; syntax highlight from a css file instead of copying
   (setq org-html-htmlize-output-type 'css)
-  (setq org-html-htmlize-font-prefix "org-")
-  )
+  (setq org-html-htmlize-font-prefix "org-"))
+
+ (setq org-todo-keywords
+       '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
 
 ;; pretty bullets for org-mode
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
+;; export org-mode to various formats using pandoc
+(with-eval-after-load 'ox
+  (use-package ox-pandoc))
+
 ;; evil bindings for org-mode
-(use-package evil-org-mode :defer 3)
+(use-package evil-org)
 
 ;; Load magit last
-(use-package magit :defer 4
+(use-package magit
   :config
   (evil-leader/set-key "g" 'magit-status))
 
 ;; evil bindings for magit
-(use-package evil-magit :defer 4)
+(use-package evil-magit)
 
 (provide 'init)
 ;;; init.el ends here
