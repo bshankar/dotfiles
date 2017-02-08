@@ -1,0 +1,44 @@
+# Show a fortune cookie
+cowfortune
+
+# Environment variables
+$PROMPT = '{env_name:{}}{BOLD_BLUE} {cwd}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR} '
+$EDITOR = 'nvim'
+$BROWSER = 'firefox'
+$WEECHAT_HOME = '$HOME/.config/weechat'
+$NVIM_TUI_ENABLE_TRUE_COLOR = 1
+$ANDROIDSDK = '$HOME/.local/share/android/android-sdk'
+$ANDROIDNDK = '$HOME/.local/share/android/crystax-ndk-10.3.2'
+
+# General Aliases
+aliases['vim'] = '/usr/bin/nvim'
+aliases['clang++'] = '/usr/bin/clang++ -std=c++11'
+aliases['tmux'] = 'tmux -f ~/.config/tmux/tmux.conf'
+
+# Android related aliases
+aliases['adb'] = '$HOME/.local/share/android/android-sdk/platform-tools/adb'
+aliases['fastboot'] = '$HOME/.local/share/android/android-sdk/platform-tools/fastboot'
+aliases['adbc'] = 'adb connect 10.0.0.7'
+aliases['adbi'] = 'adb install -r'
+aliases['adbl'] = 'adb logcat'
+
+# Pacman and yaourt aliases
+aliases['y'] = 'yaourt'
+aliases['yu'] = 'y -U'
+aliases['yupg'] = 'sudo pacman -Syu'
+aliases['yaupg'] = 'y -Syua'
+aliases['yin'] = 'y -S'
+aliases['yrem'] = 'y -Rs'
+
+# Coloured man page support
+# using 'less' env vars (format is '\E[<brightness>;<colour>m')
+$LESS_TERMCAP_mb = '\033[01;31m'     # begin blinking
+$LESS_TERMCAP_md = '\033[01;31m'     # begin bold
+$LESS_TERMCAP_me = '\033[0m'         # end mode
+$LESS_TERMCAP_so = '\033[01;44;36m'  # begin standout-mode (bottom of screen)
+$LESS_TERMCAP_se = '\033[0m'         # end standout-mode
+$LESS_TERMCAP_us = '\033[00;36m'     # begin underline
+$LESS_TERMCAP_ue = '\033[0m'         # end underline
+
+
+# vim: set ft=python:
