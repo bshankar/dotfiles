@@ -13,6 +13,7 @@
 *.txt
 *.elc
 *~
+\#*\#
 
 .lmmsrc.xml
 .packages/iridium/
@@ -80,6 +81,8 @@ y
 .config/designer
 .config/gconf
 .config/gtk-3.0
+.config/weechat/fifo.conf
+.coursier
 
 .conkyForecast.config
 .solfegerc

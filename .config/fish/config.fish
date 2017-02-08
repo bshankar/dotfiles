@@ -1,9 +1,3 @@
-# start X at login
-if status --is-login
-    if test -z "$DISPLAY" -a $XDG_VTNR -eq 1
-        exec startx -- -keeptty
-    end
-end
 
 # set editor to nvim
 set -x EDITOR nvim
@@ -26,6 +20,7 @@ alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 alias java='java -Xms512M -Xmx2G -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 alias adbc='~/.local/share/android/android-sdk/platform-tools/adb connect 10.0.0.7'
 alias adbi='~/.local/share/android/android-sdk/platform-tools/adb install -r'
+alias adbl='~/.local/share/android/android-sdk/platform-tools/adb logcat'
 
 # Some yaourt shortcuts
 alias y='yaourt'

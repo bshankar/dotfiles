@@ -74,6 +74,9 @@
 (setq user-full-name "Bhavani Shankar")
 (setq user-email-address "ebs@openmailbox.org")
 
+;; remove the startup screen
+(setq inhibit-startup-screen t)
+
 ;; get rid of the annoying bell
 (setq ring-bell-function 'ignore)
 
@@ -81,6 +84,9 @@
 (setq-default indent-tabs-mode nil)
 ;; set tab width to 4
 (setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
+
 
 ;; force horizontal split always
 (setq split-width-threshold 9999)
@@ -189,16 +195,26 @@
 (setq python-indent-offset 4))
 
 ;; Scala tools
-(use-package ensime)
-(setq ensime-startup-notification nil)
+(use-package ensime
+  :config
+  (setq ensime-startup-notification nil))
 
 ;; ;; allow babel to run elisp, python and sh codes
 (use-package org
   :config
+  ;; open html exported file in firefox
+  '(org-file-apps
+    (quote
+     ((auto-mode . emacs)
+      ("\\.mm\\'" . default)
+      ("\\.html\\'" . "/usr/bin/firefox %s")
+      ("\\.pdf\\'" . default))))
+  
   ;; let babel execute python and sh in org documents
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
+     (dot . t)
      (sh . t)))
 
   ;; custom ellipsis for org-mode (...)

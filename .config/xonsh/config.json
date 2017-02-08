@@ -1,0 +1,31 @@
+{
+ "env": {
+
+     "PROMPT": "{env_name:{}}{BOLD_BLUE} {cwd}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR} ",
+
+     "EDITOR": "nvim",
+     "BROWSER": "firefox",
+     "WEECHAT_HOME": "$HOME/.config/weechat",
+     "NVIM_TUI_ENABLE_TRUE_COLOR": 1,
+     "ANDROIDSDK": "$HOME/.local/share/android/android-sdk",
+     "ANDROIDNDK": "$HOME/.local/share/android/crystax-ndk-10.3.2"
+ },
+ 
+ "aliases": {
+     "vim": "/usr/bin/nvim",
+     "clang++": "/usr/bin/clang++ -std=c++11",
+     "tmux": "tmux -f ~/.config/tmux/tmux.conf",
+
+     "adb": "~/.local/share/android/android-sdk/platform-tools/adb",
+     "adbc": "adb connect 10.0.0.7",
+     "adbi": "adb install -r",
+     "adbl": "adb logcat",
+
+     "y": "yaourt",
+     "yu": "sudo pacman -U",
+     "yupg": "sudo pacman -Syu",
+     "yaupg": "yaourt -Syua",
+     "yin": "yaourt -S",
+     "yrem": "sudo pacman -Rs"
+ }
+}
