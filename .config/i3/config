@@ -256,3 +256,4 @@ exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper.png
 # Autostart applications
 #exec --no-startup-id compton
 exec --no-startup-id dunst
+exec --no-startup-id udiskie -2 
