@@ -33,12 +33,14 @@
  '(custom-enabled-themes (quote (material)))
  '(custom-safe-themes
    (quote
-    ("98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "43c1a8090ed19ab3c0b1490ce412f78f157d69a29828aa977dae941b994b4147" "4156d0da4d9b715c6f7244be34f2622716fb563d185b6facedca2c0985751334" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
+    ("28c07d8e75ed7e2ea9154239caa4f9d3fc831cf2340ea3e307ee49b4321dc7f5" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "43c1a8090ed19ab3c0b1490ce412f78f157d69a29828aa977dae941b994b4147" "4156d0da4d9b715c6f7244be34f2622716fb563d185b6facedca2c0985751334" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
  '(fci-rule-color "#37474f")
+ '(flycheck-clang-args (quote ("-std=c++1z")))
  '(hl-sexp-background-color "#1c1f26")
+ '(irony-additional-clang-options (quote ("-std=c++1z -Wall -Wextra")))
  '(package-selected-packages
    (quote
-    (ensime material-theme ox-pandoc auto-compile evil-magit magit evil-org evil-commentary swiper htmlize ivy evil evil-leader evil-surround relative-line-numbers gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets)))
+    (tup-mode irony-eldoc swiper company-auctex auctex ensime material-theme ox-pandoc auto-compile evil-magit magit evil-org evil-commentary htmlize evil evil-leader evil-surround relative-line-numbers gruvbox-theme flycheck yasnippet company irony company-irony flycheck-irony elpy org org-bullets)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -86,8 +88,6 @@
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
-
-
 ;; force horizontal split always
 (setq split-width-threshold 9999)
 
@@ -112,14 +112,14 @@
 ;; automatically scroll compilation output
 (setq compilation-scroll-output t)
 
-(use-package abbrev
-  :config
-  (if (file-exists-p abbrev-file-name)
-      (quietly-read-abbrev-file))
+;; (use-package abbrev
+  ;; :config
+  ;; (if (file-exists-p abbrev-file-name)
+      ;; (quietly-read-abbrev-file))
   ;; silently save new abbrevations
-  (setq save-abbrevs 'silently)
+  ;; (setq save-abbrevs 'silently))
   ;; always enable abbrev mode
-  (setq-default abbrev-mode t))
+  ;; (setq-default abbrev-mode t))
 
 ;; show relative line numbers
 (use-package relative-line-numbers
@@ -184,6 +184,7 @@
     'irony-completion-at-point-async))
 (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+(add-hook 'irony-mode-hook 'irony-eldoc)
 
 ;; use comany backend for auto completion everywhere
 (add-hook 'after-init-hook 'global-company-mode)
@@ -197,7 +198,13 @@
 ;; Scala tools
 (use-package ensime
   :config
-  (setq ensime-startup-notification nil))
+  (setq ensime-startup-snapshot-notification nil))
+
+;; Latex support
+(load "auctex.el" nil t t)
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
 
 ;; ;; allow babel to run elisp, python and sh codes
 (use-package org

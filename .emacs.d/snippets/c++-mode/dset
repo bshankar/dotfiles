@@ -1,0 +1,45 @@
+# -*- mode: snippet -*-
+# name: disjoint set data structure
+# key: dset
+# --
+template<typename T, typename W>
+class DisjointSet {
+public:
+  DisjointSet() {
+    this->parent = this;
+    this->rank = 0;
+  }
+  
+
+  DisjointSet *find() {
+    return find(this);
+  }
+
+
+  void Union(DisjointSet *y) {
+    auto xRoot = find(this);
+    auto yRoot = find(y);
+
+    if (xRoot == yRoot)
+      return;
+
+    if (xRoot->rank < yRoot->rank)
+      xRoot->parent = yRoot;
+    else if (xRoot->rank > yRoot->rank)
+      yRoot->parent = xRoot;
+    else {
+      yRoot->parent = xRoot;
+      xRoot->rank = xRoot->rank + 1;
+    }
+  }
+
+private:
+  DisjointSet *parent;
+  W rank;
+
+  DisjointSet *find(DisjointSet *x) {
+    if (x->parent != x)
+      x->parent = find(x->parent);
+    return x->parent;
+  }
+};
