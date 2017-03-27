@@ -8,5 +8,5 @@ xkbcomp -w 0 ~/.config/xkbmap $DISPLAY
 # done
 # unset f
 #fi
-exec ck-launch-session i3
+exec ck-launch-session sway
 
