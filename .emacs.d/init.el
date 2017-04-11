@@ -166,6 +166,13 @@ static char *gnus-pointer[] = {
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
+(defun indent-whole-buffer ()
+  "Indent the whole buffer."
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max)))
+
 ;; force horizontal split always
 (setq split-width-threshold 9999)
 
@@ -191,6 +198,9 @@ static char *gnus-pointer[] = {
 ;; automatically scroll compilation output
 (setq compilation-scroll-output t)
 
+;; Close parenthesis automatically
+(electric-pair-mode 1)
+
  (use-package abbrev
    :diminish abbrev-mode
    :config
@@ -212,7 +222,8 @@ static char *gnus-pointer[] = {
   (evil-leader/set-key
     "f" 'find-file
     "b" 'ivy-switch-buffer
-    "k" 'kill-buffer)
+    "k" 'kill-buffer
+    "i" 'indent-whole-buffer)
   (evil-commentary-mode)
   (global-evil-surround-mode 1)
   (global-evil-leader-mode)

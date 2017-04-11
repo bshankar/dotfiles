@@ -16,9 +16,9 @@ aliases['clang++'] = '/usr/bin/clang++ -std=c++11'
 aliases['tmux'] = 'tmux -f ~/.config/tmux/tmux.conf'
 
 # Android related aliases
-aliases['adb'] = '/home/ebs/.local/share/android/android-sdk/platform-tools/adb'
-aliases['sadb'] = 'sudo /home/ebs/.local/share/android/android-sdk/platform-tools/adb start-server'
-aliases['fastboot'] = 'sudo /home/ebs/.local/share/android/android-sdk/platform-tools/fastboot'
+aliases['adb'] = '/usr/bin/adb'
+aliases['sadb'] = 'sudo adb start-server'
+aliases['fastboot'] = 'sudo /usr/bin/fastboot'
 aliases['adbc'] = 'adb connect 10.0.0.7'
 aliases['adbi'] = 'adb install -r'
 aliases['adbl'] = 'adb logcat'
