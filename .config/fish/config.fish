@@ -15,6 +15,7 @@ set -x ANDROIDNDKVER 10.3.2
 set -x PYTHONPATH /usr/lib/python2.7/site-packages/lldb
 
 alias vim=/usr/bin/nvim
+alias diff="/usr/bin/diff --color"
 alias clang++="/usr/bin/clang++ -std=c++11"
 alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 alias java='java -Xms512M -Xmx2G -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'

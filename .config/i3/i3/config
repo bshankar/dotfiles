@@ -58,8 +58,8 @@ font pango:Cantarell 10
 floating_modifier $mod
 
 # start a terminal
-# set $shell /usr/bin/xonsh
-bindsym $mod+Return exec i3-sensible-terminal -e /usr/bin/fish
+set $shell /usr/bin/xonsh
+bindsym $mod+Return exec i3-sensible-terminal -e $shell
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -72,7 +72,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Run web browser
-bindsym $mod+Shift+f exec chromium
+bindsym $mod+Shift+f exec firefox
 
 # Take a screenshot
 bindsym Print exec pscrotum -s
