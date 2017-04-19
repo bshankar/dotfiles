@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: bit fiddling routines
+# key: tdf
+# --
+typedef long l;
+typedef unsigned long ul;
+typedef pair<int,int> pii;
+typedef vector<int> vi;
+typedef vector<vector<int> > vvi;

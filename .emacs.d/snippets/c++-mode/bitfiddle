@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: bit fiddling routines
+# key: bit
+# --
+#define __builtin_clz CLZ
+#define __builtin_ctz CTZ
+#define __builtin_parity PAR
+#define __builtin_popcount POPCNT

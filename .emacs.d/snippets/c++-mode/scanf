@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: scanf template
+# key: sf
+# --
+scanf("%${d}", &${N});

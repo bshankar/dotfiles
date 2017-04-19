@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: 2d grid template
+# key: grid
+# --
+int R, C;
+${1:char }grid[${2:25}][$2];
+$1 row[$2];
