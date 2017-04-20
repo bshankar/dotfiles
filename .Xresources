@@ -1,5 +1,5 @@
 /* emacs settings  load faster from here.*/
-Emacs.font: Knack Nerd Font-13
+Emacs.font: Hack-13
 Emacs.menuBar: off
 Emacs.verticalScrollBars: off
 Emacs.toolBar: off

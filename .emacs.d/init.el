@@ -152,9 +152,14 @@ static char *gnus-pointer[] = {
  '(pdf-view-midnight-colors (quote ("#969896" . "#f8eec7")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
+ '(scroll-bar-mode nil)
+ '(show-paren-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
+ '(tool-bar-mode nil)
+ '(menu-bar-mode nil)
+ '(tooltip-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
@@ -194,7 +199,7 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Hack" :foundry "simp" :slant normal :weight normal :height 128 :width normal)))))
 
 ;; some user details for packages
 (setq user-full-name "Bhavani Shankar")
@@ -219,11 +224,19 @@ static char *gnus-pointer[] = {
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max)))
 
+;; theme
+(use-package dracula-theme
+  :ensure t)
+
 ;; relative line numbers
-(global-relative-line-numbers-mode)
+(use-package linum-relative 
+  :ensure t 
+  :config
+  (global-relative-line-numbers-mode))
 
 ;; ivy mode
 (use-package ivy
+  :ensure t
   :diminish ivy-mode
   :config
   (ivy-mode 1)
@@ -257,11 +270,16 @@ static char *gnus-pointer[] = {
   ;; always enable abbrev mode
   (setq-default abbrev-mode t))
 
+;; evil mode
+(use-package evil-mode
+  :config
+  (evil-mode 1))
+
 ;; evil leader
 (use-package evil-leader
+  :ensure t
   :diminish undo-tree-mode
   :diminish auto-revert-mode
-  :diminish evil-commentary-mode
   :config
   (evil-leader/set-leader ",")
   ;; evil leader settings
@@ -270,23 +288,37 @@ static char *gnus-pointer[] = {
     "b" 'ivy-switch-buffer
     "k" 'kill-buffer
     "i" 'indent-whole-buffer)
-  (evil-commentary-mode)
-  (global-evil-surround-mode 1)
   (global-evil-leader-mode)
   ;; finally load evil mode
   (evil-mode 1))
 
+(use-package evil-commentary 
+  :ensure t
+  :diminish evil-commentary-mode
+  :config 
+  (evil-commentary-mode))
+
+(use-package evil-surround 
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
 ;; powerline
-(powerline-default-theme)
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-default-theme))
 
 ;; snippet manager
 (use-package yasnippet
+  :ensure t
   :diminish yas-minor-mode
   :config
   (yas-global-mode 1))
 
 ;; enable flycheck globally
 (use-package flycheck
+  :ensure t
   :diminish flycheck-mode
   :config
   (global-flycheck-mode)
@@ -329,21 +361,19 @@ static char *gnus-pointer[] = {
   '(add-to-list 'company-backends 'company-irony))
 
 ;; Enable elpy for python
-(use-package elpy :config (elpy-enable)
+(use-package elpy 
+  :ensure t
+  :config (elpy-enable)
   (setq python-indent-offset 4))
 
 ;; Scala tools
 (use-package ensime
+  :ensure t
   :config
   (setq ensime-startup-snapshot-notification nil))
 
-;; Latex support
-(load "auctex.el" nil t t)
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
-
 (use-package markdown-mode
+  :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
@@ -352,6 +382,7 @@ static char *gnus-pointer[] = {
 
 ;; ;; allow babel to run elisp, python and sh codes
 (use-package org
+  :ensure t
   :config
   ;; open html exported file in firefox
   '(org-file-apps
@@ -391,7 +422,9 @@ static char *gnus-pointer[] = {
   (add-to-list 'org-agenda-files "/home/ebs/Documents/org/ideas.org)"))
 
 ;; htmlize for syntax highlighting in exported html
-(use-package htmlize :config
+(use-package htmlize
+  :ensure t
+  :config
   ;; syntax highlight from a css file instead of copying
   (setq org-html-htmlize-output-type 'css)
   (setq org-html-htmlize-font-prefix "org-"))
@@ -401,24 +434,25 @@ static char *gnus-pointer[] = {
 
 ;; pretty bullets for org-mode
 (use-package org-bullets
+  :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;; export org-mode to various formats using pandoc
 (with-eval-after-load 'ox
   (require 'ox-md nil t)
-  (use-package ox-pandoc))
+  (use-package ox-pandoc :ensure t))
 
 ;; evil bindings for org-mode
-(use-package evil-org)
+(use-package evil-org
+  :ensure t
+)
 
 ;; Load magit last
 (use-package magit
+  :ensure t
   :config
   (evil-leader/set-key "g" 'magit-status))
-
-;; evil bindings for magit
-(use-package evil-magit)
 
 (provide 'init)
 ;;; init.el ends here
