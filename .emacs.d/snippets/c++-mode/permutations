@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: permutation generating template
+# key: perm
+# --
+do {
+   ${2: // process permutation}
+} while (next_permutation(${1:vec}.begin(), $1.end()));

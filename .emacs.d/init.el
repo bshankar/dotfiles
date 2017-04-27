@@ -139,6 +139,7 @@ static char *gnus-pointer[] = {
  '(irony-additional-clang-options (quote ("-std=c++1z -Wall -Wextra")))
  '(linum-format " %3i ")
  '(magit-diff-use-overlays nil)
+ '(menu-bar-mode nil)
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
@@ -148,7 +149,7 @@ static char *gnus-pointer[] = {
  '(org-fontify-whole-heading-line t)
  '(package-selected-packages
    (quote
-    (swiper company-irony-c-headers 4clojure relative-line-numbers dracula-theme gruvbox-theme rainbow-blocks markdown-mode tup-mode irony-eldoc company-auctex auctex ensime ox-pandoc auto-compile evil-magit magit evil-org evil-commentary htmlize evil evil-leader evil-surround flycheck company irony company-irony flycheck-irony elpy org org-bullets)))
+    (evil-easymotion swiper company-irony-c-headers 4clojure relative-line-numbers dracula-theme gruvbox-theme rainbow-blocks markdown-mode tup-mode irony-eldoc company-auctex auctex ensime ox-pandoc auto-compile evil-magit magit evil-org evil-commentary htmlize evil evil-leader evil-surround flycheck company irony company-irony flycheck-irony elpy org org-bullets)))
  '(pdf-view-midnight-colors (quote ("#969896" . "#f8eec7")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
@@ -158,7 +159,6 @@ static char *gnus-pointer[] = {
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
  '(tool-bar-mode nil)
- '(menu-bar-mode nil)
  '(tooltip-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
@@ -229,8 +229,8 @@ static char *gnus-pointer[] = {
   :ensure t)
 
 ;; relative line numbers
-(use-package linum-relative 
-  :ensure t 
+(use-package linum-relative
+  :ensure t
   :config
   (global-relative-line-numbers-mode))
 
@@ -292,7 +292,7 @@ static char *gnus-pointer[] = {
   ;; finally load evil mode
   (evil-mode 1))
 
-(use-package evil-commentary 
+(use-package evil-commentary
   :ensure t
   :diminish evil-commentary-mode
   :config 
@@ -302,6 +302,11 @@ static char *gnus-pointer[] = {
   :ensure t
   :config
   (global-evil-surround-mode 1))
+
+(use-package evil-easymotion
+  :ensure t
+  :config
+  (evilem-default-keybindings "SPC"))
 
 ;; powerline
 (use-package powerline

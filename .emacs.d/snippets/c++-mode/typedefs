@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: bit fiddling routines
+# name: typedefs
 # key: tdf
 # --
 typedef long l;

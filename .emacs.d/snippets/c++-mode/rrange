@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: range template
+# key: rrn
+# --
+for (int ${1:i} = 0; $1 < ${2:n}; ++$1) {
+  ${3};
+  for (int ${4:j} = ${5:0}; $4 < ${6:m}; ++$4) {
+    ${4};
+  }
+}
