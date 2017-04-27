@@ -149,7 +149,7 @@ static char *gnus-pointer[] = {
  '(org-fontify-whole-heading-line t)
  '(package-selected-packages
    (quote
-    (evil-easymotion swiper company-irony-c-headers 4clojure relative-line-numbers dracula-theme gruvbox-theme rainbow-blocks markdown-mode tup-mode irony-eldoc company-auctex auctex ensime ox-pandoc auto-compile evil-magit magit evil-org evil-commentary htmlize evil evil-leader evil-surround flycheck company irony company-irony flycheck-irony elpy org org-bullets)))
+    (flycheck-rtags ivy-rtags evil-easymotion swiper company-irony-c-headers 4clojure relative-line-numbers dracula-theme gruvbox-theme rainbow-blocks markdown-mode tup-mode irony-eldoc company-auctex auctex ensime ox-pandoc auto-compile evil-magit magit evil-org evil-commentary htmlize evil evil-leader evil-surround flycheck company irony company-irony flycheck-irony elpy org org-bullets)))
  '(pdf-view-midnight-colors (quote ("#969896" . "#f8eec7")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
@@ -295,10 +295,10 @@ static char *gnus-pointer[] = {
 (use-package evil-commentary
   :ensure t
   :diminish evil-commentary-mode
-  :config 
+  :config
   (evil-commentary-mode))
 
-(use-package evil-surround 
+(use-package evil-surround
   :ensure t
   :config
   (global-evil-surround-mode 1))
@@ -343,6 +343,40 @@ static char *gnus-pointer[] = {
   (add-hook 'text-mode-hook #'flycheck-mode)
   (add-hook 'org-mode-hook #'flycheck-mode))
 
+
+;; Rtags for code navigation
+(use-package rtags
+  :ensure t
+  :config
+  (setq rtags-completions-enabled t))
+
+(use-package company-rtags
+  :ensure t
+  :config
+  (eval-after-load 'company
+    '(add-to-list
+      'company-backends 'company-rtags))
+  (setq rtags-autostart-diagnostics t)
+  (rtags-enable-standard-keybindings))
+
+(use-package ivy-rtags
+  :ensure t
+  :config
+  (setq rtags-use-ivy t))
+
+(defun my-flycheck-rtags-setup ()
+  "Flycheck for rtags."
+  (flycheck-select-checker 'rtags)
+  (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+  (setq-local flycheck-check-syntax-automatically nil))
+
+;; c-mode-common-hook is also called by c++-mode
+(use-package flycheck-rtags
+  :ensure t
+  :config
+  (add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup))
+
+
 ;; Irony mode for c++
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -362,11 +396,22 @@ static char *gnus-pointer[] = {
 
 ;; use comany backend for auto completion everywhere
 (add-hook 'after-init-hook 'global-company-mode)
+
+(use-package company-irony-c-headers
+  :ensure t
+  :config
+  (eval-after-load 'company
+  '(add-to-list
+  'company-backends '(company-irony-c-headers company-irony))))
+
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
 
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+
 ;; Enable elpy for python
-(use-package elpy 
+(use-package elpy
   :ensure t
   :config (elpy-enable)
   (setq python-indent-offset 4))
@@ -451,7 +496,7 @@ static char *gnus-pointer[] = {
 ;; evil bindings for org-mode
 (use-package evil-org
   :ensure t
-)
+  )
 
 ;; Load magit last
 (use-package magit
