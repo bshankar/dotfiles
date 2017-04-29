@@ -37,7 +37,7 @@ typedef vector<vector<int> > vvi;
 
 void solveCase(int t) {
 
-  ${1}
+  ${1: // solution}
   
   cout << "Case #" << t << ": " << "\n";
 }

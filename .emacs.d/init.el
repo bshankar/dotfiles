@@ -40,8 +40,9 @@
  '(custom-enabled-themes (quote (dracula)))
  '(custom-safe-themes
    (quote
-    ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "ed317c0a3387be628a48c4bbdb316b4fa645a414838149069210b66dd521733f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "64f2981274fd8740b794bce9feee7949ed87b88fc0b4654bd98594e1aa81abcd" "55d31108a7dc4a268a1432cd60a7558824223684afecefa6fae327212c40f8d3" "60d4556ebff0dc94849f177b85dcb6956fe9bd394c18a37e339c0fcd7c83e4a9" "707227acad0cf8d4db55dcf1e574b3644b68eab8aca4a8ce6635c8830bc72144" "20e23cba00cf376ea6f20049022241c02a315547fc86df007544852c94ab44cb" "0f97285f9e0c7d9cad04f2130859d20d6c9b3142877b2bca52d958f4f1cf346f" "ea489f6710a3da0738e7dbdfc124df06a4e3ae82f191ce66c2af3e0a15e99b90" "c02476423672bc917cfe502b28bce059e52da8137fec9cdf8a2ff771923d7a03" "9122dfb203945f6e84b0de66d11a97de6c9edf28b3b5db772472e4beccc6b3c5" "a1289424bbc0e9f9877aa2c9a03c7dfd2835ea51d8781a0bf9e2415101f70a7e" "b8b66b57d6bb59b85416578cb1a338e3ad00a56da28e83362949cc2ca584c850" "0ad9ed23b1f323e4ba36a7f0cbef6aff66128b94faa473aacd79317fbd24abda" "7ceb8967b229c1ba102378d3e2c5fef20ec96a41f615b454e0dc0bfa1d326ea6" "db2ecce0600e3a5453532a89fc19b139664b4a3e7cbefce3aaf42b6d9b1d6214" "f9574c9ede3f64d57b3aa9b9cef621d54e2e503f4d75d8613cbcc4ca1c962c21" "fad38808e844f1423c68a1888db75adf6586390f5295a03823fa1f4959046f81" "f78de13274781fbb6b01afd43327a4535438ebaeec91d93ebdbba1e3fba34d3c" "a36c5e55d153b4971ec547998cbd42560df175cb4ae464ce2dc78c2652bc1576" "35b76d6f1d311d4c596dd200245ad48ff729b45b27cb88d152e5a873593fcbbc" "c1390663960169cd92f58aad44ba3253227d8f715c026438303c09b9fb66cdfb" "51e228ffd6c4fff9b5168b31d5927c27734e82ec61f414970fc6bcce23bc140d" "5e2dc1360a92bb73dafa11c46ba0f30fa5f49df887a8ede4e3533c3ab6270e08" "cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "3e335d794ed3030fefd0dbd7ff2d3555e29481fe4bbb0106ea11c660d6001767" "6e0b5911ec1e75e965130b5a683b4e2dc288651a2bdd17148caae15b4acb162b" "cd560f7570de0dcdcf06953b3f1a25145492a54f100f9c8da3b4091b469f7f02" "aae95fc700f9f7ff70efbc294fc7367376aa9456356ae36ec234751040ed9168" "ce557950466bf42096853c6dac6875b9ae9c782b8665f62478980cc5e3b6028d" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" "5e3fc08bcadce4c6785fc49be686a4a82a356db569f55d411258984e952f194a" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58" "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481" "7356632cebc6a11a87bc5fcffaa49bae528026a78637acd03cae57c091afd9b9" "28c07d8e75ed7e2ea9154239caa4f9d3fc831cf2340ea3e307ee49b4321dc7f5" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "43c1a8090ed19ab3c0b1490ce412f78f157d69a29828aa977dae941b994b4147" "4156d0da4d9b715c6f7244be34f2622716fb563d185b6facedca2c0985751334" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
+    ("d29231b2550e0d30b7d0d7fc54a7fb2aa7f47d1b110ee625c1a56b30fea3be0f" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "ed317c0a3387be628a48c4bbdb316b4fa645a414838149069210b66dd521733f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "64f2981274fd8740b794bce9feee7949ed87b88fc0b4654bd98594e1aa81abcd" "55d31108a7dc4a268a1432cd60a7558824223684afecefa6fae327212c40f8d3" "60d4556ebff0dc94849f177b85dcb6956fe9bd394c18a37e339c0fcd7c83e4a9" "707227acad0cf8d4db55dcf1e574b3644b68eab8aca4a8ce6635c8830bc72144" "20e23cba00cf376ea6f20049022241c02a315547fc86df007544852c94ab44cb" "0f97285f9e0c7d9cad04f2130859d20d6c9b3142877b2bca52d958f4f1cf346f" "ea489f6710a3da0738e7dbdfc124df06a4e3ae82f191ce66c2af3e0a15e99b90" "c02476423672bc917cfe502b28bce059e52da8137fec9cdf8a2ff771923d7a03" "9122dfb203945f6e84b0de66d11a97de6c9edf28b3b5db772472e4beccc6b3c5" "a1289424bbc0e9f9877aa2c9a03c7dfd2835ea51d8781a0bf9e2415101f70a7e" "b8b66b57d6bb59b85416578cb1a338e3ad00a56da28e83362949cc2ca584c850" "0ad9ed23b1f323e4ba36a7f0cbef6aff66128b94faa473aacd79317fbd24abda" "7ceb8967b229c1ba102378d3e2c5fef20ec96a41f615b454e0dc0bfa1d326ea6" "db2ecce0600e3a5453532a89fc19b139664b4a3e7cbefce3aaf42b6d9b1d6214" "f9574c9ede3f64d57b3aa9b9cef621d54e2e503f4d75d8613cbcc4ca1c962c21" "fad38808e844f1423c68a1888db75adf6586390f5295a03823fa1f4959046f81" "f78de13274781fbb6b01afd43327a4535438ebaeec91d93ebdbba1e3fba34d3c" "a36c5e55d153b4971ec547998cbd42560df175cb4ae464ce2dc78c2652bc1576" "35b76d6f1d311d4c596dd200245ad48ff729b45b27cb88d152e5a873593fcbbc" "c1390663960169cd92f58aad44ba3253227d8f715c026438303c09b9fb66cdfb" "51e228ffd6c4fff9b5168b31d5927c27734e82ec61f414970fc6bcce23bc140d" "5e2dc1360a92bb73dafa11c46ba0f30fa5f49df887a8ede4e3533c3ab6270e08" "cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "3e335d794ed3030fefd0dbd7ff2d3555e29481fe4bbb0106ea11c660d6001767" "6e0b5911ec1e75e965130b5a683b4e2dc288651a2bdd17148caae15b4acb162b" "cd560f7570de0dcdcf06953b3f1a25145492a54f100f9c8da3b4091b469f7f02" "aae95fc700f9f7ff70efbc294fc7367376aa9456356ae36ec234751040ed9168" "ce557950466bf42096853c6dac6875b9ae9c782b8665f62478980cc5e3b6028d" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" "5e3fc08bcadce4c6785fc49be686a4a82a356db569f55d411258984e952f194a" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58" "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481" "7356632cebc6a11a87bc5fcffaa49bae528026a78637acd03cae57c091afd9b9" "28c07d8e75ed7e2ea9154239caa4f9d3fc831cf2340ea3e307ee49b4321dc7f5" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "43c1a8090ed19ab3c0b1490ce412f78f157d69a29828aa977dae941b994b4147" "4156d0da4d9b715c6f7244be34f2622716fb563d185b6facedca2c0985751334" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
  '(diary-entry-marker (quote font-lock-variable-name-face))
+ '(display-time-mode t)
  '(emms-mode-line-icon-image-cache
    (quote
     (image :type xpm :ascent center :data "/* XPM */
@@ -84,7 +85,6 @@ static char *note[] = {
      (deprecated :strike-through "#a9b7c6"))))
  '(fci-rule-character-color "#192028")
  '(fci-rule-color "#37474f" t)
- '(flycheck-clang-args (quote ("-std=c++1z")))
  '(gnus-logo-colors (quote ("#4c8383" "#bababa")) t)
  '(gnus-mode-line-image-cache
    (quote
@@ -149,9 +149,9 @@ static char *gnus-pointer[] = {
  '(org-fontify-whole-heading-line t)
  '(package-selected-packages
    (quote
-    (flycheck-rtags ivy-rtags evil-easymotion swiper company-irony-c-headers 4clojure relative-line-numbers dracula-theme gruvbox-theme rainbow-blocks markdown-mode tup-mode irony-eldoc company-auctex auctex ensime ox-pandoc auto-compile evil-magit magit evil-org evil-commentary htmlize evil evil-leader evil-surround flycheck company irony company-irony flycheck-irony elpy org org-bullets)))
+    (avk-emacs-themes evil-easymotion swiper company-irony-c-headers 4clojure relative-line-numbers dracula-theme gruvbox-theme rainbow-blocks markdown-mode tup-mode irony-eldoc company-auctex auctex ensime ox-pandoc auto-compile evil-magit magit evil-org evil-commentary htmlize evil evil-leader evil-surround flycheck company irony company-irony flycheck-irony elpy org org-bullets)))
  '(pdf-view-midnight-colors (quote ("#969896" . "#f8eec7")))
- '(pos-tip-background-color "#073642")
+ '(pos-tip-background-color "#073642" t)
  '(pos-tip-foreground-color "#93a1a1")
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -258,7 +258,7 @@ static char *gnus-pointer[] = {
 (setq compilation-scroll-output t)
 
 ;; Close parenthesis automatically
-;; (electric-pair-mode 1)
+(electric-pair-mode 1)
 
 (use-package abbrev
   :diminish abbrev-mode
@@ -343,39 +343,41 @@ static char *gnus-pointer[] = {
   (add-hook 'text-mode-hook #'flycheck-mode)
   (add-hook 'org-mode-hook #'flycheck-mode))
 
-
-;; Rtags for code navigation
-(use-package rtags
+;; company mode
+(use-package company
   :ensure t
+  :diminish ""
   :config
-  (setq rtags-completions-enabled t))
-
-(use-package company-rtags
-  :ensure t
-  :config
-  (eval-after-load 'company
-    '(add-to-list
-      'company-backends 'company-rtags))
-  (setq rtags-autostart-diagnostics t)
-  (rtags-enable-standard-keybindings))
-
-(use-package ivy-rtags
-  :ensure t
-  :config
-  (setq rtags-use-ivy t))
-
-(defun my-flycheck-rtags-setup ()
-  "Flycheck for rtags."
-  (flycheck-select-checker 'rtags)
-  (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-  (setq-local flycheck-check-syntax-automatically nil))
-
-;; c-mode-common-hook is also called by c++-mode
-(use-package flycheck-rtags
-  :ensure t
-  :config
-  (add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup))
-
+  (progn
+    (add-hook 'org-mode-hook #'global-company-mode)
+    (add-hook 'emacs-lisp-mode-hook #'company-mode)
+    (bind-key "<tab>" 'company-complete-selection company-active-map)
+    (setq-default pos-tip-background-color "khaki1")
+    (bind-keys :map company-active-map
+           ("C-n" . company-select-nex)
+           ("C-p" . company-select-previous)
+           ("C-d" . company-show-doc-buffer)
+           ("<tab>" . company-complete))
+    (setq company-idle-delay 0
+          company-require-match nil
+          ;;company-begin-commands '(self-insert-command)
+          company-show-numbers t
+      company-tooltip-align-annotations t
+      company-tooltip-flip-when-above t
+      company-tooltip-margin 1
+      company-echo-delay 0
+      company-dabbrev-downcase nil
+      company-minimum-prefix-length 1
+      company-selection-wrap-around t
+      company-transformers '(company-sort-by-occurrence
+                 company-sort-by-backend-importance)
+      company-backends '(company-capf
+                 (company-dabbrev company-dabbrev-code company-keywords)
+                 company-yasnippet))
+    (push (apply-partially #'cl-remove-if
+                       (lambda (c) (string-match-p "\\`[0-9]+\\'" c)))
+      company-transformers)
+    (add-to-list 'company-backends 'company-math-symbols-unicode)))
 
 ;; Irony mode for c++
 (add-hook 'c++-mode-hook 'irony-mode)
@@ -503,6 +505,9 @@ static char *gnus-pointer[] = {
   :ensure t
   :config
   (evil-leader/set-key "g" 'magit-status))
+
+(use-package evil-magit
+  :ensure t)
 
 (provide 'init)
 ;;; init.el ends here
