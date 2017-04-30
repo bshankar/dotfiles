@@ -229,7 +229,7 @@ static char *gnus-pointer[] = {
   :ensure t)
 
 ;; relative line numbers
-(use-package linum-relative
+(use-package relative-line-numbers
   :ensure t
   :config
   (global-relative-line-numbers-mode))
@@ -379,6 +379,12 @@ static char *gnus-pointer[] = {
       company-transformers)
     (add-to-list 'company-backends 'company-math-symbols-unicode)))
 
+(use-package irony
+  :ensure t)
+
+(use-package company-irony
+  :ensure t)
+
 ;; Irony mode for c++
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -409,8 +415,13 @@ static char *gnus-pointer[] = {
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
 
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+(use-package flycheck-irony
+  :ensure t
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+
+(use-package irony-eldoc
+  :ensure t)
 
 ;; Enable elpy for python
 (use-package elpy

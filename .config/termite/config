@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Knack Nerd Font 13
+font = Hack 13
 
 scrollback_lines = 100000
 search_wrap = true
@@ -55,7 +55,7 @@ color14 = #99ffcc
 color15 = #ffffff
 
 [hints]
-font = Knack Nerd Font 12
+font = Hack 12
 foreground = #dcdccc
 background = #3f3f3f
 active_foreground = #e68080
