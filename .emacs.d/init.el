@@ -136,7 +136,7 @@ static char *gnus-pointer[] = {
    (quote
     ("#B9F" "#B8D" "#B7B" "#B69" "#B57" "#B45" "#B33" "#B11")))
  '(hl-sexp-background-color "#1c1f26")
- '(irony-additional-clang-options (quote ("-std=c++1z -Wall -Wextra")))
+ '(irony-additional-clang-options (quote ("-std=c++1y -Wall -Wextra")))
  '(linum-format " %3i ")
  '(magit-diff-use-overlays nil)
  '(menu-bar-mode nil)
