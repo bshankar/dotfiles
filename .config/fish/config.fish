@@ -10,7 +10,7 @@ set -x ANDROIDSDK $ANDROID_HOME
 set -x ANDROIDNDK $ANDROID_NDK_ROOT
 set -x ANDROIDNDKVER 10.3.2
 
-
+set -gx PATH /usr/lib/ccache/bin $PATH
 # Hack to make python2 detect lldb
 set -x PYTHONPATH /usr/lib/python2.7/site-packages/lldb
 

@@ -33,26 +33,43 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-background = rgba(40, 42, 54, .98)
-foreground = #cccccc
-cursor = #b9b9b9
+# hard contrast: background = #1d2021
+background = #282828
+# soft contrast: background = #32302f
+foreground = #ebdbb2
+foreground_bold = #ebdbb2
 
-color0 = #666666
-color1 = #cc6699
-color2 = #99cc66
-color3 = #cc9966
-color4 = #6699cc
-color5 = #9966cc
-color6 = #66cc99
-color7 = #cccccc
-color8 = #999999
-color9 = #ff99cc
-color10 = #ccff99
-color11 = #ffcc99
-color12 = #99ccff
-color13 = #cc99ff
-color14 = #99ffcc
-color15 = #ffffff
+# dark0 + gray
+color0 = #282828
+color8 = #928374
+
+# neutral_red + bright_red
+color1 = #cc241d
+color9 = #fb4934
+
+# neutral_green + bright_green
+color2 = #98971a
+color10 = #b8bb26
+
+# neutral_yellow + bright_yellow
+color3 = #d79921
+color11 = #fabd2f
+
+# neutral_blue + bright_blue
+color4 = #458588
+color12 = #83a598
+
+# neutral_purple + bright_purple
+color5 = #b16286
+color13 = #d3869b
+
+# neutral_aqua + faded_aqua
+color6 = #689d6a
+color14 = #8ec07c
+
+# light4 + light1
+color7 = #a89984
+color15 = #ebdbb2
 
 [hints]
 font = Hack 12

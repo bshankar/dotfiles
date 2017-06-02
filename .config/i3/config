@@ -72,10 +72,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Run web browser
-bindsym $mod+Shift+f exec firefox
+bindsym $mod+Shift+f exec firefox-nightly
 
 # Take a screenshot
-bindsym Print exec pscrotum -s
+bindsym Print exec scrot -s
 
 # change focus
 bindsym $mod+j focus left
