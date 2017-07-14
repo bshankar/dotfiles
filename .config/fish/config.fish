@@ -4,8 +4,8 @@ set -x EDITOR nvim
 set -x BROWSER firefox
 set -x WEECHAT_HOME $HOME/.config/weechat
 set -x NVIM_TUI_ENABLE_TRUE_COLOR 1
-set -x ANDROID_HOME $HOME/.local/share/android/android-sdk
-set -x ANDROID_NDK_ROOT $HOME/.local/share/android/crystax-ndk-10.3.2
+set -x ANDROID_HOME $HOME/.android/Sdk
+set -x ANDROID_NDK_ROOT $HOME/.android/android-ndk-r15
 set -x ANDROIDSDK $ANDROID_HOME
 set -x ANDROIDNDK $ANDROID_NDK_ROOT
 set -x ANDROIDNDKVER 10.3.2
