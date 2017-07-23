@@ -1,4 +1,6 @@
-; init.el --- user init file      -*- no-byte-compile: t -*-
+;; init.el --- user init file      -*- no-byte-compile: t -*-
+(let ((file-name-handler-alist nil))
+(setq-default gc-cons-threshold 100000000)
 
 (require 'package)
 (add-to-list 'package-archives
@@ -11,76 +13,6 @@
 
 (setq package-enable-at-startup nil) (package-initialize)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#151515" "#fb9fb1" "#acc267" "#ddb26f" "#6fc2ef" "#e1a3ee" "#6fc2ef" "#d0d0d0"])
- '(ansi-term-color-vector
-   [unspecified "#151515" "#fb9fb1" "#acc267" "#ddb26f" "#6fc2ef" "#e1a3ee" "#6fc2ef" "#d0d0d0"])
- '(compilation-message-face (quote default))
- '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
- '(custom-safe-themes
-   (quote
-    ("d5f17ae86464ef63c46ed4cb322703d91e8ed5e718bf5a7beb69dd63352b26b2" "43c1a8090ed19ab3c0b1490ce412f78f157d69a29828aa977dae941b994b4147" "08b8807d23c290c840bbb14614a83878529359eaba1805618b3be7d61b0b0a32" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "5999e12c8070b9090a2a1bbcd02ec28906e150bb2cdce5ace4f965c76cf30476" "4980e5ddaae985e4bae004280bd343721271ebb28f22b3e3b2427443e748cd3f" "34ed3e2fa4a1cb2ce7400c7f1a6c8f12931d8021435bad841fdc1192bd1cc7da" "eea01f540a0f3bc7c755410ea146943688c4e29bea74a29568635670ab22f9bc" "4feee83c4fbbe8b827650d0f9af4ba7da903a5d117d849a3ccee88262805f40d" "d83e34e28680f2ed99fe50fea79f441ca3fddd90167a72b796455e791c90dc49" "5673c365c8679addfb44f3d91d6b880c3266766b605c99f2d9b00745202e75f6" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" "9be1d34d961a40d94ef94d0d08a364c3d27201f3c98c9d38e36f10588469ea57" "a49760e39bd7d7876c94ee4bf483760e064002830a63e24c2842a536c6a52756" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
- '(elpy-modules
-   (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
- '(fci-rule-color "#3C3D37")
- '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
- '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
- '(highlight-tail-colors
-   (quote
-    (("#3C3D37" . 0)
-     ("#679A01" . 20)
-     ("#4BBEAE" . 30)
-     ("#1DB4D0" . 50)
-     ("#9A8F21" . 60)
-     ("#A75B00" . 70)
-     ("#F309DF" . 85)
-     ("#3C3D37" . 100))))
- '(hl-sexp-background-color "#efebe9")
- '(magit-diff-use-overlays nil)
- '(package-selected-packages
-   (quote
-    (xah-fly-keys color-theme-sanityinc-tomorrow use-package smart-compile py-autopep8 powerline ox-pandoc org-bullets org-brain markdown-mode linum-relative irony-eldoc htmlize flycheck-irony evil-surround evil-org evil-magit evil-leader evil-easymotion evil-commentary ensime elpy company-irony-c-headers company-irony color-theme clang-format all-the-icons)))
- '(pos-tip-background-color "#A6E22E" t)
- '(pos-tip-foreground-color "#272822")
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#F92672")
-     (40 . "#CF4F1F")
-     (60 . "#C26C0F")
-     (80 . "#E6DB74")
-     (100 . "#AB8C00")
-     (120 . "#A18F00")
-     (140 . "#989200")
-     (160 . "#8E9500")
-     (180 . "#A6E22E")
-     (200 . "#729A1E")
-     (220 . "#609C3C")
-     (240 . "#4E9D5B")
-     (260 . "#3C9F79")
-     (280 . "#A1EFE4")
-     (300 . "#299BA6")
-     (320 . "#2896B5")
-     (340 . "#2790C3")
-     (360 . "#66D9EF"))))
- '(vc-annotate-very-old-color nil)
- '(weechat-color-list
-   (unspecified "#272822" "#3C3D37" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
 (eval-when-compile
   (require 'use-package))
 
@@ -91,9 +23,24 @@
   (auto-compile-on-load-mode)
   (auto-compile-on-save-mode))
 
-;; some user details for packages
-(setq user-full-name "Bhavani Shankar")
-(setq user-email-address "ebs@openmailbox.org")
+(use-package gnus
+  :ensure t
+  :config
+  (setq user-full-name "Bhavani Shankar")
+  (setq user-email-address "ebhavanishankar@gmail.com")
+  
+  (setq gnus-select-method '(nnnil))
+  (setq gnus-secondary-select-methods '((nntp "news.gwene.org")))
+
+  (setq gnus-select-method
+        '(nnimap "gmail"
+	         (nnimap-address "imap.gmail.com")  ; it could also be imap.googlemail.com if that's your server.
+	         (nnimap-server-port "imaps")
+	         (nnimap-stream ssl)))
+
+  (setq smtpmail-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-service 587
+        gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
 
 ;; remove the startup screen
 (setq inhibit-startup-screen t)
@@ -107,29 +54,43 @@
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
-(defun indent-whole-buffer ()
-  "Indent the whole buffer."
-  (interactive)
-  (delete-trailing-whitespace)
-  (indent-region (point-min) (point-max) nil)
-  (untabify (point-min) (point-max)))
+;; ssh is faster than the default scp
+(setq tramp-default-method "ssh")
 
-;; relative line numbers
-;; (use-package linum-relative
-;;   :ensure t
-;;   :config
-;;   (linum-on)
-;;   (linum-relative-on))
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :config
+  (load-theme 'sanityinc-tomorrow-night t))
+
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-center-theme))
+
+(use-package xah-fly-keys
+  :diminish xah-fly-keys
+  :ensure t
+  :config
+  (xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
+  (xah-fly-keys 1))
+
+(use-package which-key
+  :diminish which-key-mode
+  :config
+  (which-key-mode 1))
 
 ;; ivy mode
 (use-package ivy
   :ensure t
   :diminish ivy-mode
   :config
-  (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
-  )
+
+  ;; use a fuzzy matcher
+  (setq ivy-re-builders-alist
+      '((t . ivy--regex-fuzzy)))
+  (ivy-mode 1))
 
 ;; use pretty symbols
 (global-prettify-symbols-mode t)
@@ -157,52 +118,11 @@
   ;; always enable abbrev mode
   (setq-default abbrev-mode t))
 
-;; evil mode
-(use-package evil-mode
-  :config
-  (evil-mode 1))
-
-;; evil leader
-(use-package evil-leader
-  :ensure t
-  :diminish undo-tree-mode
-  :diminish auto-revert-mode
-  :config
-  (evil-leader/set-leader ",")
-  ;; evil leader settings
-  (evil-leader/set-key
-    "f" 'find-file
-    "b" 'ivy-switch-buffer
-    "k" 'kill-buffer)
-  (global-evil-leader-mode)
-  ;; finally load evil mode
-  (evil-mode 1))
-
-(use-package evil-commentary
-  :ensure t
-  :diminish evil-commentary-mode
-  :config
-  (evil-commentary-mode))
-
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
-
-(use-package evil-easymotion
-  :ensure t
-  :config
-  (evilem-default-keybindings "SPC"))
-
-;; powerline
-(use-package powerline
-  :ensure t
-  :config
-  (powerline-default-theme))
 
 ;; snippet manager
 (use-package yasnippet
   :ensure t
+  :defer t
   :diminish yas-minor-mode
   :config
   (yas-global-mode 1))
@@ -211,6 +131,7 @@
 (use-package flycheck
   :ensure t
   :diminish flycheck-mode
+  :defer t
   :config
   (global-flycheck-mode)
 
@@ -267,11 +188,7 @@
     (add-to-list 'company-backends 'company-math-symbols-unicode)))
 
 (use-package smart-compile
-  :ensure t
-  :config
-  (evil-leader/set-key
-   "c" 'smart-compile)
-)
+  :ensure t)
 
 (use-package irony
   :ensure t)
@@ -311,23 +228,17 @@
 
 (use-package flycheck-irony
   :ensure t
+  :defer t
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
 (use-package irony-eldoc
   :ensure t)
 
-(use-package clang-format
-  :ensure t
-  :config
-  (evil-leader/set-key
-    "i" 'clang-format-buffer)
-  (setq clang-format-style-option "llvm"))
-
-
 ;; Enable elpy for python
 (use-package elpy
   :ensure t
+  :defer t
   :config
   (elpy-enable)
   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
@@ -335,13 +246,6 @@
   (add-hook 'elpy-mode-hook 'flycheck-mode)
   (setq python-indent-offset 4)
   (highlight-indentation-mode nil))
-
-
-;; Scala tools
-(use-package ensime
-  :ensure t
-  :config
-  (setq ensime-startup-snapshot-notification nil))
 
 (use-package markdown-mode
   :ensure t
@@ -354,6 +258,7 @@
 ;; ;; allow babel to run elisp, python and sh codes
 (use-package org
   :ensure t
+  :defer t
   :config
   ;; open html exported file in firefox
   '(org-file-apps
@@ -377,6 +282,34 @@
   ;; fontify natively for org
   (setq org-src-fontify-natively t)
 
+  ;; hide emphasis markers
+  (setq org-hide-emphasis-markers t)
+
+  ;; better bullets
+  (font-lock-add-keywords 'org-mode
+                        '(("^ +\\([-*]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+  ;; larger headings
+  (let* ((variable-tuple (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+                             ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+                             ((x-list-fonts "Verdana")         '(:font "Verdana"))
+                             ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+                             (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+       (base-font-color     (face-foreground 'default nil 'default))
+       (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+
+  (custom-theme-set-faces 'user
+                          `(org-level-8 ((t (,@headline ,@variable-tuple))))
+                          `(org-level-7 ((t (,@headline ,@variable-tuple))))
+                          `(org-level-6 ((t (,@headline ,@variable-tuple))))
+                          `(org-level-5 ((t (,@headline ,@variable-tuple))))
+                          `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+                          `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
+                          `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
+                          `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
+                          `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
+  
   ;; preserve indentation
   (setq org-src-preserve-indentation t)
   ;; evaluate code without confirm
@@ -412,21 +345,71 @@
 ;; export org-mode to various formats using pandoc
 (with-eval-after-load 'ox
   (require 'ox-md nil t)
-  (use-package ox-pandoc :ensure t))
-
-;; evil bindings for org-mode
-(use-package evil-org
-  :ensure t
-  )
+  (use-package ox-pandoc :ensure t)
+  (use-package ox-twbs) :ensure t)
 
 ;; Load magit last
 (use-package magit
   :ensure t
-  :config
-  (evil-leader/set-key "g" 'magit-status))
+  :defer t)
 
-(use-package evil-magit
-  :ensure t)
-
-(provide 'init)
+(provide 'init))
 ;;; init.el ends here
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   (vector "#c5c8c6" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#373b41"))
+ '(ansi-term-color-vector
+   [unspecified "#151515" "#fb9fb1" "#acc267" "#ddb26f" "#6fc2ef" "#e1a3ee" "#6fc2ef" "#d0d0d0"] t)
+ '(custom-safe-themes
+   (quote
+    ("0ee3fc6d2e0fc8715ff59aed2432510d98f7e76fe81d183a0eb96789f4d897ca" "e1994cf306356e4358af96735930e73eadbaf95349db14db6d9539923b225565" "93268bf5365f22c685550a3cbb8c687a1211e827edc76ce7be3c4bd764054bad" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+ '(fci-rule-color "#373b41")
+ '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
+ '(package-selected-packages
+   (quote
+    (creamsody-theme esup idle-highlight-mode xah-fly-keys which-key use-package smart-compile scala-mode sbt-mode py-autopep8 popup ox-twbs ox-pandoc org-bullets org-brain markdown-mode linum-relative irony-eldoc htmlize flycheck-irony flx elpy company-irony-c-headers company-irony color-theme-sanityinc-tomorrow color-theme autothemer)))
+ '(send-mail-function (quote smtpmail-send-it))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#cc6666")
+     (40 . "#de935f")
+     (60 . "#f0c674")
+     (80 . "#b5bd68")
+     (100 . "#8abeb7")
+     (120 . "#81a2be")
+     (140 . "#b294bb")
+     (160 . "#cc6666")
+     (180 . "#de935f")
+     (200 . "#f0c674")
+     (220 . "#b5bd68")
+     (240 . "#8abeb7")
+     (260 . "#81a2be")
+     (280 . "#b294bb")
+     (300 . "#cc6666")
+     (320 . "#de935f")
+     (340 . "#f0c674")
+     (360 . "#b5bd68"))))
+ '(vc-annotate-very-old-color nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-document-title ((t (:inherit default :weight bold :foreground "#c5c8c6" :font "Source Sans Pro" :height 1.5 :underline nil))))
+ '(org-level-1 ((t (:inherit default :weight bold :foreground "#c5c8c6" :font "Source Sans Pro" :height 1.75))))
+ '(org-level-2 ((t (:inherit default :weight bold :foreground "#c5c8c6" :font "Source Sans Pro" :height 1.5))))
+ '(org-level-3 ((t (:inherit default :weight bold :foreground "#c5c8c6" :font "Source Sans Pro" :height 1.25))))
+ '(org-level-4 ((t (:inherit default :weight bold :foreground "#c5c8c6" :font "Source Sans Pro" :height 1.1))))
+ '(org-level-5 ((t (:inherit default :weight bold :foreground "#c5c8c6" :font "Source Sans Pro"))))
+ '(org-level-6 ((t (:inherit default :weight bold :foreground "#c5c8c6" :font "Source Sans Pro"))))
+ '(org-level-7 ((t (:inherit default :weight bold :foreground "#c5c8c6" :font "Source Sans Pro"))))
+ '(org-level-8 ((t (:inherit default :weight bold :foreground "#c5c8c6" :font "Source Sans Pro")))))
