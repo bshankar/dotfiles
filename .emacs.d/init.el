@@ -12,6 +12,20 @@
 ;;; code:
 
 (setq package-enable-at-startup nil) (package-initialize)
+;; remove the startup screen
+(setq inhibit-startup-screen t)
+
+;; get rid of the annoying bell
+(setq ring-bell-function 'ignore)
+
+;; indent with spaces
+(setq-default indent-tabs-mode nil)
+;; set tab width to 4
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
+;; ssh is faster than the default scp
+(setq tramp-default-method "ssh")
 
 (eval-when-compile
   (require 'use-package))
@@ -42,54 +56,38 @@
         smtpmail-smtp-service 587
         gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
 
-;; remove the startup screen
-(setq inhibit-startup-screen t)
 
-;; get rid of the annoying bell
-(setq ring-bell-function 'ignore)
-
-;; indent with spaces
-(setq-default indent-tabs-mode nil)
-;; set tab width to 4
-(setq-default tab-width 4)
-(setq indent-line-function 'insert-tab)
-
-;; ssh is faster than the default scp
-(setq tramp-default-method "ssh")
-
-(use-package color-theme-sanityinc-tomorrow
+(use-package eclipse-theme
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-night t))
+  (load-theme 'eclipse t))
 
 (use-package powerline
   :ensure t
   :config
   (powerline-center-theme))
 
-(use-package xah-fly-keys
-  :diminish xah-fly-keys
-  :ensure t
-  :config
-  (xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
-  (xah-fly-keys 1))
-
-(use-package which-key
-  :diminish which-key-mode
-  :config
-  (which-key-mode 1))
-
-;; ivy mode
 (use-package ivy
   :ensure t
   :diminish ivy-mode
   :config
+
+  (defun ivy-format-function-horizontal (cands)
+  "Transform CANDS into a string for minibuffer."
+  (ivy--format-function-generic
+   (lambda (str)
+     (ivy--add-face str 'ivy-current-match))
+   #'identity
+   cands
+   " | "))
+  
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
-
+  (setq ivy-format-function 'ivy-format-function-horizontal)
   ;; use a fuzzy matcher
   (setq ivy-re-builders-alist
-      '((t . ivy--regex-fuzzy)))
+        '((t . ivy--regex-fuzzy)))
+
   (ivy-mode 1))
 
 ;; use pretty symbols
@@ -107,6 +105,18 @@
 
 ;; Close parenthesis automatically
 (electric-pair-mode 1)
+
+(use-package xah-fly-keys
+  :diminish xah-fly-keys
+  :ensure t
+  :config
+  (xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
+  (xah-fly-keys 1))
+
+(use-package which-key
+  :diminish which-key-mode
+  :config
+  (which-key-mode 1))
 
 (use-package abbrev
   :diminish abbrev-mode
@@ -370,12 +380,12 @@
    [unspecified "#151515" "#fb9fb1" "#acc267" "#ddb26f" "#6fc2ef" "#e1a3ee" "#6fc2ef" "#d0d0d0"] t)
  '(custom-safe-themes
    (quote
-    ("0ee3fc6d2e0fc8715ff59aed2432510d98f7e76fe81d183a0eb96789f4d897ca" "e1994cf306356e4358af96735930e73eadbaf95349db14db6d9539923b225565" "93268bf5365f22c685550a3cbb8c687a1211e827edc76ce7be3c4bd764054bad" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+    ("ff3ca9d675ad57854fb5485831a3c7d5f34aa47af4de0c24335b7efa02dbb8f9" "0ee3fc6d2e0fc8715ff59aed2432510d98f7e76fe81d183a0eb96789f4d897ca" "e1994cf306356e4358af96735930e73eadbaf95349db14db6d9539923b225565" "93268bf5365f22c685550a3cbb8c687a1211e827edc76ce7be3c4bd764054bad" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
  '(fci-rule-color "#373b41")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(package-selected-packages
    (quote
-    (creamsody-theme esup idle-highlight-mode xah-fly-keys which-key use-package smart-compile scala-mode sbt-mode py-autopep8 popup ox-twbs ox-pandoc org-bullets org-brain markdown-mode linum-relative irony-eldoc htmlize flycheck-irony flx elpy company-irony-c-headers company-irony color-theme-sanityinc-tomorrow color-theme autothemer)))
+    (eclipse-theme creamsody-theme esup idle-highlight-mode xah-fly-keys which-key use-package smart-compile scala-mode sbt-mode py-autopep8 popup ox-twbs ox-pandoc org-bullets org-brain markdown-mode linum-relative irony-eldoc htmlize flycheck-irony flx elpy company-irony-c-headers company-irony color-theme-sanityinc-tomorrow color-theme autothemer)))
  '(send-mail-function (quote smtpmail-send-it))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
