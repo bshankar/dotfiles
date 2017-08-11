@@ -1,6 +1,5 @@
 ;; init.el --- user init file      -*- no-byte-compile: t -*-
 (let ((file-name-handler-alist nil))
-  
   (setq-default gc-cons-threshold 100000000)
   
   (require 'package)
@@ -12,7 +11,8 @@
 ;;; commentary:
 ;;; code:
 
-  (setq package-enable-at-startup nil) (package-initialize)
+  (setq package-enable-at-startup nil)
+  (package-initialize)
 
   ;; Bootstrap `use-package'
   (unless (package-installed-p 'use-package)
@@ -32,9 +32,7 @@
   (setq indent-line-function 'insert-tab)
 
   (setq load-prefer-newer t)
-  ;; use pretty symbols
-  (global-prettify-symbols-mode t)
-
+  
   ;; do not highlight current line
   (global-hl-line-mode -1)
 
@@ -47,6 +45,13 @@
 
   ;; Close parenthesis automatically
   (electric-pair-mode 1)
+
+  ;; replace highlighted text with typed stuff
+  (delete-selection-mode 1)
+  
+  ;; specify custom file
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file)
 
   (use-package auto-compile
     :config
@@ -68,6 +73,11 @@
     :config
     (which-key-mode 1))
 
+  (use-package gruvbox-theme
+    :ensure t
+    :config
+    (load-theme 'gruvbox-light-hard t))
+  
   (use-package telephone-line
     :ensure t
     :config
@@ -79,6 +89,30 @@
           telephone-line-evil-use-short-tag t)
     (telephone-line-mode 1))
 
+  ;; pretty symbols
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (push '(">=" . ?≥) prettify-symbols-alist)
+              (push '("<=" . ?≤) prettify-symbols-alist)
+              (push '("!=" . ?≠) prettify-symbols-alist)
+              (push '("==" . ?≡) prettify-symbols-alist)
+              
+              (push '("\->" . ?→) prettify-symbols-alist)
+
+              (push '("and" . ?⋀) prettify-symbols-alist)
+              (push '("&&" . ?⋀) prettify-symbols-alist)
+              
+              (push '("or" . ?⋁) prettify-symbols-alist)
+              (push '("||" . ?⋁) prettify-symbols-alist)
+              
+              (push '("<<" . ?◀) prettify-symbols-alist)
+              (push '(">>" . ?▶) prettify-symbols-alist)
+              (push '("alpha" . ?α) prettify-symbols-alist)
+              (push '("beta" . ?β) prettify-symbols-alist)
+              (push '("gamma . ?γ") prettify-symbols-alist)))
+            
+  (global-prettify-symbols-mode 1)
+  
   (use-package ivy
     :ensure t
     :diminish ivy-mode
@@ -260,7 +294,15 @@
       (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
     (use-package irony-eldoc
-      :ensure t))
+      :ensure t)
+
+    (use-package clang-format
+      :ensure t
+      :config
+      (defun clang-format-buffer-on-save ()
+        "Add auto-save hook for clang-format-buffer-smart."
+        (add-hook 'before-save-hook 'clang-format-buffer nil t))
+      (add-hook 'clang-format-buffer-on-save '(c-mode-hook c++-mode-hook))))
 
   ;; Enable elpy for python
   (use-package python
@@ -386,17 +428,3 @@
   (provide 'init))
 ;;; init.el ends here
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (xah-fly-keys which-key use-package try telephone-line smart-compile scala-mode py-autopep8 powerline popup ox-twbs ox-pandoc org-bullets org-brain markdown-mode magit linum-relative ledger-mode irony-eldoc idle-highlight-mode htmlize hexrgb flycheck-ledger flycheck-irony flx esup elpy company-irony-c-headers company-irony color-theme autothemer))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
