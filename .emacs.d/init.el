@@ -53,6 +53,9 @@
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
 
+  ;; apropos sort by score
+  (setq apropos-sort-by-scores t)
+
   (use-package auto-compile
     :config
     (auto-compile-on-load-mode)
@@ -73,10 +76,10 @@
     :config
     (which-key-mode 1))
 
-  (use-package gruvbox-theme
+  (use-package darktooth-theme
     :ensure t
     :config
-    (load-theme 'gruvbox-light-hard t))
+    (load-theme 'darktooth t))
   
   (use-package telephone-line
     :ensure t
@@ -95,10 +98,10 @@
               (push '(">=" . ?≥) prettify-symbols-alist)
               (push '("<=" . ?≤) prettify-symbols-alist)
               (push '("!=" . ?≠) prettify-symbols-alist)
-              (push '("==" . ?≡) prettify-symbols-alist)
+              (push '("==" . ?≣) prettify-symbols-alist)
               
               (push '("\->" . ?→) prettify-symbols-alist)
-
+  
               (push '("and" . ?⋀) prettify-symbols-alist)
               (push '("&&" . ?⋀) prettify-symbols-alist)
               
@@ -109,33 +112,69 @@
               (push '(">>" . ?▶) prettify-symbols-alist)
               (push '("alpha" . ?α) prettify-symbols-alist)
               (push '("beta" . ?β) prettify-symbols-alist)
-              (push '("gamma . ?γ") prettify-symbols-alist)))
-            
-  (global-prettify-symbols-mode 1)
+              (push '("gamma" . ?γ) prettify-symbols-alist)
   
-  (use-package ivy
+              (push '("++" . ?‡) prettify-symbols-alist)
+              (push '("--" . ?―) prettify-symbols-alist)
+  
+              (push '("+=" . ?∓) prettify-symbols-alist)
+              (push '("-=" . ?≡) prettify-symbols-alist)
+              (push '("*=" . ?≐) prettify-symbols-alist)
+              (push '("/=" . ?⌿) prettify-symbols-alist)
+              (push '("%=" . ?⌘) prettify-symbols-alist)
+              
+              (push '(">>=" . ?⤚) prettify-symbols-alist)
+              (push '("<<=" . ?⤙) prettify-symbols-alist)
+              (push '("&=" . ?⧔) prettify-symbols-alist)
+              (push '("|=" . ?⊨) prettify-symbols-alist)
+              (push '("^=" . ?⊼) prettify-symbols-alist)
+              (push '("::" . ?⇢) prettify-symbols-alist)))
+  (global-prettify-symbols-mode +1)
+
+  ;; pretty font icons
+  (use-package all-the-icons
+    :ensure t
+    :init
+    (setq inhibit-compacting-font-caches t))
+  
+  (use-package counsel
     :ensure t
     :diminish ivy-mode
     :config
-
-    (defun ivy-format-function-horizontal (cands)
-      "Transform CANDS into a string for minibuffer."
-      (ivy--format-function-generic
-       (lambda (str)
-         (ivy--add-face str 'ivy-current-match))
-       #'identity
-       cands
-       " | "))
+    (ivy-mode 1)
     
+    ; Slim down ivy display
+    (setq ivy-count-format ""
+          ivy-display-style nil
+          ivy-minibuffer-faces nil)
+
+    ;; Let ivy use flx for fuzzy-matching
+    (use-package flx
+      :ensure t)
+    (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+
+    ; Use Enter on a directory to navigate into the directory, not open it with dired.
+    (define-key ivy-minibuffer-map (kbd "C-m") 'ivy-alt-done)
+
     (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "(%d/%d) ")
-    (setq ivy-format-function 'ivy-format-function-horizontal)
-    ;; use a fuzzy matcher
-    (setq ivy-re-builders-alist
-          '((t . ivy--regex-fuzzy)))
+    
+    ; Let projectile use ivy
+    (setq projectile-completion-system 'ivy)
 
-    (ivy-mode 1))
+    ;; bind counsel-ag
+    (define-key xah-fly-dot-keymap (kbd "a") 'counsel-ag))
+  
+  (use-package smex
+    :ensure t
+    :config
+    (smex-initialize))
 
+  (use-package avy
+    :ensure t
+    :diminish avy-mode
+    :config
+    (define-key xah-fly-leader-key-map (kbd "z") 'avy-goto-char-timer))
+  
   (use-package abbrev
     :diminish abbrev-mode
     :config
@@ -149,6 +188,7 @@
   ;; snippet manager
   (use-package yasnippet
     :ensure t
+    :diminish yas-minor-mode
     :defer 2
     :diminish yas-mode
     :config
@@ -418,13 +458,62 @@
     (with-eval-after-load 'ox
       (require 'ox-md nil t)
       (use-package ox-pandoc :ensure t)
-      (use-package ox-twbs) :ensure t))
+      (use-package ox-twbs) :ensure t)
+
+    ;; org-brain
+    (use-package org-brain :ensure t
+      :init
+      (setq org-brain-path "~/.my-brain")
+      :config
+      (setq org-id-track-globally t)
+      (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+      (setq org-brain-visualize-default-choices 'all)
+
+      ;; easy navigation of links
+      (use-package link-hint
+        :ensure t
+        :config
+        (define-key org-brain-visualize-mode-map (kbd "C-l") #'link-hint-open-link))
+
+      ;; convert ascii art to pretty unicode
+      (use-package ascii-art-to-Unicode
+        :ensure t
+        :config
+        (defun aa2u-buffer ()
+          (aa2u (point-min) (point-max)))
+
+        (add-hook 'org-brain-after-visualize-hook #'aa2u-buffer))
+
+      ;; pretty symbols with all-the-icons
+      (defun org-brain-insert-resource-icon (link)
+        "Insert an icon, based on content of org-mode LINK."
+        (insert (format "%s "
+                        (cond ((string-prefix-p "http" link)
+                               (cond ((string-match "wikipedia\\.org" link)
+                                      (all-the-icons-faicon "wikipedia-w"))
+                                     ((string-match "github\\.com" link)
+                                      (all-the-icons-octicon "mark-github"))
+                                     ((string-match "vimeo\\.com" link)
+                                      (all-the-icons-faicon "(vector )imeo"))
+                                     ((string-match "youtube\\.com" link)
+                                      (all-the-icons-faicon "youtube"))
+                                     (t
+                                      (all-the-icons-faicon "globe"))))
+                              ((string-prefix-p "brain:" link)
+                               (all-the-icons-fileicon "brain"))
+                              (t
+                               (all-the-icons-icon-for-file link))))))
+
+      (add-hook 'org-brain-after-resource-button-functions #'org-brain-insert-resource-icon)))
+
 
   ;; Load magit last
   (use-package magit
     :ensure t
-    :defer 5)
-
+    :defer 4
+    :config
+    (define-key xah-fly-leader-key-map (kbd "b") 'magit-status))
+  
   (provide 'init))
 ;;; init.el ends here
 
