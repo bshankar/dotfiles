@@ -53,9 +53,15 @@
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
 
-  ;; apropos sort by score
+;; apropos sort by score
   (setq apropos-sort-by-scores t)
 
+  ;; scroll one line at a time (less "jumpy" than defaults)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+  (setq scroll-step 1) ;; keyboard scroll one line at a time
+  
   (use-package auto-compile
     :config
     (auto-compile-on-load-mode)
@@ -76,21 +82,33 @@
     :config
     (which-key-mode 1))
 
-  (use-package darktooth-theme
+  (use-package gruvbox-theme
     :ensure t
     :config
-    (load-theme 'darktooth t))
+    (load-theme 'gruvbox-dark-medium t))
   
-  (use-package telephone-line
-    :ensure t
-    :config
-    (setq telephone-line-primary-left-separator 'telephone-line-halfcos-left
-          telephone-line-secondary-left-separator 'telephone-line-halfcos-hollow-left
-          telephone-line-primary-right-separator 'telephone-line-halfcos-right
-          telephone-line-secondary-right-separator 'telephone-line-halfcos-hollow-right)
-    (setq telephone-line-height 24
-          telephone-line-evil-use-short-tag t)
-    (telephone-line-mode 1))
+(use-package telephone-line
+  :ensure t
+  :config
+  
+  (setq telephone-line-primary-right-separator 'telephone-line-halfcos-right
+        telephone-line-secondary-right-separator 'telephone-line-halfcos-hollow-right
+        telephone-line-primary-left-separator 'telephone-line-halfcos-left
+        telephone-line-secondary-left-separator 'telephone-line-halfcos-hollow-left
+        telephone-line-height 24)
+
+  (setq telephone-line-lhs
+        '((evil   . (telephone-line-xah-fly-keys-segment))
+          (nil    . (telephone-line-minor-mode-segment))
+          (accent . (telephone-line-vc-segment
+                     telephone-line-process-segment))
+          (nil    . (telephone-line-buffer-segment))))
+
+  (setq telephone-line-rhs
+        '((nil    . (telephone-line-misc-info-segment))
+          (accent . (telephone-line-major-mode-segment))
+          (evil    . (telephone-line-airline-position-segment))))
+  (telephone-line-mode 1))
 
   ;; pretty symbols
   (add-hook 'prog-mode-hook
@@ -117,7 +135,7 @@
               (push '("++" . ?‡) prettify-symbols-alist)
               (push '("--" . ?―) prettify-symbols-alist)
   
-              (push '("+=" . ?∓) prettify-symbols-alist)
+              (push '("+=" . ?±) prettify-symbols-alist)
               (push '("-=" . ?≡) prettify-symbols-alist)
               (push '("*=" . ?≐) prettify-symbols-alist)
               (push '("/=" . ?⌿) prettify-symbols-alist)
@@ -131,12 +149,6 @@
               (push '("::" . ?⇢) prettify-symbols-alist)))
   (global-prettify-symbols-mode +1)
 
-  ;; pretty font icons
-  (use-package all-the-icons
-    :ensure t
-    :init
-    (setq inhibit-compacting-font-caches t))
-  
   (use-package counsel
     :ensure t
     :diminish ivy-mode
@@ -174,6 +186,12 @@
     :diminish avy-mode
     :config
     (define-key xah-fly-leader-key-map (kbd "z") 'avy-goto-char-timer))
+
+  (use-package dumb-jump
+    :ensure t
+    :config
+    (define-key xah-fly-dot-keymap (kbd "b") 'dumb-jump-go)
+    (define-key xah-fly-dot-keymap (kbd "c") 'dumb-jump-back))
   
   (use-package abbrev
     :diminish abbrev-mode
@@ -282,6 +300,10 @@
           smtpmail-smtp-service 587
           gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
 
+  (use-package realgud
+    :ensure t
+    :defer 5)
+  
   (use-package cc-mode
     :mode (("\\.h\\(h?\\|xx\\|pp\\)\\'" . c++-mode)
            ("\\.m\\'"                   . c-mode)
@@ -458,54 +480,7 @@
     (with-eval-after-load 'ox
       (require 'ox-md nil t)
       (use-package ox-pandoc :ensure t)
-      (use-package ox-twbs) :ensure t)
-
-    ;; org-brain
-    (use-package org-brain :ensure t
-      :init
-      (setq org-brain-path "~/.my-brain")
-      :config
-      (setq org-id-track-globally t)
-      (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-      (setq org-brain-visualize-default-choices 'all)
-
-      ;; easy navigation of links
-      (use-package link-hint
-        :ensure t
-        :config
-        (define-key org-brain-visualize-mode-map (kbd "C-l") #'link-hint-open-link))
-
-      ;; convert ascii art to pretty unicode
-      (use-package ascii-art-to-Unicode
-        :ensure t
-        :config
-        (defun aa2u-buffer ()
-          (aa2u (point-min) (point-max)))
-
-        (add-hook 'org-brain-after-visualize-hook #'aa2u-buffer))
-
-      ;; pretty symbols with all-the-icons
-      (defun org-brain-insert-resource-icon (link)
-        "Insert an icon, based on content of org-mode LINK."
-        (insert (format "%s "
-                        (cond ((string-prefix-p "http" link)
-                               (cond ((string-match "wikipedia\\.org" link)
-                                      (all-the-icons-faicon "wikipedia-w"))
-                                     ((string-match "github\\.com" link)
-                                      (all-the-icons-octicon "mark-github"))
-                                     ((string-match "vimeo\\.com" link)
-                                      (all-the-icons-faicon "(vector )imeo"))
-                                     ((string-match "youtube\\.com" link)
-                                      (all-the-icons-faicon "youtube"))
-                                     (t
-                                      (all-the-icons-faicon "globe"))))
-                              ((string-prefix-p "brain:" link)
-                               (all-the-icons-fileicon "brain"))
-                              (t
-                               (all-the-icons-icon-for-file link))))))
-
-      (add-hook 'org-brain-after-resource-button-functions #'org-brain-insert-resource-icon)))
-
+      (use-package ox-twbs) :ensure t))
 
   ;; Load magit last
   (use-package magit
