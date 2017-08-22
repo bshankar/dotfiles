@@ -111,6 +111,9 @@
           (evil    . (telephone-line-airline-position-segment))))
   (telephone-line-mode 1))
 
+  ;; load fira code symbols
+  (load-file "~/.emacs.d/fira.el")
+
   (use-package counsel
     :ensure t
     :diminish ivy-mode
@@ -350,7 +353,6 @@
   ;; ;; allow babel to run elisp, python and sh codes
   (use-package org
     :ensure t
-    :mode ("\\.org\\'" . org-mode)
     :config
     ;; open html exported file in firefox
     '(org-file-apps
@@ -413,10 +415,30 @@
     (add-hook 'org-mode-hook 'turn-on-auto-fill)
     ;; disable text warping with hotkey
     (global-set-key (kbd "C-c q") 'auto-fill-mode)
-    ;; load agenda files
-    (add-to-list 'org-agenda-files "/home/ebs/Documents/org/gtd.org)")
-    (add-to-list 'org-agenda-files "/home/ebs/Documents/org/ideas.org)")
 
+    (setq org-todo-keywords
+          '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCELLED(c)" "FAILED(f)")))
+
+    ;; capture templates
+    (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                               (file+headline "~/Documents/org/gtd/inbox.org" "Tasks")
+                               "* TODO %i%?")
+                              ("T" "Tickler" entry
+                               (file+headline "~/Documents/org/gtd/tickler.org" "Tickler")
+                               "* %i%? \n %U")))
+    ;; refile targets
+    (setq org-refile-targets '(("~/Documents/org/gtd/gtd.org" :maxlevel . 3)
+                           ("~/Documents/org/gtd/someday.org" :level . 1)
+                           ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)))
+
+    ;; agenda files
+    (setq org-agenda-files '("~/Documents/org/gtd/inbox.org"
+                         "~/Documents/org/gtd/gtd.org"
+                         "~/Documents/org/gtd/tickler.org"))
+
+    (define-key xah-fly-t-keymap (kbd "a") 'org-agenda-list)
+    (define-key xah-fly-t-keymap (kbd "b") 'org-capture)
+    
     ;; htmlize for syntax highlighting in exported html
     (use-package htmlize
       :ensure t
@@ -424,9 +446,6 @@
       ;; syntax highlight from a css file instead of copying
       (setq org-html-htmlize-output-type 'css)
       (setq org-html-htmlize-font-prefix "org-"))
-
-    (setq org-todo-keywords
-          '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCELLED(c)" "FAILED(f)")))
 
     ;; pretty bullets for org-mode
     (use-package org-bullets
