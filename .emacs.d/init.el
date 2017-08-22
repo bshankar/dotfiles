@@ -455,7 +455,7 @@
 
     ;; export org-mode to various formats using pandoc
     (with-eval-after-load 'ox
-      (require 'ox-md nil t)
+      (use-package ox-md :ensure t)
       (use-package ox-pandoc :ensure t)
       (use-package ox-twbs) :ensure t))
 
