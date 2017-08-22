@@ -80,12 +80,13 @@
   (use-package which-key
     :diminish which-key-mode
     :config
+    (which-key-setup-side-window-bottom)
     (which-key-mode 1))
 
   (use-package gruvbox-theme
     :ensure t
     :config
-    (load-theme 'gruvbox-dark-medium t))
+    (load-theme 'gruvbox-light-hard t))
   
 (use-package telephone-line
   :ensure t
@@ -109,45 +110,6 @@
           (accent . (telephone-line-major-mode-segment))
           (evil    . (telephone-line-airline-position-segment))))
   (telephone-line-mode 1))
-
-  ;; pretty symbols
-  (add-hook 'prog-mode-hook
-            (lambda ()
-              (push '(">=" . ?≥) prettify-symbols-alist)
-              (push '("<=" . ?≤) prettify-symbols-alist)
-              (push '("!=" . ?≠) prettify-symbols-alist)
-              (push '("==" . ?≣) prettify-symbols-alist)
-              
-              (push '("\->" . ?→) prettify-symbols-alist)
-  
-              (push '("and" . ?⋀) prettify-symbols-alist)
-              (push '("&&" . ?⋀) prettify-symbols-alist)
-              
-              (push '("or" . ?⋁) prettify-symbols-alist)
-              (push '("||" . ?⋁) prettify-symbols-alist)
-              
-              (push '("<<" . ?◀) prettify-symbols-alist)
-              (push '(">>" . ?▶) prettify-symbols-alist)
-              (push '("alpha" . ?α) prettify-symbols-alist)
-              (push '("beta" . ?β) prettify-symbols-alist)
-              (push '("gamma" . ?γ) prettify-symbols-alist)
-  
-              (push '("++" . ?‡) prettify-symbols-alist)
-              (push '("--" . ?―) prettify-symbols-alist)
-  
-              (push '("+=" . ?±) prettify-symbols-alist)
-              (push '("-=" . ?≡) prettify-symbols-alist)
-              (push '("*=" . ?≐) prettify-symbols-alist)
-              (push '("/=" . ?⌿) prettify-symbols-alist)
-              (push '("%=" . ?⌘) prettify-symbols-alist)
-              
-              (push '(">>=" . ?⤚) prettify-symbols-alist)
-              (push '("<<=" . ?⤙) prettify-symbols-alist)
-              (push '("&=" . ?⧔) prettify-symbols-alist)
-              (push '("|=" . ?⊨) prettify-symbols-alist)
-              (push '("^=" . ?⊼) prettify-symbols-alist)
-              (push '("::" . ?⇢) prettify-symbols-alist)))
-  (global-prettify-symbols-mode +1)
 
   (use-package counsel
     :ensure t
@@ -173,8 +135,8 @@
     ; Let projectile use ivy
     (setq projectile-completion-system 'ivy)
 
-    ;; bind counsel-ag
-    (define-key xah-fly-dot-keymap (kbd "a") 'counsel-ag))
+    ;; bind counsel-ripgrep
+    (define-key xah-fly-dot-keymap (kbd "a") 'counsel-rg))
   
   (use-package smex
     :ensure t
@@ -300,10 +262,6 @@
           smtpmail-smtp-service 587
           gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
 
-  (use-package realgud
-    :ensure t
-    :defer 5)
-  
   (use-package cc-mode
     :mode (("\\.h\\(h?\\|xx\\|pp\\)\\'" . c++-mode)
            ("\\.m\\'"                   . c-mode)
@@ -410,7 +368,7 @@
        (sh . t)))
 
     ;; custom ellipsis for org-mode (...)
-    (set-display-table-slot standard-display-table
+    (setdisplay-table-slot standard-display-table
                             'selective-display (string-to-vector " ⤵"))
 
     ;; fontify natively for org
