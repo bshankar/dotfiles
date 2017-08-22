@@ -368,7 +368,7 @@
        (sh . t)))
 
     ;; custom ellipsis for org-mode (...)
-    (setdisplay-table-slot standard-display-table
+    (set-display-table-slot standard-display-table
                             'selective-display (string-to-vector " ⤵"))
 
     ;; fontify natively for org
@@ -389,7 +389,7 @@
                                  ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
                                  (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
            (base-font-color     (face-foreground 'default nil 'default))
-           (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+           (headline           `(:inherit default :weight bold)))
 
       (custom-theme-set-faces 'user
                               `(org-level-8 ((t (,@headline ,@variable-tuple))))
