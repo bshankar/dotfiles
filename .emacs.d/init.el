@@ -457,7 +457,11 @@
     ;; export org-mode to various formats using pandoc
     (with-eval-after-load 'ox
       (use-package ox-twbs :ensure t)
-      (use-package ox-reveal :ensure t)))
+      (use-package ox-reveal
+        :ensure t
+        :init
+        (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/2.5.0/")
+        (setq org-reveal-mathjax t))))
 
   ;; Load magit last
   (use-package magit
