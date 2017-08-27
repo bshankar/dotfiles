@@ -86,30 +86,31 @@
   (use-package gruvbox-theme
     :ensure t
     :config
-    (load-theme 'gruvbox-light-hard t))
+    (load-theme 'gruvbox-light-medium t))
   
-(use-package telephone-line
-  :ensure t
-  :config
+  (use-package telephone-line
+    :ensure t
+    :config
   
-  (setq telephone-line-primary-right-separator 'telephone-line-halfcos-right
-        telephone-line-secondary-right-separator 'telephone-line-halfcos-hollow-right
-        telephone-line-primary-left-separator 'telephone-line-halfcos-left
-        telephone-line-secondary-left-separator 'telephone-line-halfcos-hollow-left
-        telephone-line-height 24)
+    (setq telephone-line-primary-right-separator 'telephone-line-halfcos-right
+          telephone-line-secondary-right-separator 'telephone-line-halfcos-hollow-right
+          telephone-line-primary-left-separator 'telephone-line-halfcos-left
+          telephone-line-secondary-left-separator 'telephone-line-halfcos-hollow-left
+          telephone-line-height 24)
 
-  (setq telephone-line-lhs
-        '((evil   . (telephone-line-xah-fly-keys-segment))
-          (nil    . (telephone-line-minor-mode-segment))
-          (accent . (telephone-line-vc-segment
-                     telephone-line-process-segment))
-          (nil    . (telephone-line-buffer-segment))))
+    (setq telephone-line-lhs
+          '((evil   . (telephone-line-xah-fly-keys-segment))
+            (accent . (telephone-line-vc-segment
+                       telephone-line-erc-modified-channels-segment
+                       telephone-line-process-segment))
+            (nil    . (telephone-line-minor-mode-segment
+                       telephone-line-buffer-segment))))
 
-  (setq telephone-line-rhs
-        '((nil    . (telephone-line-misc-info-segment))
-          (accent . (telephone-line-major-mode-segment))
-          (evil    . (telephone-line-airline-position-segment))))
-  (telephone-line-mode 1))
+    (setq telephone-line-rhs
+          '((nil    . (telephone-line-misc-info-segment))
+            (accent . (telephone-line-major-mode-segment))
+            (evil    . (telephone-line-airline-position-segment))))
+    (telephone-line-mode 1))
 
   ;; load fira code symbols
   (load-file "~/.emacs.d/fira.el")
@@ -264,7 +265,7 @@
     (setq smtpmail-smtp-server "smtp.gmail.com"
           smtpmail-smtp-service 587
           gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
-
+    
   (use-package cc-mode
     :mode (("\\.h\\(h?\\|xx\\|pp\\)\\'" . c++-mode)
            ("\\.m\\'"                   . c-mode)
@@ -455,9 +456,8 @@
 
     ;; export org-mode to various formats using pandoc
     (with-eval-after-load 'ox
-      (use-package ox-md :ensure t)
-      (use-package ox-pandoc :ensure t)
-      (use-package ox-twbs) :ensure t))
+      (use-package ox-twbs :ensure t)
+      (use-package ox-reveal :ensure t)))
 
   ;; Load magit last
   (use-package magit
