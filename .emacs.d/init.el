@@ -83,10 +83,10 @@
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
 
-  (use-package gruvbox-theme
+  (use-package darktooth-theme
     :ensure t
     :config
-    (load-theme 'gruvbox-light-medium t))
+    (load-theme 'darktooth t))
   
   (use-package telephone-line
     :ensure t
@@ -350,6 +350,21 @@
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
+
+  (use-package tern
+    :ensure t
+    :init
+    (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+    :config
+    (use-package company-tern
+      :ensure t
+      :config
+      (add-to-list 'company-backends 'company-tern)))
+
+  ;; clean language
+  (use-package clean-mode
+    :load-path "~/.emacs.d/elpa/clean-mode"
+    :mode ("\\.cl\\'" . clean-mode))
 
   ;; ;; allow babel to run elisp, python and sh codes
   (use-package org
