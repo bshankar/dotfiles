@@ -72,7 +72,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Run web browser
-bindsym $mod+Shift+f exec chromium
+bindsym $mod+Shift+f exec firefox
 
 # Take a screenshot
 bindsym Print exec scrot -s
