@@ -12,7 +12,7 @@ set -x ANDROIDNDKVER 10.3.2
 
 set -gx PATH /usr/lib/ccache/bin $PATH
 # Hack to make python2 detect lldb
-set -x PYTHONPATH /usr/lib/python2.7/site-packages/lld
+set -x PYTHONPATH /usr/lib/python2.7/site-packages/lldb
 
 alias vim=/usr/bin/nvim
 alias diff="/usr/bin/diff --color"

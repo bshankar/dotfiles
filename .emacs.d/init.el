@@ -83,10 +83,10 @@
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
 
-  (use-package darktooth-theme
+  (use-package doom-themes
     :ensure t
     :config
-    (load-theme 'darktooth t))
+    (load-theme 'doom-tomorrow-night t))
   
   (use-package telephone-line
     :ensure t
@@ -350,6 +350,21 @@
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
+
+  ;; (use-package web-mode
+    ;; :ensure t
+    ;; :mode (("\\.phtml\\'" . web-mode)
+           ;; ("\\.tpl\\.php\\'" . web-mode)
+           ;; ("\\.[agj]sp\\'" . web-mode)
+           ;; ("\\.as[cp]x\\'" . web-mode)
+           ;; ("\\.erb\\'" . web-mode)
+           ;; ("\\.mustache\\'" . web-mode)
+           ;; ("\\.djhtml\\'" . web-mode)
+           ;; ("\\.html?\\'" . web-mode)
+           ;; ("\\.js\\'" . web-mode)
+           ;; ("\\.jsx\\'" . web-mode)
+           ;; ("\\.s?css'" . web-mode)
+           ;; ("\\.xml\\'" . web-mode)))
 
   (use-package tern
     :ensure t
