@@ -371,6 +371,7 @@
     :init
     (add-hook 'js-mode-hook (lambda () (tern-mode t)))
     :config
+    (setq tern-command (append tern-command '("--no-port-file")))
     (use-package company-tern
       :ensure t
       :config
@@ -384,6 +385,8 @@
   ;; ;; allow babel to run elisp, python and sh codes
   (use-package org
     :ensure t
+    :init
+    (setq org-export-with-timestamps nil)
     :config
     ;; open html exported file in firefox
     '(org-file-apps
