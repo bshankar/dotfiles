@@ -83,10 +83,10 @@
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
 
-  (use-package doom-themes
+  (use-package kaolin-themes
     :ensure t
     :config
-    (load-theme 'doom-tomorrow-night t))
+    (load-theme 'kaolin-eclipse t))
   
   (use-package telephone-line
     :ensure t
