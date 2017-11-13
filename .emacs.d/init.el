@@ -351,31 +351,48 @@
            ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
 
-  ;; (use-package web-mode
-    ;; :ensure t
-    ;; :mode (("\\.phtml\\'" . web-mode)
-           ;; ("\\.tpl\\.php\\'" . web-mode)
-           ;; ("\\.[agj]sp\\'" . web-mode)
-           ;; ("\\.as[cp]x\\'" . web-mode)
-           ;; ("\\.erb\\'" . web-mode)
-           ;; ("\\.mustache\\'" . web-mode)
-           ;; ("\\.djhtml\\'" . web-mode)
-           ;; ("\\.html?\\'" . web-mode)
-           ;; ("\\.js\\'" . web-mode)
-           ;; ("\\.jsx\\'" . web-mode)
-           ;; ("\\.s?css'" . web-mode)
-           ;; ("\\.xml\\'" . web-mode)))
-
-  (use-package tern
+  (use-package web-mode
     :ensure t
+    :mode (("\\.phtml\\'" . web-mode)
+           ("\\.tpl\\.php\\'" . web-mode)
+           ("\\.[agj]sp\\'" . web-mode)
+           ("\\.as[cp]x\\'" . web-mode)
+           ("\\.erb\\'" . web-mode)
+           ("\\.mustache\\'" . web-mode)
+           ("\\.djhtml\\'" . web-mode)
+           ("\\.html?\\'" . web-mode)
+           ("\\.json\\'" . web-mode)
+           ("\\.js\\'" . web-mode)
+           ("\\.jsx\\'" . web-mode)
+           ("\\.s?css'" . web-mode)
+           ("\\.xml\\'" . web-mode))
+
     :init
-    (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+    ;; disable jshint since we prefer eslint checking
+    (setq flycheck-eslintrc "~/.eslintrc.json")
+    (setq-default flycheck-disabled-checkers
+                  (append flycheck-disabled-checkers
+                          '(javascript-jshint)))
+    
+    ;; use eslint with web-mode for jsx files
+    (flycheck-add-mode 'javascript-eslint 'web-mode)
+
+    ;; set all indentations to 2 spaces
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    
     :config
-    (setq tern-command (append tern-command '("--no-port-file")))
-    (use-package company-tern
+    (use-package tern
       :ensure t
+      :init
+      (add-hook 'js-mode-hook (lambda () (tern-mode t)))
       :config
-      (add-to-list 'company-backends 'company-tern)))
+      (setq tern-command (append tern-command '("--no-port-file")))
+      (use-package company-tern
+        :ensure t
+        :config
+        (add-to-list 'company-backends 'company-tern))))
 
   ;; clean language
   (use-package clean-mode
