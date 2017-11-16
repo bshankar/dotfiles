@@ -83,10 +83,10 @@
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
 
-  (use-package kaolin-themes
+  (use-package tango-plus-theme
     :ensure t
     :config
-    (load-theme 'kaolin-eclipse t))
+    (load-theme 'tango-plus t))
   
   (use-package telephone-line
     :ensure t
@@ -377,16 +377,19 @@
     ;; use eslint with web-mode for jsx files
     (flycheck-add-mode 'javascript-eslint 'web-mode)
 
-    ;; set all indentations to 2 spaces
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)
+    (defun my-web-mode-hook ()
+      "Hooks for Web mode. Set all indentations to 2 spaces"
+      (setq web-mode-markup-indent-offset 2)
+      (setq web-mode-code-indent-offset 2)
+      (setq web-mode-css-indent-offset 2))
+
+    (add-hook 'web-mode-hook  'my-web-mode-hook)
     
     :config
     (use-package tern
       :ensure t
       :init
-      (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+      (add-hook 'web-mode-hook (lambda () (tern-mode t)))
       :config
       (setq tern-command (append tern-command '("--no-port-file")))
       (use-package company-tern
