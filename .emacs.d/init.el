@@ -183,7 +183,14 @@
     :ensure t
     :diminish flycheck-mode
     :config
-    (global-flycheck-mode)
+    ;; disable jshint since we prefer eslint checking
+    (setq flycheck-eslintrc "~/.eslintrc.json")
+    (setq-default flycheck-disabled-checkers
+                  (append flycheck-disabled-checkers
+                          '(javascript-jshint)))
+    
+    ;; use eslint with rjsx-mode for jsx files
+    (add-hook 'js2-mode-hook 'flycheck-mode)
 
     (flycheck-define-checker proselint
       "A linter for prose."
@@ -198,7 +205,8 @@
 
     (add-to-list 'flycheck-checkers 'proselint)
     (add-hook 'text-mode-hook #'flycheck-mode)
-    (add-hook 'org-mode-hook #'flycheck-mode))
+    (add-hook 'org-mode-hook #'flycheck-mode)
+    (global-flycheck-mode))
   
   (use-package ledger-mode
     :ensure t
@@ -351,6 +359,15 @@
            ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
 
+  (use-package rjsx-mode
+    :ensure t
+    :mode (("\\.js\\'" . rjsx-mode)
+           ("\\.jsx\\'" . rjsx-mode))
+    :config
+    (setq js2-mode-show-parse-errors nil
+          js2-mode-show-strict-warnings nil)
+    (setq js2-basic-offset 2))
+
   (use-package web-mode
     :ensure t
     :mode (("\\.phtml\\'" . web-mode)
@@ -362,26 +379,17 @@
            ("\\.djhtml\\'" . web-mode)
            ("\\.html?\\'" . web-mode)
            ("\\.json\\'" . web-mode)
-           ("\\.js\\'" . web-mode)
-           ("\\.jsx\\'" . web-mode)
            ("\\.s?css'" . web-mode)
            ("\\.xml\\'" . web-mode))
 
     :init
-    ;; disable jshint since we prefer eslint checking
-    (setq flycheck-eslintrc "~/.eslintrc.json")
-    (setq-default flycheck-disabled-checkers
-                  (append flycheck-disabled-checkers
-                          '(javascript-jshint)))
-    
-    ;; use eslint with web-mode for jsx files
-    (flycheck-add-mode 'javascript-eslint 'web-mode)
-
     (defun my-web-mode-hook ()
       "Hooks for Web mode. Set all indentations to 2 spaces"
-      (setq web-mode-markup-indent-offset 2)
+      (setq web-mode-markup-indent-(or )ffset 2)
+      (setq web-mode-attr-indent-offset 2)
+      (setq web-mode-css-indent-offset 2)
       (setq web-mode-code-indent-offset 2)
-      (setq web-mode-css-indent-offset 2))
+      (setq css-indent-offset 2))
 
     (add-hook 'web-mode-hook  'my-web-mode-hook)
     
@@ -392,6 +400,7 @@
       (add-hook 'web-mode-hook (lambda () (tern-mode t)))
       :config
       (setq tern-command (append tern-command '("--no-port-file")))
+
       (use-package company-tern
         :ensure t
         :config
