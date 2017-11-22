@@ -371,7 +371,7 @@
     (use-package tern
       :ensure t
       :init
-      (add-hook 'web-mode-hook (lambda () (tern-mode t)))
+      (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
       :config
       (setq tern-command (append tern-command '("--no-port-file")))
 
