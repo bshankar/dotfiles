@@ -83,10 +83,10 @@
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
 
-  (use-package tango-plus-theme
+  (use-package gruvbox-theme
     :ensure t
     :config
-    (load-theme 'tango-plus t))
+    (load-theme 'gruvbox-light-hard t))
   
   (use-package telephone-line
     :ensure t
@@ -366,7 +366,19 @@
     :config
     (setq js2-mode-show-parse-errors nil
           js2-mode-show-strict-warnings nil)
-    (setq js2-basic-offset 2))
+    (setq js2-basic-offset 2)
+      
+    (use-package tern
+      :ensure t
+      :init
+      (add-hook 'web-mode-hook (lambda () (tern-mode t)))
+      :config
+      (setq tern-command (append tern-command '("--no-port-file")))
+
+      (use-package company-tern
+        :ensure t
+        :config
+        (add-to-list 'company-backends 'company-tern))))
 
   (use-package web-mode
     :ensure t
@@ -391,20 +403,7 @@
       (setq web-mode-code-indent-offset 2)
       (setq css-indent-offset 2))
 
-    (add-hook 'web-mode-hook  'my-web-mode-hook)
-    
-    :config
-    (use-package tern
-      :ensure t
-      :init
-      (add-hook 'web-mode-hook (lambda () (tern-mode t)))
-      :config
-      (setq tern-command (append tern-command '("--no-port-file")))
-
-      (use-package company-tern
-        :ensure t
-        :config
-        (add-to-list 'company-backends 'company-tern))))
+    (add-hook 'web-mode-hook  'my-web-mode-hook))
 
   ;; clean language
   (use-package clean-mode
@@ -414,13 +413,15 @@
   ;; ;; allow babel to run elisp, python and sh codes
   (use-package org
     :ensure t
+    :mode ("\\.org\\'" . org-mode)
     :init
     (setq org-export-with-timestamps nil)
     :config
     ;; latex options
     (setq org-format-latex-header "\\documentclass{article}\n\\usepackage[usenames]{color}\n[PACKAGES]\n[DEFAULT-PACKAGES]\n\\pagestyle{empty}             % do not remove\n% The settings below are copied from fullpage.sty\n\\setlength{\\textwidth}{\\paperwidth}\n\\addtolength{\\textwidth}{-3cm}\n\\setlength{\\oddsidemargin}{1.5cm}\n\\addtolength{\\oddsidemargin}{-2.54cm}\n\\setlength{\\evensidemargin}{\\oddsidemargin}\n\\setlength{\\textheight}{\\paperheight}\n\\addtolength{\\textheight}{-\\headheight}\n\\addtolength{\\textheight}{-\\headsep}\n\\addtolength{\\textheight}{-\\footskip}\n\\addtolength{\\textheight}{-3cm}\n\\setlength{\\topmargin}{1.5cm}\n\\addtolength{\\topmargin}{-2.54cm}\\everymath{\\displaystyle}")
     (plist-put org-format-latex-options :scale 2.0)
-    
+    (setq org-latex-create-formula-image-program 'dvipng)
+
     ;; open html exported file in firefox
     '(org-file-apps
       (quote
