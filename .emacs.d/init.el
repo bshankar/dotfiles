@@ -61,6 +61,9 @@
   (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
   (setq scroll-step 1) ;; keyboard scroll one line at a time
+
+  ;; do not create backup files
+  (setq make-backup-files nil)
   
   (use-package auto-compile
     :config
