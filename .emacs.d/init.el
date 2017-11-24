@@ -83,10 +83,10 @@
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
 
-  (use-package gruvbox-theme
+  (use-package kaolin-themes
     :ensure t
     :config
-    (load-theme 'gruvbox-light-hard t))
+    (load-theme 'kaolin-eclipse t))
   
   (use-package telephone-line
     :ensure t
@@ -336,6 +336,15 @@
         (add-hook 'before-save-hook 'clang-format-buffer nil t))
       (add-hook 'clang-format-buffer-on-save '(c-mode-hook c++-mode-hook))))
 
+  ;; language server protocol
+  (use-package lsp-mode
+    :ensure t
+    :config
+    (use-package company-lsp
+      :ensure t
+      :config
+      (push 'company-lsp company-backends)))
+  
   ;; Enable elpy for python
   (use-package python
     :mode ("\\.py\\'" . python-mode)
@@ -367,18 +376,11 @@
     (setq js2-mode-show-parse-errors nil
           js2-mode-show-strict-warnings nil)
     (setq js2-basic-offset 2)
-      
-    (use-package tern
-      :ensure t
-      :init
-      (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
-      :config
-      (setq tern-command (append tern-command '("--no-port-file")))
 
-      (use-package company-tern
-        :ensure t
-        :config
-        (add-to-list 'company-backends 'company-tern))))
+    (use-package lsp-javascript-typescript
+      :ensure t
+      :config
+      (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)))
 
   (use-package web-mode
     :ensure t
@@ -533,6 +535,7 @@
   ;; Load magit last
   (use-package magit
     :ensure t
+    :diminish auto-revert-mode
     :defer 4
     :config
     (define-key xah-fly-leader-key-map (kbd "b") 'magit-status))
