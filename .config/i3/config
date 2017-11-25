@@ -29,9 +29,9 @@ set $base0E #c0b7f9
 set $base0F #fcc09e
 
 set $workspace1 "1: "
-set $workspace2 "2: "
+set $workspace2 "2: "
 set $workspace3 "3: "
-set $workspace4 "4: "
+set $workspace4 "4: "
 set $workspace5 "5: "
 set $workspace6 "6: "
 set $workspace7 "7: "
@@ -151,6 +151,18 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
+# assign workspaces to monitors
+workspace $workspace1 output LVDS-1
+workspace $workspace2 output LVDS-1
+workspace $workspace3 output LVDS-1
+workspace $workspace4 output LVDS-1
+workspace $workspace5 output LVDS-1
+workspace $workspace6 output LVDS-1
+workspace $workspace7 output LVDS-1
+workspace $workspace8 output VGA-1
+workspace $workspace9 output VGA-1
+workspace $workspace10 output VGA-1
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -232,7 +244,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease
 bindsym XF86TouchpadToggle exec ~/.toggletouchpad.sh # toggle touchpad
 
 # exit menu
-set $Locker i3lock -i /home/ebs/Pictures/wallpaper.jpg
+set $Locker i3lock -i /home/ebs/Pictures/wallpaper.png
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -250,8 +262,22 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system" 
 
+## Manual management of external displays
+# Set the shortcuts and what they do
+set $mode_display External Screen (v) VGA RIGHT, (x) VGA OFF
+mode "$mode_display" {
+    bindsym v exec --no-startup-id xrandr --output VGA-1 --auto --right-of LVDS-1, mode "default"
+    bindsym x exec --no-startup-id xrandr --output VGA-1 --auto --off, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# Declare here the shortcut to bring the display selection menu
+bindsym $mod+Shift+d mode "$mode_display"
+
 # set wallpaper
-exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper.png
 
 # Autostart applications
 exec --no-startup-id compton
