@@ -22,13 +22,16 @@
   ;; remove the startup screen
   (setq inhibit-startup-screen t)
 
+  ;; set theme to leuven
+  (load-theme 'leuven)
+
   ;; get rid of the annoying bell
   (setq ring-bell-function 'ignore)
 
   ;; indent with spaces
   (setq-default indent-tabs-mode nil)
-  ;; set tab width to 4
-  (setq-default tab-width 4)
+  ;; set tab width to 2
+  (setq-default tab-width 2)
   (setq indent-line-function 'insert-tab)
 
   (setq load-prefer-newer t)
@@ -86,11 +89,6 @@
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
 
-  (use-package kaolin-themes
-    :ensure t
-    :config
-    (load-theme 'kaolin-eclipse t))
-  
   (use-package telephone-line
     :ensure t
     :config
