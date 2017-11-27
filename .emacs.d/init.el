@@ -413,7 +413,6 @@
     :load-path "~/.emacs.d/elpa/clean-mode"
     :mode ("\\.cl\\'" . clean-mode))
 
-  ;; ;; allow babel to run elisp, python and sh codes
   (use-package org
     :ensure t
     :mode ("\\.org\\'" . org-mode)
@@ -438,7 +437,7 @@
      'org-babel-load-languages
      '((python . t)
        (dot . t)
-       (sh . t)))
+       (shell . t)))
 
     ;; custom ellipsis for org-mode (...)
     (set-display-table-slot standard-display-table
