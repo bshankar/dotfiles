@@ -242,7 +242,7 @@
     :diminish company-mode
     :config
     (progn
-      (setq company-global-modes '(not gud-mode))
+      (setq company-global-modes '(not gud-mode org-mode))
       (add-hook 'org-mode-hook #'global-company-mode)
       (add-hook 'emacs-lisp-mode-hook #'company-mode)
       (bind-key "<tab>" 'company-complete-selection company-active-map)
