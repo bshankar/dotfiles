@@ -16,8 +16,8 @@
 
   ;; Bootstrap `use-package'
   (unless (package-installed-p 'use-package)
-	(package-refresh-contents)
-	(package-install 'use-package))
+    (package-refresh-contents)
+    (package-install 'use-package))
 
   ;; remove the startup screen
   (setq inhibit-startup-screen t)
@@ -48,7 +48,9 @@
 
   ;; Close parenthesis automatically
   (electric-pair-mode 1)
-
+  ;; always indent code
+  (electric-indent-mode 1)
+  
   ;; replace highlighted text with typed stuff
   (delete-selection-mode 1)
   
@@ -56,7 +58,7 @@
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
 
-;; apropos sort by score
+  ;; apropos sort by score
   (setq apropos-sort-by-scores t)
 
   ;; scroll one line at a time (less "jumpy" than defaults)
@@ -81,7 +83,24 @@
     :diminish xah-fly-keys
     :config
     (xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
+    (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
     (xah-fly-keys 1))
+
+  (use-package multiple-cursors
+    :ensure t
+    :defer t)
+
+  (use-package expand-region
+    :ensure t)
+
+  (use-package projectile
+    :ensure t
+    :config
+    (projectile-mode)
+    (use-package counsel-projectile
+      :ensure t
+      :config
+      (counsel-projectile-on)))
 
   (use-package which-key
     :diminish which-key-mode
@@ -92,7 +111,7 @@
   (use-package telephone-line
     :ensure t
     :config
-  
+    
     (setq telephone-line-primary-right-separator 'telephone-line-halfcos-right
           telephone-line-secondary-right-separator 'telephone-line-halfcos-hollow-right
           telephone-line-primary-left-separator 'telephone-line-halfcos-left
@@ -122,7 +141,7 @@
     :config
     (ivy-mode 1)
     
-    ; Slim down ivy display
+                                        ; Slim down ivy display
     (setq ivy-count-format ""
           ivy-display-style nil
           ivy-minibuffer-faces nil)
@@ -132,12 +151,12 @@
       :ensure t)
     (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 
-    ; Use Enter on a directory to navigate into the directory, not open it with dired.
+    ;; Use Enter on a directory to navigate into the directory, not open it with dired.
     (define-key ivy-minibuffer-map (kbd "C-m") 'ivy-alt-done)
 
     (setq ivy-use-virtual-buffers t)
     
-    ; Let projectile use ivy
+    ;; Let projectile use ivy
     (setq projectile-completion-system 'ivy)
 
     ;; bind counsel-ripgrep
@@ -274,7 +293,7 @@
     (setq smtpmail-smtp-server "smtp.gmail.com"
           smtpmail-smtp-service 587
           gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
-    
+  
   (use-package cc-mode
     :mode (("\\.h\\(h?\\|xx\\|pp\\)\\'" . c++-mode)
            ("\\.m\\'"                   . c-mode)
@@ -408,6 +427,12 @@
 
     (add-hook 'web-mode-hook  'my-web-mode-hook))
 
+  (use-package emmet-mode
+    :ensure t
+    :config
+    (add-hook 'sgml-mode-hook 'emmet-mode)
+    (add-hook 'web-mode-hook 'emmet-mode))
+
   ;; clean language
   (use-package clean-mode
     :load-path "~/.emacs.d/elpa/clean-mode"
@@ -491,20 +516,20 @@
 
     ;; capture templates
     (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                               (file+headline "~/Documents/org/gtd/inbox.org" "Tasks")
-                               "* TODO %i%?")
-                              ("T" "Tickler" entry
-                               (file+headline "~/Documents/org/gtd/tickler.org" "Tickler")
-                               "* %i%? \n %U")))
+                                   (file+headline "~/Documents/org/gtd/inbox.org" "Tasks")
+                                   "* TODO %i%?")
+                                  ("T" "Tickler" entry
+                                   (file+headline "~/Documents/org/gtd/tickler.org" "Tickler")
+                                   "* %i%? \n %U")))
     ;; refile targets
     (setq org-refile-targets '(("~/Documents/org/gtd/gtd.org" :maxlevel . 3)
-                           ("~/Documents/org/gtd/someday.org" :level . 1)
-                           ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)))
+                               ("~/Documents/org/gtd/someday.org" :level . 1)
+                               ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)))
 
     ;; agenda files
     (setq org-agenda-files '("~/Documents/org/gtd/inbox.org"
-                         "~/Documents/org/gtd/gtd.org"
-                         "~/Documents/org/gtd/tickler.org"))
+                             "~/Documents/org/gtd/gtd.org"
+                             "~/Documents/org/gtd/tickler.org"))
 
     (define-key xah-fly-t-keymap (kbd "a") 'org-agenda-list)
     (define-key xah-fly-t-keymap (kbd "b") 'org-capture)
