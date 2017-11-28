@@ -141,7 +141,7 @@
     :config
     (ivy-mode 1)
     
-                                        ; Slim down ivy display
+    ;; Slim down ivy display
     (setq ivy-count-format ""
           ivy-display-style nil
           ivy-minibuffer-faces nil)
@@ -442,6 +442,7 @@
     :ensure t
     :mode ("\\.org\\'" . org-mode)
     :init
+    (setq org-pretty-entities t)
     (setq org-export-with-timestamps nil)
     :config
     ;; latex options
@@ -449,6 +450,11 @@
     (plist-put org-format-latex-options :scale 2.0)
     (setq org-latex-create-formula-image-program 'dvipng)
 
+    ;; preview images at this width
+    (setq org-image-actual-width 500)
+    ;; display all inline images
+    (org-display-inline-images t t)
+    
     ;; open html exported file in firefox
     '(org-file-apps
       (quote
