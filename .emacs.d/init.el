@@ -88,19 +88,10 @@
 
   (use-package multiple-cursors
     :ensure t
-    :defer t)
-
-  (use-package expand-region
-    :ensure t)
-
-  (use-package projectile
-    :ensure t
     :config
-    (projectile-mode)
-    (use-package counsel-projectile
-      :ensure t
-      :config
-      (counsel-projectile-on)))
+    (define-key xah-fly-comma-keymap (kbd ";") 'mc/mark-next-like-this)
+    (define-key xah-fly-comma-keymap (kbd "h") 'mc/mark-previous-like-this)
+    (define-key xah-fly-comma-keymap (kbd "i") 'mc/mark-all-dwim))
 
   (use-package which-key
     :diminish which-key-mode
