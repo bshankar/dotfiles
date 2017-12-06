@@ -1,7 +1,7 @@
 
 # set editor to nvim
 set -x EDITOR nvim
-set -x BROWSER firefox
+set -x BROWSER firefox-developer
 set -x WEECHAT_HOME $HOME/.config/weechat
 set -x NVIM_TUI_ENABLE_TRUE_COLOR 1
 set -x ANDROID_HOME $HOME/.android/Sdk
