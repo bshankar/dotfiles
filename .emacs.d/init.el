@@ -5,6 +5,7 @@
   (require 'package)
   (add-to-list 'package-archives
                '("melpa" . "https://melpa.org/packages/"))
+
   (when (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
@@ -18,6 +19,13 @@
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
+
+  (setq use-package-always-ensure t)
+
+  (use-package auto-compile
+    :config
+    (auto-compile-on-load-mode)
+    (auto-compile-on-save-mode))
 
   ;; remove the startup screen
   (setq inhibit-startup-screen t)
@@ -69,40 +77,31 @@
 
   ;; do not create backup files
   (setq make-backup-files nil)
-  
-  (use-package auto-compile
-    :config
-    (auto-compile-on-load-mode)
-    (auto-compile-on-save-mode))
 
-  (use-package try
-    :ensure t)
+  (use-package delight)
+  (use-package try)
   
   (use-package xah-fly-keys
-    :ensure t
-    :diminish xah-fly-keys
+    :delight xah-fly-keys
     :config
     (xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
     (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
     (xah-fly-keys 1))
 
   (use-package multiple-cursors
-    :ensure t
     :config
     (define-key xah-fly-comma-keymap (kbd ";") 'mc/mark-next-like-this)
     (define-key xah-fly-comma-keymap (kbd "h") 'mc/mark-previous-like-this)
     (define-key xah-fly-comma-keymap (kbd "i") 'mc/mark-all-dwim))
 
   (use-package which-key
-    :diminish which-key-mode
+    :delight
     :config
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
 
   (use-package telephone-line
-    :ensure t
     :config
-    
     (setq telephone-line-primary-right-separator 'telephone-line-halfcos-right
           telephone-line-secondary-right-separator 'telephone-line-halfcos-hollow-right
           telephone-line-primary-left-separator 'telephone-line-halfcos-left
@@ -127,8 +126,7 @@
   (load-file "~/.emacs.d/fira.el")
 
   (use-package counsel
-    :ensure t
-    :diminish ivy-mode
+    :delight ivy-mode
     :config
     (ivy-mode 1)
     
@@ -139,7 +137,7 @@
 
     ;; Let ivy use flx for fuzzy-matching
     (use-package flx
-      :ensure t)
+      )
     (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 
     ;; Use Enter on a directory to navigate into the directory, not open it with dired.
@@ -154,24 +152,20 @@
     (define-key xah-fly-dot-keymap (kbd "a") 'counsel-rg))
   
   (use-package smex
-    :ensure t
     :config
     (smex-initialize))
 
   (use-package avy
-    :ensure t
-    :diminish avy-mode
     :config
     (define-key xah-fly-leader-key-map (kbd "z") 'avy-goto-char-timer))
 
   (use-package dumb-jump
-    :ensure t
     :config
     (define-key xah-fly-dot-keymap (kbd "b") 'dumb-jump-go)
     (define-key xah-fly-dot-keymap (kbd "c") 'dumb-jump-back))
   
   (use-package abbrev
-    :diminish abbrev-mode
+    :delight
     :config
     (if (file-exists-p abbrev-file-name)
         (quietly-read-abbrev-file))
@@ -182,17 +176,14 @@
 
   ;; snippet manager
   (use-package yasnippet
-    :ensure t
-    :diminish yas-minor-mode
+    :delight yas-minor-mode
     :defer 2
-    :diminish yas-mode
     :config
     (yas-global-mode 1))
 
   ;; enable flycheck globally
   (use-package flycheck
-    :ensure t
-    :diminish flycheck-mode
+    :delight
     :config
     ;; disable jshint since we prefer eslint checking
     (setq flycheck-eslintrc "~/.eslintrc.json")
@@ -220,17 +211,16 @@
     (global-flycheck-mode))
   
   (use-package ledger-mode
-    :ensure t
+    
     :mode ("\\.ledger\\'" . ledger-mode)
     :config
     ;; flycheck-ledger
     (use-package flycheck-ledger
-      :ensure t))
+      ))
 
   ;; company mode
   (use-package company
-    :ensure t
-    :diminish company-mode
+    :delight
     :config
     (progn
       (setq company-global-modes '(not gud-mode org-mode))
@@ -266,7 +256,6 @@
     (global-company-mode 1))
 
   (use-package gnus
-    :ensure t
     :defer t
     :config
     (setq user-full-name "Bhavani Shankar")
@@ -291,7 +280,7 @@
            ("\\.mm\\'"                  . c++-mode))
     :config
     (use-package irony
-      :ensure t
+      
       :init
       (setq irony-additional-clang-options '("-std=c++17"))
       :config
@@ -316,13 +305,11 @@
       (add-hook 'after-init-hook 'global-company-mode))
 
     (use-package company-irony
-      :ensure t
       :config
       (eval-after-load 'company
         '(add-to-list 'company-backends 'company-irony)))
 
     (use-package company-irony-c-headers
-      :ensure t
       :config
       (eval-after-load 'company
         '(add-to-list
@@ -332,15 +319,13 @@
       '(add-to-list 'company-backends 'company-irony))
 
     (use-package flycheck-irony
-      :ensure t
       :config
       (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
     (use-package irony-eldoc
-      :ensure t)
+      )
 
     (use-package clang-format
-      :ensure t
       :config
       (defun clang-format-buffer-on-save ()
         "Add auto-save hook for clang-format-buffer-smart."
@@ -349,10 +334,8 @@
 
   ;; language server protocol
   (use-package lsp-mode
-    :ensure t
     :config
     (use-package company-lsp
-      :ensure t
       :config
       (push 'company-lsp company-backends)))
   
@@ -362,7 +345,6 @@
     :interpreter ("python" . python-mode)
     :config
     (use-package elpy
-      :ensure t
       :config
       (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
@@ -372,7 +354,6 @@
       (elpy-enable)))
 
   (use-package markdown-mode
-    :ensure t
     :commands (markdown-mode gfm-mode)
     :mode (("README\\.md\\'" . gfm-mode)
            ("\\.md\\'" . markdown-mode)
@@ -380,7 +361,6 @@
     :init (setq markdown-command "multimarkdown"))
 
   (use-package rjsx-mode
-    :ensure t
     :mode (("\\.js\\'" . rjsx-mode)
            ("\\.jsx\\'" . rjsx-mode))
     :config
@@ -389,12 +369,10 @@
     (setq js2-basic-offset 2)
 
     (use-package lsp-javascript-typescript
-      :ensure t
       :config
       (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)))
 
   (use-package web-mode
-    :ensure t
     :mode (("\\.phtml\\'" . web-mode)
            ("\\.tpl\\.php\\'" . web-mode)
            ("\\.[agj]sp\\'" . web-mode)
@@ -419,7 +397,6 @@
     (add-hook 'web-mode-hook  'my-web-mode-hook))
 
   (use-package emmet-mode
-    :ensure t
     :config
     (add-hook 'sgml-mode-hook 'emmet-mode)
     (add-hook 'web-mode-hook 'emmet-mode))
@@ -430,7 +407,6 @@
     :mode ("\\.cl\\'" . clean-mode))
 
   (use-package org
-    :ensure t
     :mode ("\\.org\\'" . org-mode)
     :init
     (setq org-pretty-entities t)
@@ -451,8 +427,13 @@
       (quote
        ((auto-mode . emacs)
         ("\\.mm\\'" . default)
-        ("\\.html\\'" . "/usr/bin/firefox %s")
+        ("\\.html\\'" . "/usr/bin/firefox-developer %s")
         ("\\.pdf\\'" . default))))
+
+    ;; set generic browser
+    (setq browse-url-generic-program
+          (executable-find "firefox-developer")
+          browse-url-browser-function 'browse-url-generic)
 
     ;; let babel execute python and sh in org documents
     (org-babel-do-load-languages
@@ -470,11 +451,6 @@
 
     ;; hide emphasis markers
     (setq org-hide-emphasis-markers t)
-
-    ;; better bullets
-    (font-lock-add-keywords 'org-mode
-                            '(("^ +\\([-*]\\) "
-                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
     ;; larger headings
     (let* ((variable-tuple (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
@@ -533,7 +509,7 @@
     
     ;; htmlize for syntax highlighting in exported html
     (use-package htmlize
-      :ensure t
+      
       :config
       ;; syntax highlight from a css file instead of copying
       (setq org-html-htmlize-output-type 'css)
@@ -541,24 +517,27 @@
 
     ;; pretty bullets for org-mode
     (use-package org-bullets
-      :ensure t
+      
       :config
-      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+      (add-hook 'org-mode-hook 'org-bullets-mode))
 
-    ;; export org-mode to various formats using pandoc
+    ;; ;; convert ascii art symbols to unicode
+    (use-package ascii-art-to-unicode
+      )
+
+    ;; ;; export org-mode to various formats using pandoc
     (with-eval-after-load 'ox
-      (use-package ox-twbs :ensure t)
+      (use-package ox-twbs )
       (use-package ox-reveal
-        :ensure t
+        
         :init
         (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/2.5.0/")
         (setq org-reveal-mathjax t))))
 
   ;; Load magit last
   (use-package magit
-    :ensure t
-    :diminish auto-revert-mode
     :defer 4
+    :delight auto-revert-mode
     :config
     (define-key xah-fly-leader-key-map (kbd "b") 'magit-status))
   
