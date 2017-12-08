@@ -80,6 +80,13 @@
 
   (use-package delight)
   (use-package try)
+
+  (use-package helpful
+    :config
+    (global-set-key (kbd "C-h f") #'helpful-callable)
+    (global-set-key (kbd "C-h v") #'helpful-variable)
+    (global-set-key (kbd "C-h k") #'helpful-key)
+    (global-set-key (kbd "C-c C-.") #'helpful-at-point))
   
   (use-package xah-fly-keys
     :delight xah-fly-keys
