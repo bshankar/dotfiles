@@ -30,9 +30,6 @@
   ;; remove the startup screen
   (setq inhibit-startup-screen t)
 
-  ;; set theme to leuven
-  (load-theme 'leuven)
-
   ;; get rid of the annoying bell
   (setq ring-bell-function 'ignore)
 
@@ -87,6 +84,10 @@
     (global-set-key (kbd "C-h v") #'helpful-variable)
     (global-set-key (kbd "C-h k") #'helpful-key)
     (global-set-key (kbd "C-c C-.") #'helpful-at-point))
+
+  (use-package dracula-theme
+    :config
+    (load-theme 'dracula))
   
   (use-package xah-fly-keys
     :delight xah-fly-keys
