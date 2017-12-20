@@ -440,7 +440,7 @@
 
     ;; set generic browser
     (setq browse-url-generic-program
-          (executable-find "firefox-developer")
+          (executable-find "firefox-developer-edition")
           browse-url-browser-function 'browse-url-generic)
 
     ;; let babel execute python and sh in org documents
