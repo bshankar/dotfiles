@@ -189,6 +189,11 @@
     :config
     (yas-global-mode 1))
 
+  ;; keep code always indented
+  (use-package aggressive-indent
+    :config
+    (global-aggressive-indent-mode 1))
+
   ;; enable flycheck globally
   (use-package flycheck
     :delight
@@ -341,11 +346,11 @@
       (add-hook 'clang-format-buffer-on-save '(c-mode-hook c++-mode-hook))))
 
   ;; language server protocol
-  (use-package lsp-mode
-    :config
-    (use-package company-lsp
-      :config
-      (push 'company-lsp company-backends)))
+  ;; (use-package lsp-mode
+    ;; :config
+    ;; (use-package company-lsp
+      ;; :config
+      ;; (push 'company-lsp company-backends)))
   
   ;; Enable elpy for python
   (use-package python
@@ -375,10 +380,21 @@
     (setq js2-mode-show-parse-errors nil
           js2-mode-show-strict-warnings nil)
     (setq js2-basic-offset 2)
+    (setq js2-bounce-indent-p t)
 
-    (use-package lsp-javascript-typescript
+    (use-package tern
+      :ensure t
+      :delight tern-mode
+      :init
+      (add-hook 'web-mode-hook (lambda () (tern-mode t)))
+      (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
       :config
-      (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)))
+      (setq tern-command (append tern-command '("--no-port-file")))
+
+      (use-package company-tern
+        :ensure t
+        :config
+        (add-to-list 'company-backends 'company-tern))))
 
   (use-package web-mode
     :mode (("\\.phtml\\'" . web-mode)
@@ -425,11 +441,11 @@
     (plist-put org-format-latex-options :scale 2.0)
     (setq org-latex-create-formula-image-program 'dvipng)
 
-    ;; preview images at this width
-    (setq org-image-actual-width 500)
     ;; display all inline images
-    (org-display-inline-images t t)
-    
+    (setq org-startup-with-inline-images t)
+    ;; update inline images on execute code block
+    (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
     ;; open html exported file in firefox
     '(org-file-apps
       (quote
@@ -529,11 +545,13 @@
       :config
       (add-hook 'org-mode-hook 'org-bullets-mode))
 
-    ;; ;; convert ascii art symbols to unicode
+    ;; convert ascii art symbols to unicode
     (use-package ascii-art-to-unicode
       )
 
-    ;; ;; export org-mode to various formats using pandoc
+    
+
+    ;; export org-mode to various formats using pandoc
     (with-eval-after-load 'ox
       (use-package ox-twbs )
       (use-package ox-reveal
