@@ -133,6 +133,9 @@
   ;; load fira code symbols
   (load-file "~/.emacs.d/fira.el")
 
+  ;; trim trailing whitespaces before saving
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
   (use-package counsel
     :delight ivy-mode
     :config
@@ -191,8 +194,9 @@
 
   ;; keep code always indented
   (use-package aggressive-indent
+    :delight aggressive-indent-mode
     :config
-    (global-aggressive-indent-mode 1))
+    (add-hook 'prog-mode-hook #'aggressive-indent-mode))
 
   ;; enable flycheck globally
   (use-package flycheck
@@ -345,13 +349,6 @@
         (add-hook 'before-save-hook 'clang-format-buffer nil t))
       (add-hook 'clang-format-buffer-on-save '(c-mode-hook c++-mode-hook))))
 
-  ;; language server protocol
-  ;; (use-package lsp-mode
-    ;; :config
-    ;; (use-package company-lsp
-      ;; :config
-      ;; (push 'company-lsp company-backends)))
-  
   ;; Enable elpy for python
   (use-package python
     :mode ("\\.py\\'" . python-mode)
