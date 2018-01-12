@@ -1,7 +1,7 @@
 ;; init.el --- user init file      -*- no-byte-compile: t -*-
 (let ((file-name-handler-alist nil))
   (setq-default gc-cons-threshold 100000000)
-  
+
   (require 'package)
   (add-to-list 'package-archives
                '("melpa" . "https://melpa.org/packages/"))
@@ -40,7 +40,7 @@
   (setq indent-line-function 'insert-tab)
 
   (setq load-prefer-newer t)
-  
+
   ;; do not highlight current line
   (global-hl-line-mode -1)
 
@@ -55,10 +55,10 @@
   (electric-pair-mode 1)
   ;; always indent code
   (electric-indent-mode 1)
-  
+
   ;; replace highlighted text with typed stuff
   (delete-selection-mode 1)
-  
+
   ;; specify custom file
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
@@ -88,7 +88,7 @@
   (use-package dracula-theme
     :config
     (load-theme 'dracula))
-  
+
   (use-package xah-fly-keys
     :delight xah-fly-keys
     :config
@@ -136,11 +136,17 @@
   ;; trim trailing whitespaces before saving
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+  ;; set scratch buffer's message to a random fortune
+  (use-package fortune-cookie
+    :config
+    (setq fortune-cookie-cowsay-args  "-f tux -s")
+    (fortune-cookie-mode))
+
   (use-package counsel
     :delight ivy-mode
     :config
     (ivy-mode 1)
-    
+
     ;; Slim down ivy display
     (setq ivy-count-format ""
           ivy-display-style nil
@@ -155,13 +161,13 @@
     (define-key ivy-minibuffer-map (kbd "C-m") 'ivy-alt-done)
 
     (setq ivy-use-virtual-buffers t)
-    
+
     ;; Let projectile use ivy
     (setq projectile-completion-system 'ivy)
 
     ;; bind counsel-ripgrep
     (define-key xah-fly-dot-keymap (kbd "a") 'counsel-rg))
-  
+
   (use-package smex
     :config
     (smex-initialize))
@@ -174,7 +180,7 @@
     :config
     (define-key xah-fly-dot-keymap (kbd "b") 'dumb-jump-go)
     (define-key xah-fly-dot-keymap (kbd "c") 'dumb-jump-back))
-  
+
   (use-package abbrev
     :delight
     :config
@@ -207,7 +213,7 @@
     (setq-default flycheck-disabled-checkers
                   (append flycheck-disabled-checkers
                           '(javascript-jshint)))
-    
+
     ;; use eslint with rjsx-mode for jsx files
     (add-hook 'js2-mode-hook 'flycheck-mode)
 
@@ -226,9 +232,9 @@
     (add-hook 'text-mode-hook #'flycheck-mode)
     (add-hook 'org-mode-hook #'flycheck-mode)
     (global-flycheck-mode))
-  
+
   (use-package ledger-mode
-    
+
     :mode ("\\.ledger\\'" . ledger-mode)
     :config
     ;; flycheck-ledger
@@ -277,7 +283,7 @@
     :config
     (setq user-full-name "Bhavani Shankar")
     (setq user-email-address "ebhavanishankar@gmail.com")
-    
+
     (setq gnus-select-method '(nnnil))
     (setq gnus-secondary-select-methods '((nntp "news.gwene.org")))
 
@@ -290,14 +296,14 @@
     (setq smtpmail-smtp-server "smtp.gmail.com"
           smtpmail-smtp-service 587
           gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
-  
+
   (use-package cc-mode
     :mode (("\\.h\\(h?\\|xx\\|pp\\)\\'" . c++-mode)
            ("\\.m\\'"                   . c-mode)
            ("\\.mm\\'"                  . c++-mode))
     :config
     (use-package irony
-      
+
       :init
       (setq irony-additional-clang-options '("-std=c++17"))
       :config
@@ -375,9 +381,10 @@
            ("\\.jsx\\'" . rjsx-mode))
     :config
     (setq js2-mode-show-parse-errors nil
-          js2-mode-show-strict-warnings nil)
-    (setq js2-basic-offset 2)
-    (setq js2-bounce-indent-p t)
+          js2-mode-show-strict-warnings nil
+          js2-mode-indent-inhibit-undo t
+          js2-basic-offset 2
+          js2-bounce-indent-p t)
 
     (use-package tern
       :ensure t
@@ -492,7 +499,7 @@
                               `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
                               `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
                               `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
-    
+
     ;; preserve indentation
     (setq org-src-preserve-indentation t)
     ;; evaluate code without confirm
@@ -527,10 +534,10 @@
 
     (define-key xah-fly-t-keymap (kbd "a") 'org-agenda-list)
     (define-key xah-fly-t-keymap (kbd "b") 'org-capture)
-    
+
     ;; htmlize for syntax highlighting in exported html
     (use-package htmlize
-      
+
       :config
       ;; syntax highlight from a css file instead of copying
       (setq org-html-htmlize-output-type 'css)
@@ -538,7 +545,7 @@
 
     ;; pretty bullets for org-mode
     (use-package org-bullets
-      
+
       :config
       (add-hook 'org-mode-hook 'org-bullets-mode))
 
@@ -546,13 +553,13 @@
     (use-package ascii-art-to-unicode
       )
 
-    
+
 
     ;; export org-mode to various formats using pandoc
     (with-eval-after-load 'ox
       (use-package ox-twbs )
       (use-package ox-reveal
-        
+
         :init
         (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/2.5.0/")
         (setq org-reveal-mathjax t))))
@@ -563,7 +570,6 @@
     :delight auto-revert-mode
     :config
     (define-key xah-fly-leader-key-map (kbd "b") 'magit-status))
-  
+
   (provide 'init))
 ;;; init.el ends here
-
