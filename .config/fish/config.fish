@@ -1,4 +1,3 @@
-
 # set editor to nvim
 set -x EDITOR nvim
 set -x BROWSER firefox-developer
@@ -32,3 +31,4 @@ alias yin='yaourt -S'
 alias yrem='sudo pacman -Rs'
 alias demo='/home/ebs/.screenlayout/demo.sh'
 alias clean='/home/ebs/node_modules/cleanlang/bin/command.js'
+cowfortune
