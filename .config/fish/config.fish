@@ -1,3 +1,7 @@
+function fish_title
+  true
+end
+
 # set editor to nvim
 set -x EDITOR nvim
 set -x BROWSER firefox-developer
