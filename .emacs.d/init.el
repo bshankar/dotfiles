@@ -85,9 +85,9 @@
     (global-set-key (kbd "C-h k") #'helpful-key)
     (global-set-key (kbd "C-c C-.") #'helpful-at-point))
 
-  (use-package dracula-theme
+  (use-package eclipse-theme
     :config
-    (load-theme 'dracula))
+    (load-theme 'eclipse))
 
   (use-package xah-fly-keys
     :delight xah-fly-keys
@@ -141,6 +141,9 @@
     :config
     (setq fortune-cookie-cowsay-args  "-f tux -s")
     (fortune-cookie-mode))
+
+  (use-package pdf-tools
+    :mode ("\\.pdf\\'" . pdf-view-mode))
 
   (use-package counsel
     :delight ivy-mode
