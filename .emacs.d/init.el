@@ -85,9 +85,9 @@
     (global-set-key (kbd "C-h k") #'helpful-key)
     (global-set-key (kbd "C-c C-.") #'helpful-at-point))
 
-  (use-package eclipse-theme
+  (use-package dracula-theme
     :config
-    (load-theme 'eclipse))
+    (load-theme 'dracula))
 
   (use-package xah-fly-keys
     :delight xah-fly-keys
@@ -389,19 +389,9 @@
           js2-basic-offset 2
           js2-bounce-indent-p t)
 
-    (use-package tern
-      :ensure t
-      :delight tern-mode
-      :init
-      (add-hook 'web-mode-hook (lambda () (tern-mode t)))
-      (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+    (use-package lsp-javascript-typescript
       :config
-      (setq tern-command (append tern-command '("--no-port-file")))
-
-      (use-package company-tern
-        :ensure t
-        :config
-        (add-to-list 'company-backends 'company-tern))))
+      (add-hook 'rjsx-mode #'lsp-typescript-enable)))
 
   (use-package web-mode
     :mode (("\\.phtml\\'" . web-mode)
@@ -440,7 +430,7 @@
   (use-package org
     :mode ("\\.org\\'" . org-mode)
     :init
-    (setq org-pretty-entities t)
+    ;; (setq org-pretty-entities t)
     (setq org-export-with-timestamps nil)
     :config
     ;; latex options
