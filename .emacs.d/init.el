@@ -1,26 +1,27 @@
-;; init.el --- user init file      -*- no-byte-compile: t -*-
+;; init.el --- user init file
+;;; commentary:
+;;; code:
+
 (let ((file-name-handler-alist nil))
   (setq-default gc-cons-threshold 100000000)
 
   (require 'package)
-  (add-to-list 'package-archives
-               '("melpa" . "https://melpa.org/packages/"))
-
-  (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-;;; commentary:
-;;; code:
+  (setq package-archives
+        '(("melpa" . "https://melpa.org/packages/")
+          ("gnu" . "https://elpa.gnu.org/packages/")
+          ("org" . "http://orgmode.org/elpa/")))
+  (package-initialize)
 
   (setq package-enable-at-startup nil)
   (package-initialize)
+
+  ;; Always ensure packages exist
+  (setq use-package-always-ensure t)
 
   ;; Bootstrap `use-package'
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
-
-  (setq use-package-always-ensure t)
 
   (use-package auto-compile
     :config
@@ -53,15 +54,14 @@
 
   ;; Close parenthesis automatically
   (electric-pair-mode 1)
-  ;; always indent code
-  (electric-indent-mode 1)
 
   ;; replace highlighted text with typed stuff
   (delete-selection-mode 1)
 
-  ;; specify custom file
+  ;; Load additional files
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
+  (load "~/.emacs.d/fira.el")
 
   ;; apropos sort by score
   (setq apropos-sort-by-scores t)
@@ -72,22 +72,27 @@
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
   (setq scroll-step 1) ;; keyboard scroll one line at a time
 
-  ;; do not create backup files
+  ;; do not create backup or lock files
   (setq make-backup-files nil)
+  (setq create-lockfiles nil)
+
+  ;; Faster scrolling
+  (setq auto-window-vscroll nil)
+
+  ;; Set theme to wombat
+  (load-theme 'wombat)
 
   (use-package delight)
-  (use-package try)
+  (use-package try
+    :defer 4)
 
   (use-package helpful
+    :defer 5
     :config
     (global-set-key (kbd "C-h f") #'helpful-callable)
     (global-set-key (kbd "C-h v") #'helpful-variable)
     (global-set-key (kbd "C-h k") #'helpful-key)
     (global-set-key (kbd "C-c C-.") #'helpful-at-point))
-
-  (use-package dracula-theme
-    :config
-    (load-theme 'dracula))
 
   (use-package xah-fly-keys
     :delight xah-fly-keys
@@ -97,6 +102,7 @@
     (xah-fly-keys 1))
 
   (use-package multiple-cursors
+    :defer 2
     :config
     (define-key xah-fly-comma-keymap (kbd ";") 'mc/mark-next-like-this)
     (define-key xah-fly-comma-keymap (kbd "h") 'mc/mark-previous-like-this)
@@ -107,31 +113,6 @@
     :config
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
-
-  (use-package telephone-line
-    :config
-    (setq telephone-line-primary-right-separator 'telephone-line-halfcos-right
-          telephone-line-secondary-right-separator 'telephone-line-halfcos-hollow-right
-          telephone-line-primary-left-separator 'telephone-line-halfcos-left
-          telephone-line-secondary-left-separator 'telephone-line-halfcos-hollow-left
-          telephone-line-height 24)
-
-    (setq telephone-line-lhs
-          '((evil   . (telephone-line-xah-fly-keys-segment))
-            (accent . (telephone-line-vc-segment
-                       telephone-line-erc-modified-channels-segment
-                       telephone-line-process-segment))
-            (nil    . (telephone-line-minor-mode-segment
-                       telephone-line-buffer-segment))))
-
-    (setq telephone-line-rhs
-          '((nil    . (telephone-line-misc-info-segment))
-            (accent . (telephone-line-major-mode-segment))
-            (evil    . (telephone-line-airline-position-segment))))
-    (telephone-line-mode 1))
-
-  ;; load fira code symbols
-  (load-file "~/.emacs.d/fira.el")
 
   ;; trim trailing whitespaces before saving
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -156,8 +137,7 @@
           ivy-minibuffer-faces nil)
 
     ;; Let ivy use flx for fuzzy-matching
-    (use-package flx
-      )
+    (use-package flx)
     (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 
     ;; Use Enter on a directory to navigate into the directory, not open it with dired.
@@ -176,10 +156,12 @@
     (smex-initialize))
 
   (use-package avy
+    :defer 2
     :config
     (define-key xah-fly-leader-key-map (kbd "z") 'avy-goto-char-timer))
 
   (use-package dumb-jump
+    :defer 3
     :config
     (define-key xah-fly-dot-keymap (kbd "b") 'dumb-jump-go)
     (define-key xah-fly-dot-keymap (kbd "c") 'dumb-jump-back))
@@ -199,7 +181,8 @@
     :delight yas-minor-mode
     :defer 2
     :config
-    (yas-global-mode 1))
+    (yas-global-mode 1)
+    (use-package yasnippet-snippets))
 
   ;; keep code always indented
   (use-package aggressive-indent
@@ -209,6 +192,7 @@
 
   ;; enable flycheck globally
   (use-package flycheck
+    :defer 2.5
     :delight
     :config
     ;; disable jshint since we prefer eslint checking
@@ -237,21 +221,18 @@
     (global-flycheck-mode))
 
   (use-package ledger-mode
-
     :mode ("\\.ledger\\'" . ledger-mode)
     :config
     ;; flycheck-ledger
-    (use-package flycheck-ledger
-      ))
+    (use-package flycheck-ledger))
 
   ;; company mode
   (use-package company
     :delight
+    :defer 2.5
     :config
     (progn
       (setq company-global-modes '(not gud-mode org-mode))
-      (add-hook 'org-mode-hook #'global-company-mode)
-      (add-hook 'emacs-lisp-mode-hook #'company-mode)
       (bind-key "<tab>" 'company-complete-selection company-active-map)
       (setq-default pos-tip-background-color "khaki1")
       (bind-keys :map company-active-map
@@ -261,102 +242,44 @@
                  ("<tab>" . company-complete))
       (setq company-idle-delay 0
             company-require-match nil
-            ;;company-begin-commands '(self-insert-command)
             company-show-numbers t
             company-tooltip-align-annotations t
             company-tooltip-flip-when-above t
             company-tooltip-margin 1
             company-echo-delay 0
             company-dabbrev-downcase nil
-            company-minimum-prefix-length 1
+            company-minimum-prefix-length 2
             company-selection-wrap-around t
             company-transformers '(company-sort-by-occurrence
                                    company-sort-by-backend-importance)
             company-backends '(company-capf
                                (company-dabbrev company-dabbrev-code company-keywords)
-                               company-yasnippet company-files))
+                               company-yasnippet company-files company-math-symbols-unicode))
       (push (apply-partially #'cl-remove-if
                              (lambda (c) (string-match-p "\\`[0-9]+\\'" c)))
-            company-transformers)
-      (add-to-list 'company-backends 'company-math-symbols-unicode))
+            company-transformers))
     (global-company-mode 1))
 
-  (use-package gnus
-    :defer t
+  (use-package haskell-mode
+    :mode ("\\.hs\\'" . haskell-mode))
+
+  (use-package rust-mode
+    :mode ("\\.rs\\'" . rust-mode)
     :config
-    (setq user-full-name "Bhavani Shankar")
-    (setq user-email-address "ebhavanishankar@gmail.com")
-
-    (setq gnus-select-method '(nnnil))
-    (setq gnus-secondary-select-methods '((nntp "news.gwene.org")))
-
-    (setq gnus-select-method
-          '(nnimap "gmail"
-                   (nnimap-address "imap.gmail.com")  ; it could also be imap.googlemail.com if that's your server.
-                   (nnimap-server-port "imaps")
-                   (nnimap-stream ssl)))
-
-    (setq smtpmail-smtp-server "smtp.gmail.com"
-          smtpmail-smtp-service 587
-          gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
-
-  (use-package cc-mode
-    :mode (("\\.h\\(h?\\|xx\\|pp\\)\\'" . c++-mode)
-           ("\\.m\\'"                   . c-mode)
-           ("\\.mm\\'"                  . c++-mode))
-    :config
-    (use-package irony
-
-      :init
-      (setq irony-additional-clang-options '("-std=c++17"))
+    (setq rust-format-on-save t)
+    (use-package flycheck-rust
+      :ensure
       :config
-      ;; Irony mode for c++
-      (add-hook 'c++-mode-hook 'irony-mode)
-      (add-hook 'c-mode-hook 'irony-mode)
-      (add-hook 'objc-mode-hook 'irony-mode)
+      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
-      ;; replace the `completion-at-point' and `complete-symbol' bindings in
-      ;; irony-mode's buffers by irony-mode's function
-      (defun my-irony-mode-hook ()
-        "Recommended settings for irony-mode hook."
-        (define-key irony-mode-map [remap completion-at-point]
-          'irony-completion-at-point-async)
-        (define-key irony-mode-map [remap complete-symbol]
-          'irony-completion-at-point-async))
-      (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-      (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-      (add-hook 'irony-mode-hook 'irony-eldoc)
-
-      ;; use comany backend for auto completion everywhere
-      (add-hook 'after-init-hook 'global-company-mode))
-
-    (use-package company-irony
+    (use-package racer
       :config
-      (eval-after-load 'company
-        '(add-to-list 'company-backends 'company-irony)))
+      (add-hook 'rust-mode-hook #'racer-mode)
+      (add-hook 'racer-mode-hook #'eldoc-mode))
 
-    (use-package company-irony-c-headers
+    (use-package cargo
       :config
-      (eval-after-load 'company
-        '(add-to-list
-          'company-backends '(company-irony-c-headers company-irony))))
-
-    (eval-after-load 'company
-      '(add-to-list 'company-backends 'company-irony))
-
-    (use-package flycheck-irony
-      :config
-      (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-
-    (use-package irony-eldoc
-      )
-
-    (use-package clang-format
-      :config
-      (defun clang-format-buffer-on-save ()
-        "Add auto-save hook for clang-format-buffer-smart."
-        (add-hook 'before-save-hook 'clang-format-buffer nil t))
-      (add-hook 'clang-format-buffer-on-save '(c-mode-hook c++-mode-hook))))
+      (add-hook 'rust-mode-hook 'cargo-minor-mode)))
 
   ;; Enable elpy for python
   (use-package python
@@ -387,11 +310,7 @@
           js2-mode-show-strict-warnings nil
           js2-mode-indent-inhibit-undo t
           js2-basic-offset 2
-          js2-bounce-indent-p t)
-
-    (use-package lsp-javascript-typescript
-      :config
-      (add-hook 'rjsx-mode #'lsp-typescript-enable)))
+          js2-bounce-indent-p t))
 
   (use-package web-mode
     :mode (("\\.phtml\\'" . web-mode)
@@ -415,17 +334,13 @@
       (setq web-mode-code-indent-offset 2)
       (setq css-indent-offset 2))
 
-    (add-hook 'web-mode-hook  'my-web-mode-hook))
+    (add-hook 'web-mode-hook  'my-web-mode-hook)
+    (setq web-mode-enable-auto-expanding t)
 
-  (use-package emmet-mode
-    :config
-    (add-hook 'sgml-mode-hook 'emmet-mode)
-    (add-hook 'web-mode-hook 'emmet-mode))
-
-  ;; clean language
-  (use-package clean-mode
-    :load-path "~/.emacs.d/elpa/clean-mode"
-    :mode ("\\.cl\\'" . clean-mode))
+    (use-package emmet-mode
+      :config
+      (add-hook 'sgml-mode-hook 'emmet-mode)
+      (add-hook 'web-mode-hook 'emmet-mode)))
 
   (use-package org
     :mode ("\\.org\\'" . org-mode)
@@ -530,7 +445,6 @@
 
     ;; htmlize for syntax highlighting in exported html
     (use-package htmlize
-
       :config
       ;; syntax highlight from a css file instead of copying
       (setq org-html-htmlize-output-type 'css)
@@ -538,21 +452,16 @@
 
     ;; pretty bullets for org-mode
     (use-package org-bullets
-
       :config
       (add-hook 'org-mode-hook 'org-bullets-mode))
 
     ;; convert ascii art symbols to unicode
-    (use-package ascii-art-to-unicode
-      )
-
-
+    (use-package ascii-art-to-Unicode)
 
     ;; export org-mode to various formats using pandoc
     (with-eval-after-load 'ox
-      (use-package ox-twbs )
+      (use-package ox-twbs :ensure)
       (use-package ox-reveal
-
         :init
         (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/2.5.0/")
         (setq org-reveal-mathjax t))))
@@ -562,7 +471,8 @@
     :defer 4
     :delight auto-revert-mode
     :config
-    (define-key xah-fly-leader-key-map (kbd "b") 'magit-status))
+    (define-key xah-fly-leader-key-map (kbd "b") 'magit-status)
+    (use-package gist))
 
   (provide 'init))
 ;;; init.el ends here
