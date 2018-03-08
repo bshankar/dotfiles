@@ -35,4 +35,6 @@ alias yin='yaourt -S'
 alias yrem='sudo pacman -Rs'
 alias demo='/home/ebs/.screenlayout/demo.sh'
 alias clean='/home/ebs/node_modules/cleanlang/bin/command.js'
+alias npm='/usr/bin/pnpm'
+alias ghc='ghc -dynamic -O'
 cowfortune
