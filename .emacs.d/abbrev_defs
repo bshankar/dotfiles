@@ -27,7 +27,7 @@
 
   '(
     ;; personal details
-    ("em" "ebs@openmailbox.org" nil 0)
+    ("ema" "ebhavanishankar@gmail.com" nil 0)
     ("nm" "Bhavani Shankar" nil 0)
 
     ;; autocorrection from emacsWiki
@@ -449,6 +449,7 @@
     ("hda" "had" nil 0)
     ("hearign" "hearing" nil 0)
     ("heire" "he-ire" nil 0)
+    ("heirarchy" "hierarchy" nil 0)
     ("helpdesk" "help-desk" nil 0)
     ("helpfull" "helpful" nil 0)
     ("herat" "heart" nil 0)
@@ -609,7 +610,6 @@
     ("omre" "more" nil 0)
     ("oneof" "one of" nil 0)
     ("onepoint" "one point" nil 0)
-    ("online" "on-line" nil 0)
     ("ont he" "on the" nil 0)
     ("onthe" "on the" nil 0)
     ("onyl" "only" nil 0)
