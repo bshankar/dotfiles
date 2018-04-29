@@ -9,7 +9,7 @@
   (setq package-archives
         '(("melpa" . "https://melpa.org/packages/")
           ("gnu" . "https://elpa.gnu.org/packages/")
-          ("org" . "http://orgmode.org/elpa/")))
+          ("org" . "https://orgmode.org/elpa/")))
   (package-initialize)
 
   (setq package-enable-at-startup nil)
@@ -79,8 +79,7 @@
   ;; Faster scrolling
   (setq auto-window-vscroll nil)
 
-  ;; Set theme to wombat
-  (load-theme 'wombat)
+  (load-theme 'adwaita)
 
   (use-package delight)
   (use-package try
@@ -107,6 +106,10 @@
     (define-key xah-fly-comma-keymap (kbd ";") 'mc/mark-next-like-this)
     (define-key xah-fly-comma-keymap (kbd "h") 'mc/mark-previous-like-this)
     (define-key xah-fly-comma-keymap (kbd "i") 'mc/mark-all-dwim))
+
+  (use-package define-word
+    :config
+    (define-key xah-fly-comma-keymap (kbd "w") 'define-word-at-point))
 
   (use-package which-key
     :delight
@@ -263,6 +266,22 @@
   (use-package haskell-mode
     :mode ("\\.hs\\'" . haskell-mode))
 
+  (use-package typescript-mode
+    :mode ("\\.ts\\'" . typescript-mode)
+    :config
+    (use-package tide
+      :config
+      (defun setup-tide-mode ()
+        (interactive)
+        (tide-setup)
+        (setq flycheck-check-syntax-automatically '(save mode-enabled))
+        (setq typescript-indent-level 2)
+        (tide-hl-identifier-mode +1))
+
+      (setup-tide-mode)
+      (add-hook 'before-save-hook 'tide-format-before-save)
+      (add-hook 'typescript-mode-hook #'setup-tide-mode)))
+
   (use-package rust-mode
     :mode ("\\.rs\\'" . rust-mode)
     :config
@@ -275,6 +294,7 @@
     (use-package racer
       :config
       (add-hook 'rust-mode-hook #'racer-mode)
+      (add-hook 'racer-mode-hook #'company-mode)
       (add-hook 'racer-mode-hook #'eldoc-mode))
 
     (use-package cargo
@@ -304,6 +324,7 @@
 
   (use-package rjsx-mode
     :mode (("\\.js\\'" . rjsx-mode)
+           ("\\.mjs\\'" . rjsx-mode)
            ("\\.jsx\\'" . rjsx-mode))
     :config
     (setq js2-mode-show-parse-errors nil
@@ -311,6 +332,15 @@
           js2-mode-indent-inhibit-undo t
           js2-basic-offset 2
           js2-bounce-indent-p t))
+
+  (use-package json-mode
+    :mode ("\\.json\\'" . json-mode)
+    :config
+    (setq json-reformat:indent-width 2))
+
+  (use-package yaml-mode
+    :mode (("\\.yml'" . yaml-mode)
+           ("\\.yaml'" . yaml-mode)))
 
   (use-package web-mode
     :mode (("\\.phtml\\'" . web-mode)
@@ -321,14 +351,13 @@
            ("\\.mustache\\'" . web-mode)
            ("\\.djhtml\\'" . web-mode)
            ("\\.html?\\'" . web-mode)
-           ("\\.json\\'" . web-mode)
            ("\\.s?css'" . web-mode)
            ("\\.xml\\'" . web-mode))
 
-    :init
+    :config
     (defun my-web-mode-hook ()
       "Hooks for Web mode. Set all indentations to 2 spaces"
-      (setq web-mode-markup-indent-(or )ffset 2)
+      (setq web-mode-markup-indent-offset 2)
       (setq web-mode-attr-indent-offset 2)
       (setq web-mode-css-indent-offset 2)
       (setq web-mode-code-indent-offset 2)
@@ -454,9 +483,6 @@
     (use-package org-bullets
       :config
       (add-hook 'org-mode-hook 'org-bullets-mode))
-
-    ;; convert ascii art symbols to unicode
-    (use-package ascii-art-to-Unicode)
 
     ;; export org-mode to various formats using pandoc
     (with-eval-after-load 'ox
