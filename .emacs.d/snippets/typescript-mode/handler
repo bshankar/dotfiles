@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: handler
+# key: sh
+# --
+import { Handler } from 'aws-lambda'
+
+const ${1:handler}: Handler = (event, context, callback) => {
+  ${2:callback(null, 'hello world!')}
+}
+
+export $1
