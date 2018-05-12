@@ -79,7 +79,7 @@
   ;; Faster scrolling
   (setq auto-window-vscroll nil)
 
-  (load-theme 'adwaita)
+  (load-theme 'wombat)
 
   (use-package delight)
   (use-package try
@@ -257,7 +257,7 @@
                                    company-sort-by-backend-importance)
             company-backends '(company-capf
                                (company-dabbrev company-dabbrev-code company-keywords)
-                               company-yasnippet company-files company-math-symbols-unicode))
+                               company-yasnippet company-files))
       (push (apply-partially #'cl-remove-if
                              (lambda (c) (string-match-p "\\`[0-9]+\\'" c)))
             company-transformers))
