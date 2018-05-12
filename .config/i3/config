@@ -200,8 +200,6 @@ assign [class="Firefox"] $workspace1
 # Floating
 for_window [class="Lxappearance"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="Qalculate-gtk"] floating enable
-for_window [class="Godot_Engine"] floating enable
 
 # Widow Colours
 #                       border  background text    indicator
