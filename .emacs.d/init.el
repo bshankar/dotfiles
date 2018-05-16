@@ -107,10 +107,6 @@
     (define-key xah-fly-comma-keymap (kbd "h") 'mc/mark-previous-like-this)
     (define-key xah-fly-comma-keymap (kbd "i") 'mc/mark-all-dwim))
 
-  (use-package define-word
-    :config
-    (define-key xah-fly-comma-keymap (kbd "w") 'define-word-at-point))
-
   (use-package which-key
     :delight
     :config
@@ -157,11 +153,6 @@
   (use-package smex
     :config
     (smex-initialize))
-
-  (use-package avy
-    :defer 2
-    :config
-    (define-key xah-fly-leader-key-map (kbd "z") 'avy-goto-char-timer))
 
   (use-package dumb-jump
     :defer 3
@@ -223,12 +214,6 @@
     (add-hook 'org-mode-hook #'flycheck-mode)
     (global-flycheck-mode))
 
-  (use-package ledger-mode
-    :mode ("\\.ledger\\'" . ledger-mode)
-    :config
-    ;; flycheck-ledger
-    (use-package flycheck-ledger))
-
   ;; company mode
   (use-package company
     :delight
@@ -262,9 +247,6 @@
                              (lambda (c) (string-match-p "\\`[0-9]+\\'" c)))
             company-transformers))
     (global-company-mode 1))
-
-  (use-package haskell-mode
-    :mode ("\\.hs\\'" . haskell-mode))
 
   (use-package typescript-mode
     :mode ("\\.ts\\'" . typescript-mode)
@@ -301,20 +283,6 @@
       :config
       (add-hook 'rust-mode-hook 'cargo-minor-mode)))
 
-  ;; Enable elpy for python
-  (use-package python
-    :mode ("\\.py\\'" . python-mode)
-    :interpreter ("python" . python-mode)
-    :config
-    (use-package elpy
-      :config
-      (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-      (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-      (add-hook 'elpy-mode-hook 'flycheck-mode)
-      (setq python-indent-offset 4)
-      (highlight-indentation-mode nil)
-      (elpy-enable)))
-
   (use-package markdown-mode
     :commands (markdown-mode gfm-mode)
     :mode (("README\\.md\\'" . gfm-mode)
@@ -322,20 +290,10 @@
            ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
 
-  (use-package rjsx-mode
-    :mode (("\\.js\\'" . rjsx-mode)
-           ("\\.mjs\\'" . rjsx-mode)
-           ("\\.jsx\\'" . rjsx-mode))
-    :config
-    (setq js2-mode-show-parse-errors nil
-          js2-mode-show-strict-warnings nil
-          js2-mode-indent-inhibit-undo t
-          js2-basic-offset 2
-          js2-bounce-indent-p t))
-
   (use-package json-mode
     :mode ("\\.json\\'" . json-mode)
     :config
+    (setq js-indent-level 2)
     (setq json-reformat:indent-width 2))
 
   (use-package yaml-mode
@@ -452,22 +410,10 @@
     (setq org-todo-keywords
           '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCELLED(c)" "FAILED(f)")))
 
-    ;; capture templates
-    (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                   (file+headline "~/Documents/org/gtd/inbox.org" "Tasks")
-                                   "* TODO %i%?")
-                                  ("T" "Tickler" entry
-                                   (file+headline "~/Documents/org/gtd/tickler.org" "Tickler")
-                                   "* %i%? \n %U")))
     ;; refile targets
     (setq org-refile-targets '(("~/Documents/org/gtd/gtd.org" :maxlevel . 3)
                                ("~/Documents/org/gtd/someday.org" :level . 1)
                                ("~/Documents/org/gtd/tickler.org" :maxlevel . 2)))
-
-    ;; agenda files
-    (setq org-agenda-files '("~/Documents/org/gtd/inbox.org"
-                             "~/Documents/org/gtd/gtd.org"
-                             "~/Documents/org/gtd/tickler.org"))
 
     (define-key xah-fly-t-keymap (kbd "a") 'org-agenda-list)
     (define-key xah-fly-t-keymap (kbd "b") 'org-capture)
@@ -501,4 +447,5 @@
     (use-package gist))
 
   (provide 'init))
+
 ;;; init.el ends here
