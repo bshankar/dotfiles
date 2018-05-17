@@ -79,7 +79,9 @@
   ;; Faster scrolling
   (setq auto-window-vscroll nil)
 
-  (load-theme 'wombat)
+  (use-package material-theme
+    :config
+    (load-theme 'material))
 
   (use-package delight)
   (use-package try
