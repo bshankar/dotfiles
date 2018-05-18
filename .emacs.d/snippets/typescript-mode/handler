@@ -2,10 +2,8 @@
 # name: handler
 # key: handler
 # --
-import { Handler } from 'aws-lambda'
+import { Context, Callback } from 'aws-lambda'
 
-const ${1:handler}: Handler = (event, context, callback) => {
-  ${2:callback(null, 'hello world!')}
+export async function handler (event, context: Context, callback: Callback) {
+  ${1:callback(null, 'hello world!')}
 }
-
-export { $1 }
