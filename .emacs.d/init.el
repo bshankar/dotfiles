@@ -47,6 +47,7 @@
 
   ;; highlight matching parenthesis
   (show-paren-mode t)
+  (defvar show-paren-style)
   (setq show-paren-style 'parenthesis)
 
   ;; automatically scroll compilation output
@@ -64,6 +65,7 @@
   (load "~/.emacs.d/fira.el")
 
   ;; apropos sort by score
+  (defvar apropos-sort-by-scores)
   (setq apropos-sort-by-scores t)
 
   ;; scroll one line at a time (less "jumpy" than defaults)
@@ -82,6 +84,28 @@
   (use-package material-theme
     :config
     (load-theme 'material))
+
+  (use-package telephone-line
+    :config
+    (setq telephone-line-primary-right-separator 'telephone-line-halfcos-right
+          telephone-line-secondary-right-separator 'telephone-line-halfcos-hollow-right
+          telephone-line-primary-left-separator 'telephone-line-halfcos-left
+          telephone-line-secondary-left-separator 'telephone-line-halfcos-hollow-left
+          telephone-line-height 24)
+
+    (setq telephone-line-lhs
+          '((evil   . (telephone-line-xah-fly-keys-segment))
+            (accent . (telephone-line-vc-segment
+                       telephone-line-erc-modified-channels-segment
+                       telephone-line-process-segment))
+            (nil    . (telephone-line-minor-mode-segment
+                       telephone-line-buffer-segment))))
+
+    (setq telephone-line-rhs
+          '((nil    . (telephone-line-misc-info-segment))
+            (accent . (telephone-line-major-mode-segment))
+            (evil    . (telephone-line-airline-position-segment))))
+    (telephone-line-mode 1))
 
   (use-package delight)
   (use-package try
@@ -144,9 +168,11 @@
     ;; Use Enter on a directory to navigate into the directory, not open it with dired.
     (define-key ivy-minibuffer-map (kbd "C-m") 'ivy-alt-done)
 
+    (defvar ivy-use-virtual-buffers)
     (setq ivy-use-virtual-buffers t)
 
     ;; Let projectile use ivy
+    (defvar projectile-completion-system)
     (setq projectile-completion-system 'ivy)
 
     ;; bind counsel-ripgrep
@@ -192,6 +218,7 @@
     :delight
     :config
     ;; disable jshint since we prefer eslint checking
+    (defvar flycheck-eslintrc)
     (setq flycheck-eslintrc "~/.eslintrc.json")
     (setq-default flycheck-disabled-checkers
                   (append flycheck-disabled-checkers
@@ -237,7 +264,6 @@
             company-tooltip-flip-when-above t
             company-tooltip-margin 1
             company-echo-delay 0
-            company-dabbrev-downcase nil
             company-minimum-prefix-length 2
             company-selection-wrap-around t
             company-transformers '(company-sort-by-occurrence
@@ -321,6 +347,7 @@
       (setq web-mode-attr-indent-offset 2)
       (setq web-mode-css-indent-offset 2)
       (setq web-mode-code-indent-offset 2)
+      (defvar css-indent-offset)
       (setq css-indent-offset 2))
 
     (add-hook 'web-mode-hook  'my-web-mode-hook)
@@ -340,7 +367,6 @@
     ;; latex options
     (setq org-format-latex-header "\\documentclass{article}\n\\usepackage[usenames]{color}\n[PACKAGES]\n[DEFAULT-PACKAGES]\n\\pagestyle{empty}             % do not remove\n% The settings below are copied from fullpage.sty\n\\setlength{\\textwidth}{\\paperwidth}\n\\addtolength{\\textwidth}{-3cm}\n\\setlength{\\oddsidemargin}{1.5cm}\n\\addtolength{\\oddsidemargin}{-2.54cm}\n\\setlength{\\evensidemargin}{\\oddsidemargin}\n\\setlength{\\textheight}{\\paperheight}\n\\addtolength{\\textheight}{-\\headheight}\n\\addtolength{\\textheight}{-\\headsep}\n\\addtolength{\\textheight}{-\\footskip}\n\\addtolength{\\textheight}{-3cm}\n\\setlength{\\topmargin}{1.5cm}\n\\addtolength{\\topmargin}{-2.54cm}\\everymath{\\displaystyle}")
     (plist-put org-format-latex-options :scale 2.0)
-    (setq org-latex-create-formula-image-program 'dvipng)
 
     ;; display all inline images
     (setq org-startup-with-inline-images t)
@@ -356,6 +382,7 @@
         ("\\.pdf\\'" . default))))
 
     ;; set generic browser
+    (defvar browse-url-generic-program)
     (setq browse-url-generic-program
           (executable-find "firefox-developer-edition")
           browse-url-browser-function 'browse-url-generic)
