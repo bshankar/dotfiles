@@ -81,6 +81,9 @@
   ;; Faster scrolling
   (setq auto-window-vscroll nil)
 
+  ;; trim trailing whitespaces before saving
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
   (use-package material-theme
     :config
     (load-theme 'material))
@@ -138,9 +141,6 @@
     :config
     (which-key-setup-side-window-bottom)
     (which-key-mode 1))
-
-  ;; trim trailing whitespaces before saving
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
   ;; set scratch buffer's message to a random fortune
   (use-package fortune-cookie
@@ -205,6 +205,12 @@
     :config
     (yas-global-mode 1)
     (use-package yasnippet-snippets))
+
+  ;; highlight indentation levels
+  (use-package highlight-indent-guides
+    :hook ((prog-mode yaml-mode) . highlight-indent-guides-mode)
+    :init
+    (setq highlight-indent-guides-method 'character))
 
   ;; keep code always indented
   (use-package aggressive-indent
@@ -338,7 +344,8 @@
            ("\\.djhtml\\'" . web-mode)
            ("\\.html?\\'" . web-mode)
            ("\\.s?css'" . web-mode)
-           ("\\.xml\\'" . web-mode))
+           ("\\.xml\\'" . web-mode)
+           ("\\.ejs\\'" . web-mode))
 
     :config
     (defun my-web-mode-hook ()
