@@ -84,9 +84,16 @@
   ;; trim trailing whitespaces before saving
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-  (use-package material-theme
+  ;; Highlight lines longer than 80 characters
+  (setq-default
+   whitespace-line-column 80
+   whitespace-style '(face li nes-tail))
+
+  (add-hook 'prog-mode-hook #'whitespace-mode)
+
+  (use-package gruvbox-theme
     :config
-    (load-theme 'material))
+    (load-theme 'gruvbox-dark-medium))
 
   (use-package telephone-line
     :config
@@ -283,7 +290,7 @@
     (global-company-mode 1))
 
   (use-package typescript-mode
-    :mode ("\\.ts\\'" . typescript-mode)
+    :mode ("\\.tsx?\\'" . typescript-mode)
     :config
     (use-package tide
       :config
@@ -364,6 +371,9 @@
       :config
       (add-hook 'sgml-mode-hook 'emmet-mode)
       (add-hook 'web-mode-hook 'emmet-mode)))
+
+  (use-package vue-mode
+    :mode ("\\.vue\\'" . vue-mode))
 
   (use-package org
     :mode ("\\.org\\'" . org-mode)
