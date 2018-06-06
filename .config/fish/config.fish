@@ -13,12 +13,4 @@ alias adbc='~/.local/share/android/android-sdk/platform-tools/adb connect 10.0.0
 alias adbi='~/.local/share/android/android-sdk/platform-tools/adb install -r'
 alias adbl='~/.local/share/android/android-sdk/platform-tools/adb logcat'
 
-# Some yaourt shortcuts
-alias y='yaourt'
-alias yu='yaourt -U '
-alias yupg='yaourt -Syu'
-alias yaupg='yaourt -Syua'
-alias yin='yaourt -S'
-alias yrem='sudo pacman -Rs'
-
 cowfortune
