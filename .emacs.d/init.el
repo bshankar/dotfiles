@@ -91,9 +91,7 @@
 
   (add-hook 'prog-mode-hook #'whitespace-mode)
 
-  (use-package gruvbox-theme
-    :config
-    (load-theme 'gruvbox-dark-medium))
+  (load-theme 'wombat)
 
   (use-package telephone-line
     :config
