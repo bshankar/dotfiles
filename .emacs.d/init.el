@@ -288,16 +288,19 @@
     (global-company-mode 1))
 
   (use-package typescript-mode
-    :mode ("\\.tsx?\\'" . typescript-mode)
+    :mode ("\\.[jt]sx?\\'" . typescript-mode)
     :config
     (use-package tide
       :config
       (defun setup-tide-mode ()
         (interactive)
         (tide-setup)
+        (flycheck-mode +1)
         (setq flycheck-check-syntax-automatically '(save mode-enabled))
+        (tide-hl-identifier-mode +1)
+        (eldoc-mode +1)
         (setq typescript-indent-level 2)
-        (tide-hl-identifier-mode +1))
+        (company-mode +1))
 
       (setup-tide-mode)
       (add-hook 'before-save-hook 'tide-format-before-save)
