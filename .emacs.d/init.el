@@ -64,6 +64,10 @@
   (load custom-file)
   (load "~/.emacs.d/fira.el")
 
+  ;; Faster than scp
+  (defvar tramp-default-method)
+  (setq tramp-default-method "ssh")
+
   ;; apropos sort by score
   (defvar apropos-sort-by-scores)
   (setq apropos-sort-by-scores t)
@@ -91,7 +95,9 @@
 
   (add-hook 'prog-mode-hook #'whitespace-mode)
 
-  (load-theme 'wombat)
+  (use-package gruvbox-theme
+    :config
+    (load-theme 'gruvbox-light-medium))
 
   (use-package telephone-line
     :config
@@ -181,7 +187,10 @@
     (setq projectile-completion-system 'ivy)
 
     ;; bind counsel-ripgrep
-    (define-key xah-fly-dot-keymap (kbd "a") 'counsel-rg))
+    (define-key xah-fly-dot-keymap (kbd "a") 'counsel-rg)
+
+    ;; bind counsel-fzf
+    (define-key xah-fly-dot-keymap (kbd "f") 'counsel-fzf))
 
   (use-package smex
     :config
@@ -303,7 +312,7 @@
         (company-mode +1))
 
       (setup-tide-mode)
-      (add-hook 'before-save-hook 'tide-format-before-save)
+      ;; (add-hook 'before-save-hook 'tide-format-before-save)
       (add-hook 'typescript-mode-hook #'setup-tide-mode)))
 
   (use-package rust-mode
