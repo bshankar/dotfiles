@@ -159,9 +159,9 @@ workspace $workspace4 output LVDS-1
 workspace $workspace5 output LVDS-1
 workspace $workspace6 output LVDS-1
 workspace $workspace7 output LVDS-1
-workspace $workspace8 output VGA-1
-workspace $workspace9 output VGA-1
-workspace $workspace10 output VGA-1
+workspace $workspace8 output HDMI-1
+workspace $workspace9 output HDMI-1
+workspace $workspace10 output HDMI-1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
