@@ -12,5 +12,6 @@ alias java='java -Xms512M -Xmx2G -Dawt.useSystemAAFontSettings=on -Dswing.aatext
 alias adbc='~/.local/share/android/android-sdk/platform-tools/adb connect 10.0.0.7'
 alias adbi='~/.local/share/android/android-sdk/platform-tools/adb install -r'
 alias adbl='~/.local/share/android/android-sdk/platform-tools/adb logcat'
+alias ys="yarn serve"
 
 cowfortune
