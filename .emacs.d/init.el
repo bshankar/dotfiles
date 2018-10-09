@@ -311,12 +311,22 @@
   (use-package emmet-mode
     :hook vue-mode))
 
+(use-package git-gutter
+  :config
+  (defvar git-gutter:update-interval)
+  (setq git-gutter:update-interval 2)
+  (global-git-gutter-mode t))
+
 (use-package magit
   :defer 4
   :delight auto-revert-mode
   :config
   (define-key xah-fly-leader-key-map (kbd "b") 'magit-status)
-  (use-package gist))
+  (use-package gist)
+  (use-package magithub
+    :config
+    (magithub-feature-autoinject t)
+    (setq magithub-clone-default-directory "~/Documents/code/")))
 
 (add-hook 'emacs-startup-hook
 	        (lambda () (setq gc-cons-threshold 16777216
