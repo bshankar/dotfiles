@@ -21,7 +21,7 @@
      (shell . t)))
 
   (set-display-table-slot standard-display-table
-                          'selective-display (string-to-vector " ⤵"))
+                          'selective-display (string-to-vector " ⤵ "))
 
   (setq org-src-fontify-natively t)
   (setq org-hide-emphasis-markers t)
