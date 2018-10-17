@@ -55,6 +55,8 @@
 (setq scroll-step 1)
 (setq auto-window-vscroll nil)
 
+(put 'dired-find-alternate-file 'disabled nil)
+
 (setq make-backup-files nil)
 (setq create-lockfiles nil)
 
