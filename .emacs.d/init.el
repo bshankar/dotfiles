@@ -70,6 +70,8 @@
    whitespace-line-column 80
    whitespace-style '(face lines-tail)))
 
+(load-theme 'adwaita)
+
 (use-package telephone-line
   :config
   (setq telephone-line-primary-right-separator 'telephone-line-halfcos-right
