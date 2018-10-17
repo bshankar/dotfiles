@@ -317,8 +317,12 @@
 
 (use-package git-gutter
   :config
-  (defvar git-gutter:update-interval)
-  (setq git-gutter:update-interval 2)
+  (custom-set-variables
+   '(git-gutter:update-interval 2)
+   '(git-gutter:window-width 1)
+   '(git-gutter:modified-sign "•")
+   '(git-gutter:added-sign "•")
+   '(git-gutter:deleted-sign "•"))
   (global-git-gutter-mode t))
 
 (use-package magit
