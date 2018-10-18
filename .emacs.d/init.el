@@ -55,12 +55,15 @@
 (setq scroll-step 1)
 (setq auto-window-vscroll nil)
 
-(put 'dired-find-alternate-file 'disabled nil)
-
 (setq make-backup-files nil)
 (setq create-lockfiles nil)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(use-package dired
+  :config
+  (put 'dired-find-alternate-file 'disabled nil)
+  (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file))
 
 (use-package whitespace-mode
   :delight whitespace-mode
