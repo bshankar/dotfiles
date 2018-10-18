@@ -58,8 +58,7 @@ font pango:Cantarell 10
 floating_modifier $mod
 
 # start a terminal
-# set $shell /usr/bin/xonsh
-bindsym $mod+Return exec i3-sensible-terminal -e /usr/bin/fish
+bindsym $mod+Return exec alacritty -e /usr/bin/fish
 
 # kill focused window
 bindsym $mod+Shift+q kill
