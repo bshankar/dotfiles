@@ -293,6 +293,11 @@
     :config
     (add-hook 'rust-mode-hook 'cargo-minor-mode)))
 
+(use-package nov
+  :mode ("\\.epub\\'" . nov-mode)
+  :init
+  (setq nov-text-width 80))
+
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
