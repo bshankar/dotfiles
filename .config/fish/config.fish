@@ -4,7 +4,7 @@ end
 
 # set editor to nvim
 set -x EDITOR nvim
-set -x BROWSER firefox-developer
+set -x BROWSER firefox-nightly
 
 alias vim=/usr/bin/nvim
 alias diff="/usr/bin/diff --color"
@@ -13,5 +13,7 @@ alias adbc='~/.local/share/android/android-sdk/platform-tools/adb connect 10.0.0
 alias adbi='~/.local/share/android/android-sdk/platform-tools/adb install -r'
 alias adbl='~/.local/share/android/android-sdk/platform-tools/adb logcat'
 alias ys="yarn serve"
+alias yb="yarn build"
+alias yl="yarn lint"
 
 cowfortune
