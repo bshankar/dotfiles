@@ -15,6 +15,8 @@ alias adbl='~/.local/share/android/android-sdk/platform-tools/adb logcat'
 alias ys="yarn serve"
 alias yb="yarn build"
 alias yl="yarn lint"
-alias yl="yarn install"
+alias yi="yarn install"
+
+alias aria2c="aria2c -x8 -s8"
 
 cowfortune
