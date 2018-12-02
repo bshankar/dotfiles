@@ -60,6 +60,11 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(if (file-exists-p abbrev-file-name)
+    (quietly-read-abbrev-file))
+(setq save-abbrevs 'silently)
+(setq-default abbrev-mode t)
+
 (use-package dired
   :config
   (put 'dired-find-alternate-file 'disabled nil)
@@ -171,9 +176,13 @@
 
   (defvar projectile-completion-system)
   (setq projectile-completion-system 'ivy)
+  (define-key xah-fly-dot-keymap (kbd "a") 'counsel-rg))
 
-  (define-key xah-fly-dot-keymap (kbd "a") 'counsel-rg)
-  (define-key xah-fly-dot-keymap (kbd "f") 'counsel-fzf))
+(use-package avy
+  :ensure t
+  :diminish avy-mode
+  :config
+  (define-key xah-fly-leader-key-map (kbd "z") 'avy-goto-char-timer))
 
 (use-package smex
   :config
@@ -184,14 +193,6 @@
   :config
   (define-key xah-fly-dot-keymap (kbd "b") 'dumb-jump-go)
   (define-key xah-fly-dot-keymap (kbd "c") 'dumb-jump-back))
-
-(use-package abbrev
-  :delight
-  :config
-  (if (file-exists-p abbrev-file-name)
-      (quietly-read-abbrev-file))
-  (setq save-abbrevs 'silently)
-  (setq-default abbrev-mode t))
 
 (use-package yasnippet
   :delight yas-minor-mode
@@ -213,7 +214,8 @@
 
 (use-package projectile
   :config
-  (projectile-mode +1))
+  (projectile-mode +1)
+  (define-key xah-fly-dot-keymap (kbd "f") 'projectile-find-file))
 
 (use-package flycheck
   :defer 2.5
@@ -322,6 +324,9 @@
   (use-package vue-html-mode)
   (use-package emmet-mode
     :hook vue-mode))
+
+(use-package dockerfile-mode
+  :mode ("Dockerfile\\'" . dockerfile-mode))
 
 (use-package git-gutter
   :config
