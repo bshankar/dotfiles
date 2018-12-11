@@ -471,6 +471,7 @@
     ("htink" "think" nil 0)
     ("htis" "this" nil 0)
     ("htp:" "http:" nil 0)
+    ("improt" "import" nil 0)
    ))
 
 (define-abbrev-table 'help-mode-abbrev-table '())
