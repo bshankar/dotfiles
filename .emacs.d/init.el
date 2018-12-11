@@ -65,6 +65,10 @@
 (setq save-abbrevs 'silently)
 (setq-default abbrev-mode t)
 
+(use-package keychain-environment
+  :config
+  (keychain-refresh-environment))
+
 (use-package dired
   :config
   (put 'dired-find-alternate-file 'disabled nil)
@@ -78,7 +82,9 @@
    whitespace-line-column 80
    whitespace-style '(face lines-tail)))
 
-(load-theme 'adwaita)
+(use-package material-theme
+  :config
+  (load-theme 'material))
 
 (use-package telephone-line
   :config
@@ -320,6 +326,10 @@
 
 (use-package vue-mode
   :mode ("\\.vue\\'" . vue-mode)
+  :init
+  (add-hook 'mmm-mode-hook
+            (lambda ()
+              (set-face-background 'mmm-default-submode-face nil)))
   :config
   (use-package vue-html-mode)
   (use-package emmet-mode
