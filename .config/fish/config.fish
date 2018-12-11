@@ -2,6 +2,10 @@ function fish_title
   true
 end
 
+function fish_greeting
+  cowfortune
+end
+
 # set editor to nvim
 set -x EDITOR nvim
 set -x BROWSER firefox-nightly
@@ -18,5 +22,4 @@ alias yl="yarn lint"
 alias yi="yarn install"
 
 alias aria2c="aria2c -x8 -s8"
-
-cowfortune
+alias ls="exa"
