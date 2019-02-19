@@ -2,20 +2,14 @@ function fish_title
   true
 end
 
-function fish_greeting
-  cowfortune
-end
-
 # set editor to nvim
 set -x EDITOR nvim
-set -x BROWSER firefox-nightly
+set -x BROWSER firefox-developer-edition
 
 alias vim=/usr/bin/nvim
 alias diff="/usr/bin/diff --color"
 alias java='java -Xms512M -Xmx2G -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-alias adbc='~/.local/share/android/android-sdk/platform-tools/adb connect 10.0.0.7'
-alias adbi='~/.local/share/android/android-sdk/platform-tools/adb install -r'
-alias adbl='~/.local/share/android/android-sdk/platform-tools/adb logcat'
+
 alias ys="yarn serve"
 alias yb="yarn build"
 alias yl="yarn lint"
@@ -23,3 +17,17 @@ alias yi="yarn install"
 
 alias aria2c="aria2c -x8 -s8"
 alias ls="exa"
+
+alias kp="kubectl --context=adori-prod"
+alias kd="kubectl --context=adori-dev"
+alias kup="kubectl config use-context adori-prod"
+alias kud="kubectl config use-context adori-dev"
+
+alias kpb="kp apply -f /home/ebs/Documents/code/adori/infra/prod/backend-v5.yaml"
+alias kdb="kd apply -f /home/ebs/Documents/code/adori/infra/dev/backend-v5.yaml"
+alias kpt="kp apply -f /home/ebs/Documents/code/adori/infra/prod/thumbor-server.yaml"
+alias kdt="kd apply -f /home/ebs/Documents/code/adori/infra/dev/thumbor-server.yaml"
+
+alias tppcb="kup; telepresence --copy-deployment backend-v5 --also-proxy=10.128.0.0/16"
+alias tpdcb="kud; telepresence --copy-deployment backend-v5"
+alias tpdsb="kud; telepresence --swap-deployment backend-v5"
