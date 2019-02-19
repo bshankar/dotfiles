@@ -82,9 +82,9 @@
    whitespace-line-column 80
    whitespace-style '(face lines-tail)))
 
-(use-package material-theme
+(use-package gruvbox-theme
   :config
-  (load-theme 'material))
+  (load-theme 'gruvbox-dark-medium))
 
 (use-package telephone-line
   :config
@@ -123,6 +123,11 @@
   (global-set-key (kbd "C-h k") #'helpful-key)
   (global-set-key (kbd "C-c C-.") #'helpful-at-point))
 
+(use-package drag-stuff
+  :config
+  (drag-stuff-global-mode t)
+  (drag-stuff-define-keys))
+
 (use-package xah-fly-keys
   :delight xah-fly-keys
   :config
@@ -131,7 +136,7 @@
   (xah-fly-keys 1))
 
 (use-package hideshow
-  :hook ((prog-mode . hs-minor-mode))
+  :hook ((json-mode . hs-minor-mode))
   :config
   (defun toggle-fold ()
     (interactive)
@@ -213,10 +218,10 @@
   :init
   (setq highlight-indent-guides-method 'character))
 
-(use-package aggressive-indent
-  :delight aggressive-indent-mode
-  :config
-  (add-hook 'prog-mode-hook #'aggressive-indent-mode))
+;; (use-package aggressive-indent
+;;   :delight aggressive-indent-mode
+;;   :config
+;;   (global-aggressive-indent-mode 1))
 
 (use-package projectile
   :config
@@ -282,6 +287,12 @@
     (setup-tide-mode)
     (add-hook 'typescript-mode-hook #'setup-tide-mode)))
 
+(use-package elpy
+  :mode ("\\.py\\'" . python-mode)
+  :config
+  (elpy-enable)
+  (elpy-mode))
+
 (use-package rust-mode
   :mode ("\\.rs\\'" . rust-mode)
   :config
@@ -339,14 +350,20 @@
   :mode ("Dockerfile\\'" . dockerfile-mode))
 
 (use-package git-gutter
+  :diminish git-gutter-mode
+  :defer t
+  :init (global-git-gutter-mode 1)
   :config
-  (custom-set-variables
-   '(git-gutter:update-interval 2)
-   '(git-gutter:window-width 1)
-   '(git-gutter:modified-sign "•")
-   '(git-gutter:added-sign "•")
-   '(git-gutter:deleted-sign "•"))
-  (global-git-gutter-mode t))
+  (setq git-gutter:added-sign "++")
+  (setq git-gutter:deleted-sign "--")
+  (setq git-gutter:modified-sign "  ")
+  (setq git-gutter:update-interval 1)
+  (set-face-background 'git-gutter:modified "#a36fff")
+  (set-face-foreground 'git-gutter:added "#198844")
+  (set-face-foreground 'git-gutter:deleted "#cc342b")
+  (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
+  (add-hook 'git-gutter:update-hooks 'magit-after-revert-hook)
+  (add-hook 'git-gutter:update-hooks 'magit-not-reverted-hook))
 
 (use-package magit
   :defer 4
@@ -354,10 +371,11 @@
   :config
   (define-key xah-fly-leader-key-map (kbd "b") 'magit-status)
   (use-package gist)
-  (use-package magithub
-    :config
-    (magithub-feature-autoinject t)
-    (setq magithub-clone-default-directory "~/Documents/code/")))
+  ;; (use-package magithub
+  ;;   :config
+  ;;   (magithub-feature-autoinject t)
+  ;;   (setq magithub-clone-default-directory "~/Documents/code/"))
+  )
 
 (add-hook 'emacs-startup-hook
 	        (lambda () (setq gc-cons-threshold 16777216
@@ -366,3 +384,4 @@
 (provide 'init)
 
 ;;; init.el ends here
+(put 'magit-clean 'disabled nil)
