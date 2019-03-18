@@ -79,12 +79,12 @@
   :hook prog-mode
   :init
   (setq-default
-   whitespace-line-column 80
+   whitespace-line-column 88
    whitespace-style '(face lines-tail)))
 
-(use-package gruvbox-theme
+(use-package color-theme-sanityinc-tomorrow
   :config
-  (load-theme 'gruvbox-dark-medium))
+  (load-theme 'sanityinc-tomorrow-night))
 
 (use-package telephone-line
   :config
@@ -214,7 +214,7 @@
 
 (use-package highlight-indent-guides
   :delight
-  :hook ((prog-mode yaml-mode) . highlight-indent-guides-mode)
+  :hook (yaml-mode . highlight-indent-guides-mode)
   :init
   (setq highlight-indent-guides-method 'character))
 
@@ -288,10 +288,11 @@
     (add-hook 'typescript-mode-hook #'setup-tide-mode)))
 
 (use-package elpy
-  :mode ("\\.py\\'" . python-mode)
+  :init (with-eval-after-load 'python (elpy-enable))
+  :commands elpy-enable
   :config
-  (elpy-enable)
-  (elpy-mode))
+  (setq elpy-rpc-timeout 10)
+  (add-hook 'before-save-hook 'elpy-format-code))
 
 (use-package rust-mode
   :mode ("\\.rs\\'" . rust-mode)
@@ -354,11 +355,11 @@
   :defer t
   :init (global-git-gutter-mode 1)
   :config
-  (setq git-gutter:added-sign "++")
-  (setq git-gutter:deleted-sign "--")
-  (setq git-gutter:modified-sign "  ")
+  (setq git-gutter:added-sign "+")
+  (setq git-gutter:deleted-sign "-")
+  (setq git-gutter:modified-sign "*")
   (setq git-gutter:update-interval 1)
-  (set-face-background 'git-gutter:modified "#a36fff")
+  (set-face-foreground 'git-gutter:modified "#a36fff")
   (set-face-foreground 'git-gutter:added "#198844")
   (set-face-foreground 'git-gutter:deleted "#cc342b")
   (add-to-list 'git-gutter:update-hooks 'focus-in-hook)

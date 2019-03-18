@@ -30,13 +30,19 @@ alias kb="kubectl --context=adori-beta"
 
 alias kup="kubectl config use-context adori-prod"
 alias kud="kubectl config use-context adori-dev"
-alias kud="kubectl config use-context adori-beta"
+alias kub="kubectl config use-context adori-beta"
 
 alias kpb="kp apply -f /home/ebs/Documents/code/adori/infra/prod/backend-v5.yaml"
 alias kdb="kd apply -f /home/ebs/Documents/code/adori/infra/dev/backend-v5.yaml"
 alias kpt="kp apply -f /home/ebs/Documents/code/adori/infra/prod/thumbor-server.yaml"
 alias kdt="kd apply -f /home/ebs/Documents/code/adori/infra/dev/thumbor-server.yaml"
 
+alias tpcb="telepresence --copy-deployment backend-v5"
+alias tpsb="telepresence --copy-deployment backend-v5"
 alias tppcb="kup; telepresence --copy-deployment backend-v5 --also-proxy=10.128.0.0/16"
 alias tpdcb="kud; telepresence --copy-deployment backend-v5"
 alias tpdsb="kud; telepresence --swap-deployment backend-v5"
+alias tpbcb="kub; telepresence --copy-deployment backend-v5"
+
+bass export LC_ALL=en_US.utf-8
+bass export LANG=en_US.utf-8
