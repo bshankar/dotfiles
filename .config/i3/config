@@ -242,7 +242,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease
 bindsym XF86TouchpadToggle exec ~/.toggletouchpad.sh # toggle touchpad
 
 # exit menu
-set $Locker i3lock -i /home/ebs/Pictures/wallpaper.png
+set $Locker i3lock -ti /home/ebs/Pictures/wallpaper.png
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
