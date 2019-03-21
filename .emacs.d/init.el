@@ -82,9 +82,9 @@
    whitespace-line-column 88
    whitespace-style '(face lines-tail)))
 
-(use-package color-theme-sanityinc-tomorrow
+(use-package base16-theme
   :config
-  (load-theme 'sanityinc-tomorrow-night))
+  (load-theme 'base16-chalk))
 
 (use-package telephone-line
   :config
@@ -214,7 +214,7 @@
 
 (use-package highlight-indent-guides
   :delight
-  :hook (yaml-mode . highlight-indent-guides-mode)
+  :hook (prog-mode . highlight-indent-guides-mode)
   :init
   (setq highlight-indent-guides-method 'character))
 
@@ -288,11 +288,14 @@
     (add-hook 'typescript-mode-hook #'setup-tide-mode)))
 
 (use-package elpy
-  :init (with-eval-after-load 'python (elpy-enable))
+  :init
+  (with-eval-after-load 'python (elpy-enable))
+  (setq highlight-indent-guides-method 'character)
   :commands elpy-enable
   :config
   (setq elpy-rpc-timeout 10)
-  (add-hook 'before-save-hook 'elpy-format-code))
+  (add-hook 'python-mode-hook
+            (lambda () (add-hook 'before-save-hook 'elpy-format-code))))
 
 (use-package rust-mode
   :mode ("\\.rs\\'" . rust-mode)
@@ -385,4 +388,3 @@
 (provide 'init)
 
 ;;; init.el ends here
-(put 'magit-clean 'disabled nil)
