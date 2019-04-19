@@ -23,23 +23,18 @@ alias yi="yarn install"
 
 alias aria2c="aria2c -x8 -s8"
 alias ls="exa"
+alias cat="bat"
 
-alias kp="kubectl --context=adori-prod"
 alias kd="kubectl --context=adori-dev"
 alias kb="kubectl --context=adori-beta"
+alias ke="kubectl exec (kubectl get po | awk '{print $1;}' | fzf) -it sh"
 
-alias kup="kubectl config use-context adori-prod"
 alias kud="kubectl config use-context adori-dev"
 alias kub="kubectl config use-context adori-beta"
 
-alias kpb="kp apply -f /home/ebs/Documents/code/adori/infra/prod/backend-v5.yaml"
+alias kbb="kb apply -f /home/ebs/Documents/code/adori/infra/prod/backend-v5.yaml"
 alias kdb="kd apply -f /home/ebs/Documents/code/adori/infra/dev/backend-v5.yaml"
-alias kpt="kp apply -f /home/ebs/Documents/code/adori/infra/prod/thumbor-server.yaml"
-alias kdt="kd apply -f /home/ebs/Documents/code/adori/infra/dev/thumbor-server.yaml"
 
-alias tpcb="telepresence --copy-deployment backend-v5"
-alias tpsb="telepresence --copy-deployment backend-v5"
-alias tppcb="kup; telepresence --copy-deployment backend-v5 --also-proxy=10.128.0.0/16"
 alias tpdcb="kud; telepresence --copy-deployment backend-v5"
 alias tpdsb="kud; telepresence --swap-deployment backend-v5"
 alias tpbcb="kub; telepresence --copy-deployment backend-v5"
