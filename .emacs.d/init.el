@@ -82,9 +82,9 @@
    whitespace-line-column 88
    whitespace-style '(face lines-tail)))
 
-(use-package base16-theme
+(use-package material-theme
   :config
-  (load-theme 'base16-chalk))
+  (load-theme 'material))
 
 (use-package telephone-line
   :config
@@ -107,6 +107,10 @@
           (accent . (telephone-line-major-mode-segment))
           (evil    . (telephone-line-airline-position-segment))))
   (telephone-line-mode 1))
+
+(use-package emojify
+  :config
+  (global-emojify-mode))
 
 (use-package delight
   :config
@@ -288,14 +292,10 @@
     (add-hook 'typescript-mode-hook #'setup-tide-mode)))
 
 (use-package elpy
+  :ensure t
+  :defer t
   :init
-  (with-eval-after-load 'python (elpy-enable))
-  (setq highlight-indent-guides-method 'character)
-  :commands elpy-enable
-  :config
-  (setq elpy-rpc-timeout 10)
-  (add-hook 'python-mode-hook
-            (lambda () (add-hook 'before-save-hook 'elpy-format-code))))
+  (advice-add 'python-mode :before 'elpy-enable))
 
 (use-package rust-mode
   :mode ("\\.rs\\'" . rust-mode)
@@ -353,6 +353,16 @@
 (use-package dockerfile-mode
   :mode ("Dockerfile\\'" . dockerfile-mode))
 
+(use-package docker
+  :commands (docker)
+  :config
+  (define-key xah-fly-leader-key-map (kbd "[") 'docker))
+
+(use-package kubernetes
+  :commands (kubernetes-overview)
+  :config
+  (define-key xah-fly-leader-key-map (kbd ".") 'kubernetes-overview))
+
 (use-package git-gutter
   :diminish git-gutter-mode
   :defer t
@@ -373,13 +383,13 @@
   :defer 4
   :delight auto-revert-mode
   :config
-  (define-key xah-fly-leader-key-map (kbd "b") 'magit-status)
-  (use-package gist)
-  ;; (use-package magithub
-  ;;   :config
-  ;;   (magithub-feature-autoinject t)
-  ;;   (setq magithub-clone-default-directory "~/Documents/code/"))
-  )
+  (define-key xah-fly-leader-key-map (kbd "b") 'magit-status))
+
+(use-package gist
+  :after magit)
+
+(use-package forge
+  :after magit)
 
 (add-hook 'emacs-startup-hook
 	        (lambda () (setq gc-cons-threshold 16777216
