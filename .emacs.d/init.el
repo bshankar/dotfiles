@@ -266,6 +266,10 @@
           company-transformers))
   (global-company-mode 1))
 
+(use-package company-tabnine
+  :config
+  (add-to-list 'company-backends #'company-tabnine))
+
 (use-package restclient
   :mode ("\\.rc\\'" . restclient-mode)
   :config
@@ -295,7 +299,9 @@
   :ensure t
   :defer t
   :init
-  (advice-add 'python-mode :before 'elpy-enable))
+  (advice-add 'python-mode :before 'elpy-enable)
+  :config
+  (add-hook 'before-save-hook 'elpy-format-code))
 
 (use-package rust-mode
   :mode ("\\.rs\\'" . rust-mode)

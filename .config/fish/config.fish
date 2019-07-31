@@ -32,7 +32,7 @@ alias ke="kubectl exec (kubectl get po | awk '{print $1;}' | fzf) -it sh"
 alias kud="kubectl config use-context adori-dev"
 alias kub="kubectl config use-context adori-beta"
 
-alias kbb="kb apply -f /home/ebs/Documents/code/adori/infra/prod/backend-v5-1.yaml"
+alias kbb="kb apply -f /home/ebs/Documents/code/adori/infra/beta/backend-v5-1.yaml"
 alias kdb="kd apply -f /home/ebs/Documents/code/adori/infra/dev/backend-v5-1.yaml"
 
 alias tpdcb="kud; telepresence --copy-deployment backend-v5"
@@ -41,3 +41,4 @@ alias tpbcb="kub; telepresence --copy-deployment backend-v5"
 
 bass export LC_ALL=en_US.utf-8
 bass export LANG=en_US.utf-8
+set -gx PATH /home/ebs/.cargo/bin $PATH
