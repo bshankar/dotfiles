@@ -6,6 +6,8 @@ end
 set -x EDITOR nvim
 set -x BROWSER firefox-developer
 
+set -x PATH ~/.cargo/bin:$PATH
+
 alias vim=/usr/bin/nvim
 alias diff="/usr/bin/diff --color"
 alias java='java -Xms512M -Xmx2G -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
