@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: input strip
-# key: ins
-# group : general
-# --
-input().strip()

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: tuple unpack from input
-# key: iinss
-# group : general
-# --
-(int(i) for i in input().strip().split(" "))

@@ -58,8 +58,7 @@ font pango:Cantarell 10
 floating_modifier $mod
 
 # start a terminal
-# set $shell /usr/bin/xonsh
-bindsym $mod+Return exec i3-sensible-terminal -e /usr/bin/fish
+bindsym $mod+Return exec alacritty -e /usr/bin/nu
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -159,9 +158,9 @@ workspace $workspace4 output LVDS-1
 workspace $workspace5 output LVDS-1
 workspace $workspace6 output LVDS-1
 workspace $workspace7 output LVDS-1
-workspace $workspace8 output VGA-1
-workspace $workspace9 output VGA-1
-workspace $workspace10 output VGA-1
+workspace $workspace8 output HDMI-1
+workspace $workspace9 output HDMI-1
+workspace $workspace10 output HDMI-1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -200,6 +199,7 @@ assign [class="Firefox"] $workspace1
 # Floating
 for_window [class="Lxappearance"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="Godot"] floating enable
 
 # Widow Colours
 #                       border  background text    indicator
@@ -242,7 +242,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease
 bindsym XF86TouchpadToggle exec ~/.toggletouchpad.sh # toggle touchpad
 
 # exit menu
-set $Locker i3lock -i /home/ebs/Pictures/wallpaper.png
+set $Locker i3lock -ti /home/ebs/Pictures/wallpaper.png
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -280,4 +280,5 @@ exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper.png
 # Autostart applications
 exec --no-startup-id compton
 exec --no-startup-id dunst
+exec --no-startup-id nm-applet
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh

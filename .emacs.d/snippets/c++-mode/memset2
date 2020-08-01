@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: 2d memset template
-# key: ms2
-# --
-memset(${1:grid}, ${2}, sizeof($1[0][0])*R*C);

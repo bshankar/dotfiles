@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: vector typedefs template
-# key: vec
-# --
-typedef vector<${1:int}> vec;
-typedef vector<vector<$1> > vvec;

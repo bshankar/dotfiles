@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: vector resize template
-# key: rs2
-# --
-${1:grid}.resize(${2:N}, vector<${3:int}>($2));

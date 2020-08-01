@@ -1,4 +1,0 @@
-(
- (:id "sha1:706608f9b7fcfdea563351d49047f296d74a5a76" :fingerprint "sha1:b7:4f:0f:8e:b0:79:33:1f:6f:73:88:47:b9:ef:aa:07:35:ae:c4:63")
- (:id "sha1:60d5181487044df8465f7968aa3d3ce67dd1a25a" :fingerprint "sha1:d2:1a:01:45:2b:5a:9b:06:10:69:46:93:0e:64:71:78:69:ff:7a:e0" :host "news.gwene.org:nntp" :conditions (:self-signed :no-host-match :insecure :unknown-ca :invalid))
-)

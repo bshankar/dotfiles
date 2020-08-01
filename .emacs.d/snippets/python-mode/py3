@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: python3 binary specification
-# key: rpy3
-# group : general
-# --
-#!/usr/bin/python3

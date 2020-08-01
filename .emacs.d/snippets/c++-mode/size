@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: range template
-# key: sz
-# --
-${1:vec}.size()

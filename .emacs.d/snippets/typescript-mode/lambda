@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: lambda
-# key: lda
-# --
-import { Context, Callback } from 'aws-lambda'
-
-export async function handler(event, context: Context, callback: Callback) {
-  ${1:callback(null, 'hello world!')}
-}

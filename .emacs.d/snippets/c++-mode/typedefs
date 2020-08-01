@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: typedefs
-# key: tdf
-# --
-typedef long l;
-typedef unsigned long ul;
-typedef pair<int,int> pii;
-typedef vector<int> vi;
-typedef vector<vector<int> > vvi;
