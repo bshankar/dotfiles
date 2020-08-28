@@ -1,5 +1,4 @@
 /* emacs settings  load faster from here.*/
-Emacs.font: Fantasque Sans Mono-14
 Emacs.menuBar: off
 Emacs.verticalScrollBars: off
 Emacs.toolBar: off
